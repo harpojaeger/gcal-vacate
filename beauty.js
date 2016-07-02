@@ -58,8 +58,17 @@ function handleAuthClick(event) {
  * once client library is loaded.
  */
 function loadCalendarApi() {
-    gapi.client.load('calendar', 'v3', listUpcomingEvents);
+    gapi.client.load('calendar', 'v3');
 }
+
+/** Get data from the form and run the search **/
+function prepareSearch(){
+    var start_date = document.getElementById("start").value;
+    var end_date = document.getElementById("end").value;
+    console.log("Ready to search for repeating events from " + start_date + " to " + end_date);
+    listUpcomingEvents(start_date, end_date);
+}
+
 
 
 /** Function to delete a particular event **/
@@ -71,11 +80,10 @@ function deleteThisEvent(calendar_id, event_id) {
     });
     delete_request.execute(function(resp) {
 
-        console.log(resp);
         var code = resp.code;
         if (resp.code) {
             console.log("Error " + resp.code + ": " + resp.message);
-
+            console.log(resp);
         } else {
             console.log("Deleted " + event_id + "successfully.")
             var event_div = document.getElementById("event-" + event_id);
@@ -103,13 +111,14 @@ function buildDeleteLink(div, calendar_id, event_id) {
  * the authorized user's calendar. If no events are found an
  * appropriate message is printed.
  */
-function listUpcomingEvents() {
+function listUpcomingEvents(start_date,end_date) {
     var request = gapi.client.calendar.events.list({
         'calendarId': calendar_ID,
-        'timeMin': (new Date()).toISOString(),
+        'timeMin': start_date,
+        'timeMax': end_date,
         'showDeleted': false,
         'singleEvents': true,
-        'maxResults': 15,
+        'maxResults': 100,
         'orderBy': 'startTime'
     });
 
@@ -117,6 +126,7 @@ function listUpcomingEvents() {
 
     request.execute(function(resp) {
         var events = resp.items;
+        document.getElementById("output").innerHTML = "";
         appendPre('Upcoming events:');
 
         if (events.length > 0) {

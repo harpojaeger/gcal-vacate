@@ -1,7 +1,6 @@
 <html>
   <head>
     <script type="text/javascript" src="beauty.js">
-      
     </script>
     <script src="https://apis.google.com/js/client.js?onload=checkAuth">
     </script>
@@ -13,6 +12,13 @@
       <button id="authorize-button" onclick="handleAuthClick(event)">
         Authorize
       </button>
+    </div>
+    <div id="params">
+    <input type="text" id="start" value="2016-07-02T00:00:00Z"/>
+    <label for="start">Start</label>
+    <input type="text" id="end" value ="2016-07-25T00:00:00Z"/>
+    <label for="end">End</label>
+    <button type="submit" id="submit" onclick="prepareSearch();">Submit</button>
     </div>
     <div id="output"></div>
   </body>
