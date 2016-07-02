@@ -78,6 +78,8 @@
 		    else
 		    {
 		      console.log("Deleted "+ event_id + "successfully.")
+		      var event_div = document.getElementById("event-" + event_id);
+		      event_div.parentNode.removeChild(event_div);
 		    }
          });  
        }
@@ -88,6 +90,7 @@
          t = document.createTextNode("(delete)");
          a.appendChild(t);
          div.appendChild(a);
+         div.setAttribute("id","event-"+ event_id)
        }
 
 
