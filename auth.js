@@ -51,8 +51,7 @@ function handleAuthClick(event) {
 }
 
 /**
- * Load Google Calendar client library. List upcoming events
- * once client library is loaded.
+ * Load Google Calendar client library.
  */
 function loadCalendarApi() {
     gapi.client.load('calendar', 'v3');

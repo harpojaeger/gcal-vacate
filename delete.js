@@ -13,8 +13,7 @@ function deleteThisEvent(calendar_id, event_id) {
             debug(resp);
         } else {
             debug("Deleted " + event_id + "successfully.")
-            var event_div = document.getElementById("event-" + event_id);
-            event_div.parentNode.removeChild(event_div);
+            eventList.delete(event_id)
         }
     });
 }
