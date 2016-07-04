@@ -26,5 +26,5 @@ function buildDeleteLink(div, calendar_id, event_id) {
     t = document.createTextNode("(delete)");
     a.appendChild(t);
     div.appendChild(a);
-    
+
 }
