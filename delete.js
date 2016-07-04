@@ -1,6 +1,6 @@
 /** Function to delete a particular event **/
 function deleteThisEvent(calendar_id, event_id) {
-    console.log("Attempting to delete event " + event_id + " cal ID " + calendar_id);
+    debug("Attempting to delete event " + event_id + " cal ID " + calendar_id);
     var delete_request = gapi.client.calendar.events.delete({
         'calendarId': calendar_id,
         'eventId': event_id
@@ -9,10 +9,10 @@ function deleteThisEvent(calendar_id, event_id) {
 
         var code = resp.code;
         if (resp.code) {
-            console.log("Error " + resp.code + ": " + resp.message);
-            console.log(resp);
+            debug("Error " + resp.code + ": " + resp.message);
+            debug(resp);
         } else {
-            console.log("Deleted " + event_id + "successfully.")
+            debug("Deleted " + event_id + "successfully.")
             var event_div = document.getElementById("event-" + event_id);
             event_div.parentNode.removeChild(event_div);
         }

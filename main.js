@@ -9,7 +9,7 @@ var calendar_ID = "ckqdcpe80jbu7f5sa72nukc6fo@group.calendar.google.com"
 function prepareSearch(){
     var start_date = document.getElementById("start").value;
     var end_date = document.getElementById("end").value;
-    console.log("Ready to search for repeating events from " + start_date + " to " + end_date);
+    debug("Ready to search for repeating events from " + start_date + " to " + end_date);
     listUpcomingEvents(start_date, end_date);
 }
 
@@ -39,7 +39,7 @@ function listUpcomingEvents(start_date,end_date) {
             for (i = 0; i < events.length; i++) {
                 var event = events[i];
                 var isRepeating = event.recurringEventId;
-                console.log(event.summary + " has repeating ID " + isRepeating);
+                debug(event.summary + " has repeating ID " + isRepeating);
                 if (isRepeating) {
                     var when = event.start.dateTime;
                     n++;
@@ -58,9 +58,9 @@ function listUpcomingEvents(start_date,end_date) {
                 }
             }
             console.log ("Retrieved " + events.length + " events, of which " + n + " are repeating.");
-            debug("hello");
+
         } else {
-            console.log('No upcoming events found.');
+            debug('No upcoming events found.');
         }
 
 

@@ -11,7 +11,7 @@ a.setAttribute("id", "instances-event-" + event_id)
 }
 
 function listInstances(calendar_id, recurring_id){
-console.log("Instances of " + recurring_id + " from calendar " + calendar_id + ":");
+debug("Instances of " + recurring_id + " from calendar " + calendar_id + ":");
 
 
 }
