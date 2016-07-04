@@ -13,7 +13,7 @@ function deleteThisEvent(calendar_id, event_id) {
             debug(resp);
         } else {
             debug("Deleted " + event_id + "successfully.")
-            eventList.delete(event_id)
+            VEvents.delete(event_id)
         }
     });
 }
