@@ -28,7 +28,7 @@ function listUpcomingEvents(start_date, end_date) {
     });
     request.execute(function(resp) {
         var events = resp.items;
-        VEvents.clear()
+
 
 
         if (events.length > 0) {
@@ -38,20 +38,13 @@ function listUpcomingEvents(start_date, end_date) {
                 var isRepeating = event.recurringEventId;
                 debug(event.summary + " has repeating ID " + isRepeating);
                 if (isRepeating) {
-                    var when = event.start.dateTime;
                     n++;
-                    if (!when) {
-                        when = event.start.date;
-                    }
                     
-                    var s = document.createElement("div");
-                    var c = document.createTextNode(event.summary + ' (' + when + ') ');
-                    s.appendChild(c)
-                    s.setAttribute("id", "event-" + event.id)
-                    buildDeleteLink(s, calendar_ID, event.id);
+                    /**buildDeleteLink(s, calendar_ID, event.id);
                     buildInstancesLink(s, calendar_ID, event.id, event.recurringEventID);
-                    VEvents.append(s)
-                    VEvents.new(event)
+                **/
+                new Event(event)    
+
                 }
             }
             console.log("Retrieved " + events.length + " events, of which " + n + " are repeating.");

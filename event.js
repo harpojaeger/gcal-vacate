@@ -1,32 +1,17 @@
-var VEvents = {
+function Event(event) {
+    debug("Creating new Event")
+    this.id = event.id;
+    this.recurringId = event.recurringId;
+    this.summary = event.summary;
+    this.start = event.start;
+    this.end = event.end;
 
-    append: function(o) {
-        debug("Appending.");
-        document.getElementById("output").appendChild(o)
-    },
-    clear: function() {
-        document.getElementById("output").innerHTML = ""
-    },
+    var when = event.start.dateTime;
+    if (!when) { when = event.start.date; }
 
-    delete: function(id) {
-        event_div = document.getElementById("event-" + id)
-        event_div.parentNode.removeChild(event_div);
-
-    },
-
-    new: function(event) {
-
-        debug(event)
-
-    },
-
-
-};
-
-function Event(id, recurringId, summary, start, end) {
-    this.id = id;
-    this.recurringId = recurringId;
-    this.summary = summary;
-    this.start = start;
-    this.end = end;
+    var s = document.createElement("div");
+    var c = document.createTextNode(event.summary + ' (' + when + ') ');
+    s.appendChild(c)
+    s.setAttribute("id", "event-" + event.id)
+    $("#output").append(s);
 }
