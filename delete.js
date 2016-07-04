@@ -1,5 +1,3 @@
-
-
 /** Function to delete a particular event **/
 function deleteThisEvent(calendar_id, event_id) {
     console.log("Attempting to delete event " + event_id + " cal ID " + calendar_id);

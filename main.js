@@ -13,26 +13,6 @@ function prepareSearch(){
     listUpcomingEvents(start_date, end_date);
 }
 
-
-
-function buildInstancesLink(div, calendar_id, event_id, recurring_id) {
-a = document.createElement("a");
-function_call = "javascript:listInstances('" + calendar_id + "','" + recurring_id + "');"
-a.setAttribute("href", function_call);
-t = document.createTextNode("(list instances)");
-a.appendChild(t);
-div.appendChild(a);
-a.setAttribute("id", "instances-event-" + event_id)
-
-
-}
-
-function listInstances(calendar_id, recurring_id){
-console.log("Instances of " + recurring_id + " from calendar " + calendar_id + ":");
-
-
-}
-
 /**
  * Print the summary and start datetime/date of the next ten events in
  * the authorized user's calendar. If no events are found an
@@ -48,9 +28,6 @@ function listUpcomingEvents(start_date,end_date) {
 		'maxResults': 2500,
         'orderBy': 'startTime'
     });
-
-
-
     request.execute(function(resp) {
         var events = resp.items;
         document.getElementById("output").innerHTML = "";
@@ -81,6 +58,7 @@ function listUpcomingEvents(start_date,end_date) {
                 }
             }
             console.log ("Retrieved " + events.length + " events, of which " + n + " are repeating.");
+            debug("hello");
         } else {
             console.log('No upcoming events found.');
         }
