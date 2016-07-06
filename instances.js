@@ -11,7 +11,7 @@ function Instance(event){
         when = event.start.date;
     }
 
-    var instance_list_item = document.createElement("div");
+    var instance_list_item = document.createElement("li");
     var c = document.createTextNode(event.summary + ' (' + when + ') ');
     instance_list_item.appendChild(c)
     $("#instances").append(instance_list_item);

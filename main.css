@@ -1,9 +1,24 @@
-div#output {
+div.events {
   float:left;
   width:50%;
 }
 
-div#instances {
+div.instances {
   float:right;
   width:50%;
+}
+
+div.info {
+  color: grey;
+
+}
+
+div.output span.delete.instances {
+  float:right;
+  display:inline;
+}
+
+ul {
+  list-style-type:none;
+
 }
