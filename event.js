@@ -74,8 +74,10 @@ function Event(event) {
         var event = $(event_div).data()
         debug(event)
         var instances_request = gapi.client.calendar.events.instances({
-            "calendarId": event.calendarId,
-            "eventId": event.recurringEventId
+            "calendarId" : event.calendarId,
+            "eventId" : event.recurringEventId,
+            "timeMin" : $("#start").val(),
+            "timeMax" : $("#end").val()
         });
         instances_request.execute(function(resp) {
 
@@ -87,6 +89,7 @@ function Event(event) {
                 var events = resp.items;
                 if (events.length > 0) {
                     var n = 0;
+                    $("#instances").empty();
                     for (i = 0; i < events.length; i++) {
                         var event = events[i];
                         v = new Instance(event)

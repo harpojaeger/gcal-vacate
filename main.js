@@ -12,11 +12,12 @@ var calendar_ID = "ckqdcpe80jbu7f5sa72nukc6fo@group.calendar.google.com"
 
 /** Get data from the form and run the search **/
 function prepareSearch() {
-    var start_date = document.getElementById("start").value;
-    var end_date = document.getElementById("end").value;
+    var start_date = $("#start").val();
+    var end_date = $("#end").val();
     debug("Ready to search for repeating events from " + start_date + " to " + end_date);
     listUpcomingEvents(start_date, end_date);
     $("#output").empty();
+    $("#instances").empty();
 }
 
 /**
