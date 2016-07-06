@@ -5,21 +5,21 @@ function Event(event) {
     this.summary = event.summary;
     this.start = event.start;
     this.end = event.end;
+    this.recurrence = event.recurrence;
 
-    var when = event.start.dateTime;
-    if (!when) {
-        when = event.start.date;
-    }
 
-    var event_list_item = document.createElement("div");
-    var c = document.createTextNode(event.summary + ' (' + when + ') ');
-    event_list_item.appendChild(c)
+    /** Create the list item  with summary**/
+    var event_list_item = document.createElement("li");
+    var summary = document.createElement("span");
+    $(summary).text(this.summary);
+    event_list_item.appendChild(summary)
     $("#output").append(event_list_item);
     $(event_list_item).data({
         "id": this.id,
         "recurringEventId": this.recurringEventId,
         "calendarId": calendar_ID
     });
+
 
 
     /**Create the delete button for the event **/
@@ -30,6 +30,32 @@ function Event(event) {
     event_list_item.appendChild(delete_link);
     $(delete_link).click(deleteMe);
 
+
+
+
+
+
+    /**Create the instances button **/
+    var instance_link = document.createElement("span");
+    instance_link.setAttribute("class", "instances");
+    instance_text = document.createTextNode("(instances)");
+    instance_link.appendChild(instance_text);
+    event_list_item.appendChild(instance_link);
+
+    $(instance_link).click(listInstances);
+
+
+
+    /**Create the "further info" div **/
+    var info = document.createElement("div");
+    $(info).attr("class", "info");
+    var RRule = rrulestr(this.recurrence[0]);
+    var repeat_desc = RRule.toText();
+    $(info).text(repeat_desc).hide();
+    event_list_item.appendChild(info);
+    $(summary).click(function() {
+        $(info).slideToggle();
+    });
 
 
     function deleteMe() {
@@ -59,25 +85,16 @@ function Event(event) {
 
     }
 
-
-    /**Create the instances button **/
-    var instance_link = document.createElement("a");
-    instance_link.setAttribute("class", "instances");
-    instance_text = document.createTextNode("(instances)");
-    instance_link.appendChild(instance_text);
-    event_list_item.appendChild(instance_link);
-
-    $(instance_link).click(listInstances);
-
     function listInstances() {
         var event_div = this.parentNode
         var event = $(event_div).data()
         debug(event)
         var instances_request = gapi.client.calendar.events.instances({
-            "calendarId" : event.calendarId,
-            "eventId" : event.recurringEventId,
-            "timeMin" : $("#start").val(),
-            "timeMax" : $("#end").val()
+            "calendarId": event.calendarId,
+            "eventId": event.id,
+            "timeMin": $("#start").val(),
+            "timeMax": $("#end").val(),
+
         });
         instances_request.execute(function(resp) {
 

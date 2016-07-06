@@ -31,9 +31,9 @@ function listUpcomingEvents(start_date, end_date) {
         'timeMin': start_date,
         'timeMax': end_date,
         'showDeleted': false,
-        'singleEvents': true,
-        'maxResults': 2500,
-        'orderBy': 'startTime'
+        'singleEvents': false,
+        'maxResults': 2500
+        
     });
     request.execute(function(resp) {
         var events = resp.items;
@@ -41,14 +41,16 @@ function listUpcomingEvents(start_date, end_date) {
             var n = 0;
             for (i = 0; i < events.length; i++) {
                 var event = events[i];
-                var isRepeating = event.recurringEventId;
-                debug(event.summary + " has repeating ID " + isRepeating);
-                if (isRepeating) {
+
+                
+                if (event.status == "confirmed" ) {
                     n++;
                     v = new Event(event)
+                    
+                    
                 }
             }
-            console.log("Retrieved " + events.length + " events, of which " + n + " are repeating.");
+            console.log("Retrieved " + n + " repeating events.");
 
 
         } else {
