@@ -14,7 +14,6 @@ function Event(event) {
     var event_list_item = document.createElement("div");
     var c = document.createTextNode(event.summary + ' (' + when + ') ');
     event_list_item.appendChild(c)
-    event_list_item.setAttribute("id", "event-" + event.id)
     $("#output").append(event_list_item);
     $(event_list_item).data({
         "id": this.id,
@@ -29,8 +28,11 @@ function Event(event) {
     delete_text = document.createTextNode("(delete)");
     delete_link.appendChild(delete_text);
     event_list_item.appendChild(delete_link);
+    $(delete_link).click(deleteMe);
 
-    $(delete_link).click(function() {
+
+
+    function deleteMe() {
         var event_div = this.parentNode
         var event = $(event_div).data()
         debug(event);
@@ -47,15 +49,15 @@ function Event(event) {
                 debug(resp);
             } else {
                 debug("Deleted " + event.id + " successfully.")
-                $(event_div).fadeOut(100).fadeIn(100,function(){
-                    $(event_div).slideUp(function(){
+                $(event_div).fadeOut(100).fadeIn(100, function() {
+                    $(event_div).slideUp(function() {
                         $(event_div).remove();
                     });
                 });
             }
         });
 
-    });
+    }
 
 
     /**Create the instances button **/
@@ -65,4 +67,37 @@ function Event(event) {
     instance_link.appendChild(instance_text);
     event_list_item.appendChild(instance_link);
 
+    $(instance_link).click(listInstances);
+
+    function listInstances() {
+        var event_div = this.parentNode
+        var event = $(event_div).data()
+        debug(event)
+        var instances_request = gapi.client.calendar.events.instances({
+            "calendarId": event.calendarId,
+            "eventId": event.recurringEventId
+        });
+        instances_request.execute(function(resp) {
+
+            var code = resp.code;
+            if (resp.code) {
+                debug("Error " + resp.code + ": " + resp.message);
+                debug(resp);
+            } else {
+                var events = resp.items;
+                if (events.length > 0) {
+                    var n = 0;
+                    for (i = 0; i < events.length; i++) {
+                        var event = events[i];
+                        v = new Instance(event)
+                    }
+                    console.log("Retrieved " + events.length + " instances");
+
+
+                } else {
+                    debug('No instances found (this is weird).');
+                }
+            }
+        });
+    }
 }

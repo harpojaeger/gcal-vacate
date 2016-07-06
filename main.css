@@ -1,0 +1,9 @@
+div#output {
+  float:left;
+  width:50%;
+}
+
+div#instances {
+  float:right;
+  width:50%;
+}

@@ -49,6 +49,7 @@ function listUpcomingEvents(start_date, end_date) {
             }
             console.log("Retrieved " + events.length + " events, of which " + n + " are repeating.");
 
+
         } else {
             debug('No upcoming events found.');
         }
