@@ -1,12 +1,11 @@
 <html>
   <head>
+    <script type="text/javascript" src="jquery-3.0.0.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="auth.js"></script>
-    <script type="text/javascript" src="delete.js"></script>
     <script type="text/javascript" src="instances.js"></script>
     <script type="text/javascript" src="debug.js"></script>
     <script type="text/javascript" src="event.js"></script>
-	<script type="text/javascript" src="jquery-3.0.0.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=checkAuth">
     </script>
   </head>
@@ -23,8 +22,9 @@
     <label for="start">Start</label>
     <input type="text" id="end" value ="2016-07-25T00:00:00Z"/>
     <label for="end">End</label>
-    <button type="submit" id="submit" onclick="prepareSearch();">Submit</button>
+    <button type="submit" id="submit">Submit</button>
     </div>
     <div id="output"></div>
+    
   </body>
 </html>

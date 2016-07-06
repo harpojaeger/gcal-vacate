@@ -1,3 +1,10 @@
+/** Prep some jQuery stuff **/
+
+$(document).ready(function() {
+    debug("Document ready.")
+    $("#submit").click(prepareSearch);
+});
+
 /** Temp: use a particular ID (my sandbox calendar).  Will ultimately be switched over to some kind of picker. */
 var calendar_ID = "ckqdcpe80jbu7f5sa72nukc6fo@group.calendar.google.com"
 
@@ -9,6 +16,7 @@ function prepareSearch() {
     var end_date = document.getElementById("end").value;
     debug("Ready to search for repeating events from " + start_date + " to " + end_date);
     listUpcomingEvents(start_date, end_date);
+    $("#output").empty();
 }
 
 /**
@@ -28,9 +36,6 @@ function listUpcomingEvents(start_date, end_date) {
     });
     request.execute(function(resp) {
         var events = resp.items;
-
-
-
         if (events.length > 0) {
             var n = 0;
             for (i = 0; i < events.length; i++) {
@@ -39,12 +44,7 @@ function listUpcomingEvents(start_date, end_date) {
                 debug(event.summary + " has repeating ID " + isRepeating);
                 if (isRepeating) {
                     n++;
-                    
-                    /**buildDeleteLink(s, calendar_ID, event.id);
-                    buildInstancesLink(s, calendar_ID, event.id, event.recurringEventID);
-                **/
-                new Event(event)    
-
+                    v = new Event(event)
                 }
             }
             console.log("Retrieved " + events.length + " events, of which " + n + " are repeating.");
