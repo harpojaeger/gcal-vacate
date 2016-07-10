@@ -23,13 +23,13 @@ function Event(event) {
 
 
     /**Create the delete button for the event **/
-    delete_link = document.createElement("span");
+    /** delete_link = document.createElement("span");
     delete_link.setAttribute("class", "delete");
     delete_text = document.createTextNode("(delete)");
     delete_link.appendChild(delete_text);
     event_list_item.appendChild(delete_link);
     $(delete_link).click(deleteMe);
-
+**/
 
 
 
