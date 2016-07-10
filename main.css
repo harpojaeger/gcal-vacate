@@ -1,11 +1,11 @@
 div.events {
   float:left;
-  width:50%;
+
 }
 
 div.instances {
   float:right;
-  width:50%;
+
 }
 
 div.info {
@@ -13,9 +13,9 @@ div.info {
 
 }
 
-div.output span.delete.instances {
-  float:right;
+div.events ul#output li span.delete,span.instances {
   display:inline;
+  margin-left:10px;
 }
 
 ul {
