@@ -1,3 +1,7 @@
+div#params input {
+  width:8em;
+
+}
 div.events {
   float:left;
 
@@ -5,6 +9,7 @@ div.events {
 
 div.instances {
   float:right;
+  width:50%;
 
 }
 

@@ -92,8 +92,8 @@ function Event(event) {
         var instances_request = gapi.client.calendar.events.instances({
             "calendarId": event.calendarId,
             "eventId": event.id,
-            "timeMin": $("#start").val(),
-            "timeMax": $("#end").val(),
+            "timeMin": $("#start").val() + "T00:00:00Z",
+            "timeMax": $("#end").val() + "T00:00:00Z",
 
         });
         instances_request.execute(function(resp) {

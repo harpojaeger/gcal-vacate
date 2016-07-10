@@ -2,6 +2,8 @@
   <head>
     <link rel="stylesheet" type="text/css" href="main.css">
     <script type="text/javascript" src="jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="jquery-ui/jquery-ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="jquery-ui/jquery-ui.min.css">
     <script src="rrule/rrule.js"></script>
     <script src="rrule/nlp.js"></script>
     <script src="datejs/date.js"></script>
@@ -10,6 +12,7 @@
     <script type="text/javascript" src="auth.js"></script>
     <script type="text/javascript" src="instances.js"></script>
     <script type="text/javascript" src="debug.js"></script>
+    <script type="text/javascript" src="search.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
   </head>
   <body>
@@ -21,12 +24,14 @@
       </button>
     </div>
     <div id="params">
-    <input type="text" id="start" value="2016-07-02T00:00:00Z"/>
-    <label for="start">Start</label>
-    <input type="text" id="end" value ="2016-07-25T00:00:00Z"/>
-    <label for="end">End</label>
+    Search for repeating events from
+    <input type="text" id="start" class="datepicker"value="2016-07-02"/>
+    to
+    <input type="text" id="end" class="datepicker" value ="2016-07-25"/>
+    
     <button type="submit" id="submit">Submit</button>
     </div>
+
     <div class="events">
     <ul id="output">
     </ul>
