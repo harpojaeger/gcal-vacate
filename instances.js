@@ -17,6 +17,7 @@ function Instance(event){
     var instance_list_item = document.createElement("li");
     var c = document.createTextNode(event.summary + ' (' + when + ') ');
     instance_list_item.appendChild(c)
+    $(instance_list_item).addClass("instance");
     $("#instances").append(instance_list_item);
     $(instance_list_item).data({
         "id": this.id,
@@ -25,6 +26,9 @@ function Instance(event){
     });
     $(instance_list_item).on("click",function(){
 		delete_instance(this)
+    });
+    $(instance_list_item).on("instance:delete",function(){
+    	delete_instance(this)
     });
     
     
@@ -55,4 +59,9 @@ function Instance(event){
 
 function delete_all_instances(){
         debug("Delete all shown instances.")
+        $("li.instance").each(function(index){
+        	debug(index + " " + $(this).data("id"));
+        	$(this).trigger("instance:delete");
+        
+        }); 
 }

@@ -8,6 +8,7 @@ function Event(event) {
     this.recurrence = event.recurrence;
 
 
+
     /** Create the list item  with summary**/
     var event_list_item = document.createElement("li");
     var summary = document.createElement("span");
@@ -72,7 +73,7 @@ function Event(event) {
                         v = new Instance(event)
                     }
                     console.log("Retrieved " + events.length + " instances");
-                    $("#deleteall").text("Delete all").click(delete_all_instances);
+                    $("#deleteall").text("Delete all").unbind("click").click(delete_all_instances);
                     
 
                     $("#instances_title").text("Instances");
