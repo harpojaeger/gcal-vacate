@@ -35,6 +35,7 @@ function listUpcomingEvents(start_date, end_date) {
                 }
             }
             console.log("Retrieved " + n + " repeating events.");
+            $("#events_title").text("Events");
         } else {
             debug('No upcoming events found.');
         }

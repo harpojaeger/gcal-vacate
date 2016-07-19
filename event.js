@@ -20,21 +20,6 @@ function Event(event) {
         "calendarId": calendar_ID
     });
 
-
-
-    /**Create the delete button for the event **/
-    /** delete_link = document.createElement("span");
-    delete_link.setAttribute("class", "delete");
-    delete_text = document.createTextNode("(delete)");
-    delete_link.appendChild(delete_text);
-    event_list_item.appendChild(delete_link);
-    $(delete_link).click(deleteMe);
-**/
-
-
-
-
-
     /**Create the instances button **/
     var instance_link = document.createElement("span");
     instance_link.setAttribute("class", "instances");
@@ -58,32 +43,7 @@ function Event(event) {
     });
 
 
-    function deleteMe() {
-        var event_div = this.parentNode
-        var event = $(event_div).data()
-        debug(event);
-        debug("Attempting to delete event " + event.id + " cal ID " + event.calendarId);
-        var delete_request = gapi.client.calendar.events.delete({
-            'calendarId': event.calendarId,
-            'eventId': event.id
-        });
-        delete_request.execute(function(resp) {
-
-            var code = resp.code;
-            if (resp.code) {
-                debug("Error " + resp.code + ": " + resp.message);
-                debug(resp);
-            } else {
-                debug("Deleted " + event.id + " successfully.")
-                $(event_div).fadeOut(100).fadeIn(100, function() {
-                    $(event_div).slideUp(function() {
-                        $(event_div).remove();
-                    });
-                });
-            }
-        });
-
-    }
+    
 
     function listInstances() {
         var event_div = this.parentNode
@@ -112,8 +72,10 @@ function Event(event) {
                         v = new Instance(event)
                     }
                     console.log("Retrieved " + events.length + " instances");
+                    $("#deleteall").text("Delete all").click(delete_all_instances);
+                    
 
-
+                    $("#instances_title").text("Instances");
                 } else {
                     debug('No instances found (this is weird).');
                 }
