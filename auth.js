@@ -28,6 +28,7 @@ function handleAuthResult(authResult) {
         authorizeDiv.style.display = 'none';
 
         loadCalendarApi();
+		list_calendars();
     } else {
         // Show auth UI, allowing the user to initiate authorization by
         // clicking authorize button.

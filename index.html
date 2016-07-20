@@ -13,6 +13,7 @@
     <script type="text/javascript" src="instances.js"></script>
     <script type="text/javascript" src="debug.js"></script>
     <script type="text/javascript" src="search.js"></script>
+    <script type="text/javascript" src="cal_list.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
   </head>
   <body>
@@ -23,6 +24,11 @@
         Authorize
       </button>
     </div>
+    <div id="calendar-div" style="display: none">
+    	<select id="calendar-select">
+    	</select>
+    </div>
+    <div id="search_content" style="display: none">
     <div id="params">
     Search for repeating events from
     <input type="text" id="start" class="datepicker"value="2016-07-02"/>
@@ -45,6 +51,6 @@
         <ul id="instances">
         </ul>
     </div>
-    
+    </div>
   </body>
 </html>
