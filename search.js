@@ -3,10 +3,14 @@
 function prepareSearch() {
     var start_date = $("#start").val() + "T00:00:00Z";
     var end_date = $("#end").val() + "T00:00:00Z";
-    debug("Ready to search for repeating events from " + start_date + " to " + end_date);
+    calendar_ID = $("#calendar-select").val();
+    debug("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
     listUpcomingEvents(start_date, end_date);
     $("#output").empty();
     $("#instances").empty();
+    $("#instances_title").hide();
+    $("#deleteall").hide();
+    $("#events_title").show();
 }
 
 /**
@@ -29,7 +33,8 @@ function listUpcomingEvents(start_date, end_date) {
             var n = 0;
             for (i = 0; i < events.length; i++) {
                 var event = events[i];
-                if (event.status == "confirmed" ) {
+                var recurs = !((typeof event.recurrence) == "undefined");
+                if (event.status == "confirmed" && recurs) {
                     n++;
                     v = new Event(event)   
                 }

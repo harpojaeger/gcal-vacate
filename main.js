@@ -7,6 +7,6 @@ $(document).ready(function() {
 });
 
 /** Temp: use a particular ID (my sandbox calendar).  Will ultimately be switched over to some kind of picker. */
-var calendar_ID = "ckqdcpe80jbu7f5sa72nukc6fo@group.calendar.google.com"
+
 
 /** var calendar_ID = "primary" **/

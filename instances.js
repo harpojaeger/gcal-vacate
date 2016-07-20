@@ -36,7 +36,6 @@ function Instance(event){
     
     function delete_instance(instance) {
     	event = $(instance).data();
-        debug("Attempting to delete event " + event.id + " cal ID " + event.calendarId);
         var delete_request = gapi.client.calendar.events.delete({
             'calendarId': event.calendarId,
             'eventId': event.id
@@ -44,7 +43,6 @@ function Instance(event){
         delete_request.execute(function(resp) {
             if (resp.code) {
                 debug("Error " + resp.code + ": " + resp.message);
-                debug(resp);
             } else {
                 debug("Deleted " + event.id + " successfully.")
                 $(instance).slideUp(function() {

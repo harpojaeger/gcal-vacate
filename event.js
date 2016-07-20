@@ -27,7 +27,6 @@ function Event(event) {
     instance_text = document.createTextNode("(instances)");
     instance_link.appendChild(instance_text);
     event_list_item.appendChild(instance_link);
-
     $(instance_link).click(listInstances);
 
 
@@ -49,7 +48,6 @@ function Event(event) {
     function listInstances() {
         var event_div = this.parentNode
         var event = $(event_div).data()
-        debug(event)
         var instances_request = gapi.client.calendar.events.instances({
             "calendarId": event.calendarId,
             "eventId": event.id,
@@ -73,10 +71,8 @@ function Event(event) {
                         v = new Instance(event)
                     }
                     console.log("Retrieved " + events.length + " instances");
-                    $("#deleteall").text("Delete all").unbind("click").click(delete_all_instances);
-                    
-
-                    $("#instances_title").text("Instances");
+                    $("#deleteall").show().unbind("click").click(delete_all_instances);
+                    $("#instances_title").show();
                 } else {
                     debug('No instances found (this is weird).');
                 }
