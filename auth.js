@@ -28,7 +28,7 @@ function handleAuthResult(authResult) {
         authorizeDiv.style.display = 'none';
 
         loadCalendarApi();
-		list_calendars();
+
     } else {
         // Show auth UI, allowing the user to initiate authorization by
         // clicking authorize button.
@@ -55,5 +55,5 @@ function handleAuthClick(event) {
  * Load Google Calendar client library.
  */
 function loadCalendarApi() {
-    gapi.client.load('calendar', 'v3');
+    gapi.client.load('calendar', 'v3',list_calendars);
 }
