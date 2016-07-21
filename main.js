@@ -4,4 +4,5 @@ $(document).ready(function() {
     $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
     events = new eventsController();
     instances = new instancesController();
+   
 });
