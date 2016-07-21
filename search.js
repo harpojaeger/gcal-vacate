@@ -1,15 +1,22 @@
 /** Get data from the form and run the search **/
 function prepareSearch() {
-    var start_date = $("#start").val() + "T00:00:00Z";
-    var end_date = $("#end").val() + "T00:00:00Z";
+    var start_date = $("#start").val();
+    var end_date = $("#end").val();
     calendar_ID = $("#calendar-select").val();
-    debug("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
-    listUpcomingEvents(start_date, end_date);
-    instances.clear();
-    events.title.show();
-    events.clear();
-    instances.title.hide();
-    instances.deleteAllLink.hide();
+    if( $('#calendar-select').val().length && start_date.length && end_date.length) {
+    	 start_date += "T00:00:00Z";
+    	end_date += "T00:00:00Z";
+    	debug("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
+	    listUpcomingEvents(start_date, end_date);
+	    instances.clear();
+    	events.title.show();
+	    events.clear();
+	    instances.title.hide();
+    	instances.deleteAllLink.hide();
+    } else {
+    
+    }
+   
 }
 
 function listUpcomingEvents(start_date, end_date) {
