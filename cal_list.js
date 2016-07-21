@@ -59,7 +59,7 @@ function list_calendars(){
 	$( '#calendar-select' ).selectmenu({
 		renderItem: coloredItem
 	});
-   
+	$('#submit').button();
 	$('#search_content').show();
 }
 
