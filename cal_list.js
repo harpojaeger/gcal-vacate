@@ -11,7 +11,7 @@ function list_calendars(){
     		var calendar = calendars[i];
 	    	new Calendar(calendar);
     	}
-    	
+    	debug("Retrieved " + calendars.length + " calendars.");
 		$("#calendar-div").show();
 	});
 	
