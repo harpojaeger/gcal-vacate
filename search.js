@@ -6,11 +6,12 @@ function prepareSearch() {
     calendar_ID = $("#calendar-select").val();
     debug("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
     listUpcomingEvents(start_date, end_date);
-    $("#output").empty();
-    $("#instances").empty();
-    $("#instances_title").hide();
-    $("#deleteall").hide();
-    $("#events_title").show();
+    instances.clear();
+    events.title.show();
+    events.clear();
+    instances.title.hide();
+    instances.deleteAllLink.hide();
+
 }
 
 /**

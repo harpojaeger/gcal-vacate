@@ -24,9 +24,9 @@ function Instance(event){
         "recurringEventId": this.recurringEventId,
         "calendarId": calendar_ID
     });
-    $(instance_list_item).on("click",function(){
+    /**$(instance_list_item).on("click",function(){
 		delete_instance(this)
-    });
+    });**/
     $(instance_list_item).on("instance:delete",function(){
     	delete_instance(this)
     });

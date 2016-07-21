@@ -65,14 +65,15 @@ function Event(event) {
                 var events = resp.items;
                 if (events.length > 0) {
                     var n = 0;
-                    $("#instances").empty();
+                    instances.clear();
                     for (i = 0; i < events.length; i++) {
                         var event = events[i];
                         v = new Instance(event)
                     }
                     console.log("Retrieved " + events.length + " instances");
-                    $("#deleteall").show().unbind("click").click(delete_all_instances);
-                    $("#instances_title").show();
+                    $("#deleteall").unbind("click").click(delete_all_instances);
+                    instances.deleteAllLink.show();
+                    instances.title.show();
                 } else {
                     debug('No instances found (this is weird).');
                 }
