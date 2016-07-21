@@ -12,7 +12,6 @@ function list_calendars(){
 	    	new Calendar(calendar);
     	}
     	debug("Retrieved " + calendars.length + " calendars.");
-		$("#calendar-div").show();
 	});
 
 
@@ -61,6 +60,7 @@ function list_calendars(){
 	});
 	$('#submit').button();
 	$('#search_content').show();
+	$("#calendar-div").show();
 }
 
 function Calendar(c){
