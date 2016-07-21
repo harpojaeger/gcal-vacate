@@ -14,8 +14,28 @@ function list_calendars(){
     	debug("Retrieved " + calendars.length + " calendars.");
 		$("#calendar-div").show();
 	});
+
 	
-	$("#search_content").show();
+	$('#calendar-select').selectmenu({
+		options: {
+  			appendTo: "#calendar-div",
+  			_renderItem : function(ul, item) {
+	   			debug("Hello world.");
+   				var li = $( "<li>" ).css( "background-color", 'red' ); 
+  				this._setText( li, item.label + 'hi' );
+	 			return li.appendTo( ul );
+			}
+  		},
+  		_renderItem: function( ul, item ) {
+      		if ( $.isFunction( this.options.renderItem ) )
+         	return this.options.renderItem( ul, item );
+      	else
+         	return this._super( ul, item );
+   		}
+		
+	});
+	
+	$('#search_content').show();
 }
 
 function Calendar(c){
