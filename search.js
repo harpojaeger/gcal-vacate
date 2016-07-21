@@ -14,11 +14,6 @@ function prepareSearch() {
 
 }
 
-/**
- * Print the summary and start datetime/date of the next ten events in
- * the authorized user's calendar. If no events are found an
- * appropriate message is printed.
- */
 function listUpcomingEvents(start_date, end_date) {
     var request = gapi.client.calendar.events.list({
         'calendarId': calendar_ID,
