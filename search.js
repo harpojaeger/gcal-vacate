@@ -3,20 +3,20 @@ function prepareSearch() {
     var start_date = $("#start").val();
     var end_date = $("#end").val();
     calendar_ID = $("#calendar-select").val();
-    if( $('#calendar-select').val().length && start_date.length && end_date.length) {
-    	 start_date += "T00:00:00Z";
-    	end_date += "T00:00:00Z";
-    	debug("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
-	    listUpcomingEvents(start_date, end_date);
-	    instances.clear();
-    	events.title.show();
-	    events.clear();
-	    instances.title.hide();
-    	instances.deleteAllLink.hide();
+    if ($('#calendar-select').val().length && start_date.length && end_date.length) {
+        start_date += "T00:00:00Z";
+        end_date += "T00:00:00Z";
+        debug("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
+        listUpcomingEvents(start_date, end_date);
+        instances.clear();
+        events.title.show();
+        events.clear();
+        instances.title.hide();
+        instances.deleteAllLink.hide();
     } else {
-    
+
     }
-   
+
 }
 
 function listUpcomingEvents(start_date, end_date) {
@@ -28,7 +28,7 @@ function listUpcomingEvents(start_date, end_date) {
         'singleEvents': false,
         'maxResults': 2500
     });
-    
+
     request.execute(function(resp) {
         var events = resp.items;
         if (events.length > 0) {
@@ -38,10 +38,10 @@ function listUpcomingEvents(start_date, end_date) {
                 var recurs = !((typeof event.recurrence) == "undefined");
                 if (event.status == "confirmed" && recurs) {
                     n++;
-                    v = new Event(event)   
+                    v = new Event(event)
                 }
             }
-            
+
             console.log("Retrieved " + n + " repeating events.");
             $("#events_title").text("Events");
         } else {
@@ -49,3 +49,36 @@ function listUpcomingEvents(start_date, end_date) {
         }
     });
 }
+
+$("#submit").click(prepareSearch);
+var datepickerOptions = {
+    dateFormat: 'yy-mm-dd',
+    changeMonth: true,
+    changeYear: true,
+    showOtherMonths: true,
+    selectOtherMonths: true,
+};
+
+$(function() {
+    var dateFormat = "yy-mm-dd",
+        from = $("#start")
+        .datepicker(datepickerOptions)
+        .on("change", function() {
+            to.datepicker("option", "minDate", getDate(this));
+        }),
+        to = $("#end").datepicker(datepickerOptions)
+        .on("change", function() {
+            from.datepicker("option", "maxDate", getDate(this));
+        });
+
+    function getDate(element) {
+        var date;
+        try {
+            date = $.datepicker.parseDate(dateFormat, element.value);
+        } catch (error) {
+            date = null;
+        }
+
+        return date;
+    }
+});
