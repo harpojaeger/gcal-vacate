@@ -19,12 +19,10 @@ function list_calendars(){
 }
 
 function Calendar(c){
-	
 	var o = document.createElement("option");
 	$(o).text(c.summary);
 	$(o).attr("value",c.id);
 	$(calendar_select).append(o);
-		
 	$('select#calendar-select option[val="'+c.id+'"]').css("background",c.backgroundColor);
 	$(calendar_select).css("color",c.foregroundColor);
 }

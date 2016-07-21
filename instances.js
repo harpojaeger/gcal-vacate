@@ -1,6 +1,5 @@
 function Instance(event){
     this.id = event.id
-    /** debug("Created new instance with ID " + this.id) **/
     this.recurringEventId = event.recurringEventId;
     this.summary = event.summary;
     this.start = event.start;
@@ -14,6 +13,7 @@ function Instance(event){
         parsedDate = Date.parse(when);
         when = parsedDate.toString('M/d/yyyy HH:mm tt');
     }
+    
     var instance_list_item = document.createElement("li");
     var c = document.createTextNode(event.summary + ' (' + when + ') ');
     instance_list_item.appendChild(c)
@@ -24,15 +24,13 @@ function Instance(event){
         "recurringEventId": this.recurringEventId,
         "calendarId": calendar_ID
     });
+    
     /**$(instance_list_item).on("click",function(){
 		delete_instance(this)
     });**/
     $(instance_list_item).on("instance:delete",function(){
     	delete_instance(this)
     });
-    
-    
-    
     
     function delete_instance(instance) {
     	event = $(instance).data();
@@ -54,12 +52,10 @@ function Instance(event){
     
 }
 
-
 function delete_all_instances(){
         debug("Delete all shown instances.")
         $("li.instance").each(function(index){
         	debug(index + " " + $(this).data("id"));
         	$(this).trigger("instance:delete");
-        
         }); 
 }

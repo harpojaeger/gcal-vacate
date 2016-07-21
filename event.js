@@ -1,13 +1,10 @@
 function Event(event) {
-
     this.id = event.id;
     this.recurringEventId = event.recurringEventId;
     this.summary = event.summary;
     this.start = event.start;
     this.end = event.end;
     this.recurrence = event.recurrence;
-
-
 
     /** Create the list item  with summary**/
     var event_list_item = document.createElement("li");
@@ -29,8 +26,6 @@ function Event(event) {
     event_list_item.appendChild(instance_link);
     $(instance_link).click(listInstances);
 
-
-
     /**Create the "further info" div **/
     var info = document.createElement("div");
     $(info).attr("class", "info");
@@ -42,9 +37,6 @@ function Event(event) {
         $(info).slideToggle();
     });
 
-
-    
-
     function listInstances() {
         var event_div = this.parentNode
         var event = $(event_div).data()
@@ -53,10 +45,9 @@ function Event(event) {
             "eventId": event.id,
             "timeMin": $("#start").val() + "T00:00:00Z",
             "timeMax": $("#end").val() + "T00:00:00Z",
-
         });
+        
         instances_request.execute(function(resp) {
-
             var code = resp.code;
             if (resp.code) {
                 debug("Error " + resp.code + ": " + resp.message);

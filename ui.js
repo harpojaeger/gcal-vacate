@@ -39,5 +39,4 @@ function instancesController() {
 			$(deleteLink).show();
 		}
 	}
-	
 }

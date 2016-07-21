@@ -1,4 +1,3 @@
-
 /** Get data from the form and run the search **/
 function prepareSearch() {
     var start_date = $("#start").val() + "T00:00:00Z";
@@ -11,7 +10,6 @@ function prepareSearch() {
     events.clear();
     instances.title.hide();
     instances.deleteAllLink.hide();
-
 }
 
 function listUpcomingEvents(start_date, end_date) {
@@ -23,6 +21,7 @@ function listUpcomingEvents(start_date, end_date) {
         'singleEvents': false,
         'maxResults': 2500
     });
+    
     request.execute(function(resp) {
         var events = resp.items;
         if (events.length > 0) {
@@ -35,6 +34,7 @@ function listUpcomingEvents(start_date, end_date) {
                     v = new Event(event)   
                 }
             }
+            
             console.log("Retrieved " + n + " repeating events.");
             $("#events_title").text("Events");
         } else {
