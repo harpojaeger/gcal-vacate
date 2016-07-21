@@ -14,7 +14,8 @@ function prepareSearch() {
         instances.title.hide();
         instances.deleteAllLink.hide();
     } else {
-
+		debug("Requisite data not present for search.");
+		$("#error-div").attr("title","Error").text("Please choose a calendar and enter both start and end dates.").dialog();
     }
 
 }
@@ -50,7 +51,7 @@ function listUpcomingEvents(start_date, end_date) {
     });
 }
 
-$("#submit").click(prepareSearch);
+
 var datepickerOptions = {
     dateFormat: 'yy-mm-dd',
     changeMonth: true,
