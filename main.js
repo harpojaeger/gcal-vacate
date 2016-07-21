@@ -9,8 +9,3 @@ $(document).ready(function() {
     instances = new instancesController();
     
 });
-
-/** Temp: use a particular ID (my sandbox calendar).  Will ultimately be switched over to some kind of picker. */
-
-
-/** var calendar_ID = "primary" **/
