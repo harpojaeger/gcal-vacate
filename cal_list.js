@@ -15,26 +15,51 @@ function list_calendars(){
 		$("#calendar-div").show();
 	});
 
-	
-	$('#calendar-select').selectmenu({
+
+	$.widget( "ui.selectmenu", $.ui.selectmenu, {
 		options: {
-  			appendTo: "#calendar-div",
-  			_renderItem : function(ul, item) {
-	   			debug("Hello world.");
-   				var li = $( "<li>" ).css( "background-color", 'red' ); 
-  				this._setText( li, item.label + 'hi' );
-	 			return li.appendTo( ul );
+			renderItem: null,
+			renderMenu: null
+		},
+
+		_renderItem: function( ul, item ) {
+			if ( $.isFunction( this.options.renderItem ) )
+				return this.options.renderItem( ul, item );
+			else
+				return this._super( ul, item );
+			},
+
+			_renderMenu: function( ul, items ) {
+
+			if ( $.isFunction( this.options.renderMenu ) ) {
+
+				this.options.renderMenu( ul, items );
+
 			}
-  		},
-  		_renderItem: function( ul, item ) {
-      		if ( $.isFunction( this.options.renderItem ) )
-         	return this.options.renderItem( ul, item );
-      	else
-         	return this._super( ul, item );
-   		}
-		
+
+		this._super( ul, items );
+		},
+
 	});
-	
+
+    coloredItem = function( ul, item ) {
+		var li = $('<li>');
+		var div = $('<div>');
+		$(div).css({
+			'background-color' : item.element.data('backgroundColor'),
+			'display' : 'inline'
+		});
+		$(div).html('&nbsp;');
+		var a = $( '<a>' ).html( item.label )
+		$(li).append(div).append( a );
+
+		return $(li).appendTo( ul);
+    };
+
+	$( '#calendar-select' ).selectmenu({
+		renderItem: coloredItem
+	});
+   
 	$('#search_content').show();
 }
 
@@ -43,6 +68,8 @@ function Calendar(c){
 	$(o).text(c.summary);
 	$(o).attr("value",c.id);
 	$(calendar_select).append(o);
-	$('select#calendar-select option[val="'+c.id+'"]').css("background",c.backgroundColor);
-	$(calendar_select).css("color",c.foregroundColor);
+	$(o).data({
+		'backgroundColor' : c.backgroundColor,
+		'foregroundColor' : c.foregroundColor
+	});
 }

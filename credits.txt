@@ -2,3 +2,4 @@ jQuery
 jQuery UI
 rrule
 Date.js
+http://www.benknowscode.com/2014/03/customize-jquery-ui-autocomplete-menu.html
