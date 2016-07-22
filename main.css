@@ -13,12 +13,12 @@ div#params input {
   font-size: 1em;
 
 }
-div.events {
+div#events {
   float:left;
 
 }
 
-div.instances {
+div#instances {
   float:right;
   width:50%;
 
@@ -44,4 +44,13 @@ li:nth-child(even) { background: #eeeeee; }
 div#search_content div#params {
 	font-family: Arial,Helvetica,sans-serif;
 
+}
+
+div.output{
+	width: 49%;
+    border: 1px solid;
+    margin-right: 1%;
+    border-radius: 5px;
+    padding: 5px;
+    display: none;
 }

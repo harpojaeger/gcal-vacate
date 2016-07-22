@@ -11,7 +11,7 @@ function Event(event) {
     var summary = document.createElement("span");
     $(summary).text(this.summary);
     event_list_item.appendChild(summary)
-    $("#output").append(event_list_item);
+    $("#events-ul").append(event_list_item);
     $(event_list_item).data({
         "id": this.id,
         "recurringEventId": this.recurringEventId,
@@ -56,15 +56,16 @@ function Event(event) {
                 var events = resp.items;
                 if (events.length > 0) {
                     var n = 0;
-                    instances.clear();
+                    instancesController.clear();
                     for (i = 0; i < events.length; i++) {
                         var event = events[i];
                         v = new Instance(event)
                     }
                     console.log("Retrieved " + events.length + " instances");
                     $("#deleteall").unbind("click").click(delete_all_instances);
-                    instances.deleteAllLink.show();
-                    instances.title.show();
+                    instancesController.deleteAllLink.show();
+                    instancesController.title.show();
+                    instancesController.div.show();
                 } else {
                     debug('No instances found (this is weird).');
                 }

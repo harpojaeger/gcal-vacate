@@ -8,11 +8,11 @@ function prepareSearch() {
         end_date += "T00:00:00Z";
         debug("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
         listUpcomingEvents(start_date, end_date);
-        instances.clear();
-        events.title.show();
-        events.clear();
-        instances.title.hide();
-        instances.deleteAllLink.hide();
+        instancesController.clear();
+        eventsController.title.show();
+        eventsController.ul.clear();
+        instancesController.title.hide();
+        instancesController.deleteAllLink.hide();
     } else {
         debug("Requisite data not present for search.");
         $("#error-div").attr("title", "Error").text("Please choose a calendar and enter both start and end dates.").dialog({
@@ -51,7 +51,8 @@ function listUpcomingEvents(start_date, end_date) {
             }
 
             console.log("Retrieved " + n + " repeating events.");
-            $("#events_title").text("Events");
+            eventsController.div.show();
+            /**$("#events_title").text("Events");**/
         } else {
             debug('No upcoming events found.');
         }

@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    debug("Document ready.")
-    events = new eventsController();
-    instances = new instancesController();
+    debug("Document ready.");
+    eventsController = new eventsController();
+    instancesController = new instancesController();
 	$("#submit").click(prepareSearch);
 });

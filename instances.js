@@ -18,7 +18,7 @@ function Instance(event){
     var c = document.createTextNode(event.summary + ' (' + when + ') ');
     instance_list_item.appendChild(c)
     $(instance_list_item).addClass("instance");
-    $("#instances").append(instance_list_item);
+    $("#instances-ul").append(instance_list_item);
     $(instance_list_item).data({
         "id": this.id,
         "recurringEventId": this.recurringEventId,

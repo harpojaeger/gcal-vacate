@@ -1,6 +1,7 @@
 function eventsController() {
 	eventsTitle = $("#events_title");
-	eventsOutput = $("#output");
+	eventsUl = $("#events-ul");
+	eventsDiv = $('#events-div');
 	this.title = {
 		show : function() {
 			$(eventsTitle).show();
@@ -9,17 +10,29 @@ function eventsController() {
 			$(eventsTitle).hide();
 		}
 	}
-	this.clear = function() {
-		$(eventsOutput).empty();
+	this.ul = {
+		clear : function() {
+			$(eventsUl).empty();
+		}
 	}
+	this.div = {
+		show : function () {
+			$(eventsDiv).show();
+		},
+		hide : function () {
+			$(eventsDiv).hide();
+		}
+	}
+	
 }
 
 function instancesController() {
-	instancesOutput = $("#instances");
+	instancesDiv = $("#instances-div");
+	instancesUl = $('#instances-ul');
 	instancesTitle = $("#instances_title");
 	deleteLink = $("#deleteall");
 	this.clear = function() {
-		$(instancesOutput).empty();
+		$(instancesUl).empty();
 	}
 	
 	this.title = {
@@ -29,6 +42,16 @@ function instancesController() {
 		show : function() {
 			$(instancesTitle).show();
 		}
+	}
+	
+	this.div = {
+		show : function() {
+			$(instancesDiv).show();
+		},
+		hide : function () {
+			$(instancesDiv).hide();
+		}
+	
 	}
 	
 	this.deleteAllLink = {
