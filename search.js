@@ -14,8 +14,15 @@ function prepareSearch() {
         instances.title.hide();
         instances.deleteAllLink.hide();
     } else {
-		debug("Requisite data not present for search.");
-		$("#error-div").attr("title","Error").text("Please choose a calendar and enter both start and end dates.").dialog();
+        debug("Requisite data not present for search.");
+        $("#error-div").attr("title", "Error").text("Please choose a calendar and enter both start and end dates.").dialog({
+            buttons: [{
+                text: "OK",
+                click: function() {
+                    $(this).dialog("close");
+                }
+            }]
+        });
     }
 
 }
