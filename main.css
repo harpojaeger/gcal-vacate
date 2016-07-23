@@ -50,6 +50,11 @@ ul {
 
 }
 
+ul#instances-ul {
+	font-family: "Courier New", Courier, monospace
+
+}
+
 /**
 li { background: white; }
 li:nth-child(even) { background: #eeeeee; }
