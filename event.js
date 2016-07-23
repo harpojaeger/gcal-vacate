@@ -29,19 +29,19 @@ function Event(event) {
 	var info_button = $('<span>').addClass('ui-icon-info ui-icon rrule-expand');
 	$(event_list_item).append(info_button);
 	
-    /**Create the "further info" div **/
-    var info = document.createElement("div");
-    $(info).attr("class", "info");
+    /**Create the "further info" div**/
     var RRule = rrulestr(this.recurrence[0]);
     var repeat_desc = RRule.toText();
-    $(info).text(repeat_desc).hide();
-    event_list_item.appendChild(info);
+    var info_div = $('<div>')
+    .addClass('info')
+    .text(repeat_desc)
+    .hide();
+    $(event_list_item).append(info_div);
+    
     $(info_button).click(function() {
-        $(info).slideToggle();
+        $(info_div).slideToggle();
     });
     
-    
-
     function listInstances() {
         var event_li = this.parentNode
         var event = $(event_li).data()
