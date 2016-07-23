@@ -69,3 +69,7 @@ div.output{
     display: none;
     padding-left:10px;
 }
+
+span.rrule-expand{
+	margin-left:5px;
+}

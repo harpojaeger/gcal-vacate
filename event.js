@@ -26,6 +26,10 @@ function Event(event) {
     event_list_item.appendChild(instance_link);
     $(instance_link).click(listInstances);
 
+	/**Create the info button **/
+	var info_button = $('<span>').addClass('ui-icon-info ui-icon rrule-expand');
+	$(event_list_item).append(info_button);
+	
     /**Create the "further info" div **/
     var info = document.createElement("div");
     $(info).attr("class", "info");
@@ -33,9 +37,11 @@ function Event(event) {
     var repeat_desc = RRule.toText();
     $(info).text(repeat_desc).hide();
     event_list_item.appendChild(info);
-    $(summary).click(function() {
+    $(info_button).click(function() {
         $(info).slideToggle();
     });
+    
+    
 
     function listInstances() {
         var event_li = this.parentNode
@@ -66,7 +72,7 @@ function Event(event) {
                     instancesController.deleteAllLink.show();
                     instancesController.title.show();
                     instancesController.div.show();
-                    $('li').removeClass('event-active');
+                    $('#events-div ul li').removeClass('event-active');
                     $(event_li).addClass('event-active');
                 } else {
                     debug('No instances found (this is weird).');
