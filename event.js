@@ -18,16 +18,15 @@ function Event(event) {
         "calendarId": calendar_ID
     });
 
-    /**Create the instances button **/
+	/**Create the info button **/
+	var info_button = $('<span>').addClass('ui-icon-info ui-icon event-action-button');
+	$(event_list_item).append(info_button);
+	
+	  /**Create the instances button **/
     var instance_link = $('<span>')
-    .addClass('instances')
-    .text('(instances)')
+    .addClass('ui-icon ui-icon-arrow-1-e event-action-button')
     .click(listInstances);
     $(event_list_item).append(instance_link);
-
-	/**Create the info button **/
-	var info_button = $('<span>').addClass('ui-icon-info ui-icon rrule-expand');
-	$(event_list_item).append(info_button);
 	
     /**Create the "further info" div**/
     var RRule = rrulestr(this.recurrence[0]);
