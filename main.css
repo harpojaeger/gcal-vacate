@@ -13,15 +13,23 @@ div#params input {
   font-size: 1em;
 
 }
-div#events {
+div#events-div {
   float:left;
+  margin-right:10px
 
 }
 
-div#instances {
-  float:right;
-  width:50%;
+div#instances-div {
+  float:left;
 
+
+}
+div#container{
+	display: flex;              /* establish flex container */
+	flex-direction: column;     /* stack flex items vertically */
+    justify-content: center;
+    align-items: center;
+    padding-top:10px;
 }
 
 div.info {
@@ -29,27 +37,33 @@ div.info {
 
 }
 
-div.events ul#output li span.delete,span.instances {
+div.events ul#output li span.instances {
   display:inline;
   margin-left:10px;
 }
-
+#deleteall{
+	margin-left:5px;
+}
 ul {
   list-style-type:none;
+  padding-left:0px;
 
 }
+
+/**
 li { background: white; }
 li:nth-child(even) { background: #eeeeee; }
-
+***/
+li.event-active,div#instances-div{
+	background-color: #eeeeee;
+}
 div#search_content div#params {
 	font-family: Arial,Helvetica,sans-serif;
 
 }
 
 div.output{
-	width: 49%;
     border: 1px solid;
-    margin-right: 1%;
     border-radius: 5px;
     padding: 5px;
     display: none;

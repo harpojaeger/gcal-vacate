@@ -38,8 +38,8 @@ function Event(event) {
     });
 
     function listInstances() {
-        var event_div = this.parentNode
-        var event = $(event_div).data()
+        var event_li = this.parentNode
+        var event = $(event_li).data()
         var instances_request = gapi.client.calendar.events.instances({
             "calendarId": event.calendarId,
             "eventId": event.id,
@@ -66,6 +66,8 @@ function Event(event) {
                     instancesController.deleteAllLink.show();
                     instancesController.title.show();
                     instancesController.div.show();
+                    $('li').removeClass('event-active');
+                    $(event_li).addClass('event-active');
                 } else {
                     debug('No instances found (this is weird).');
                 }

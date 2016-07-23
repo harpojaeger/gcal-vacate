@@ -26,39 +26,36 @@
       </button>
     </div>
     <div id="error-div" style="display: none"></div>
-    <div id="calendar-div" style="display: none" class="ui-front">
-    	<select id="calendar-select">
-    		<option value=''>Select a calendar...</option>
-    	</select>
-    </div>
-    <div id="search_content" style="display: none">
-    	<div id="params">
-    	Search for repeating events from
-		<input type="text" id="start" class="datepicker"/>
-    	to
-    	<input type="text" id="end" class="datepicker"/>
-    	<button type="submit" id="submit">Submit</button>
+    <div id="container">
+    <div id="content">
+    	<div id="calendar-div" style="display: none" class="ui-front">
+    		<select id="calendar-select">
+    			<option value=''>Select a calendar...</option>
+	    	</select>
     	</div>
-    </div>
+	    <div id="search_content" style="display: none">
+    		<div id="params">
+    			Search for repeating events from
+				<input type="text" id="start" class="datepicker"/>
+    			to
+		    	<input type="text" id="end" class="datepicker"/>
+    			<button type="submit" id="submit">Submit</button>
+	    	</div>
+    	</div>
 
-    <div id="events-div" class="output" style='display:none;'>
-		<div id="events_title">
-			Events
-		</div>
-        <ul id="events-ul">
-        </ul>
-    </div>
+	    <div id="events-div" class="output" style='display:none;'>
+			<div id="events_title">
+				Events
+			</div>
+    	    <ul id="events-ul"></ul>
+	    </div>
     
-    <div id="instances-div" class="output">
-        <div id="instances_title" style="display:none;">
-        	Instances
-        </div>
-        <a id="deleteall" style="display:none;">
-        	Delete all
-        </a>
-        <ul id="instances-ul">
-        </ul>
-    </div>
+    	<div id="instances-div" class="output">
+        	<span id="instances_title" style="display:none;">Instances</span>
+    	    <span id='deleteall'><span class='ui-icon ui-icon-trash'></span>Delete all</span>
+        	<ul id="instances-ul"></ul>
+    	</div>
+    	
     </div>
   </body>
 </html>
