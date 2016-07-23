@@ -33,8 +33,9 @@ div#container{
 }
 
 div.info {
-  color: grey;
-
+	color: grey;
+	font-size: 0.75em;
+	font-style: italic;
 }
 
 div.events ul#output li span.instances {
