@@ -34,16 +34,6 @@ function list_calendars() {
                 return this._super(ul, item);
         },
 
-        _renderMenu: function(ul, items) {
-
-            if ($.isFunction(this.options.renderMenu)) {
-
-                this.options.renderMenu(ul, items);
-
-            }
-
-            this._super(ul, items);
-        },
 
     });
 
