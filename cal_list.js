@@ -12,7 +12,7 @@ function list_calendars() {
             new Calendar(calendar);
         }
         debug("Retrieved " + calendars.length + " calendars.");
-        $('#calendar-select').selectmenu({
+        $('#calendar-select').coloredMenu({
             renderItem: coloredItem
         });
         $('#submit').button();
@@ -21,10 +21,9 @@ function list_calendars() {
     });
 
 
-    $.widget("ui.selectmenu", $.ui.selectmenu, {
+    $.widget("custom.coloredMenu", $.ui.selectmenu, {
         options: {
-            renderItem: null,
-            renderMenu: null
+            renderItem: null	
         },
 
         _renderItem: function(ul, item) {
