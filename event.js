@@ -19,12 +19,11 @@ function Event(event) {
     });
 
     /**Create the instances button **/
-    var instance_link = document.createElement("span");
-    instance_link.setAttribute("class", "instances");
-    instance_text = document.createTextNode("(instances)");
-    instance_link.appendChild(instance_text);
-    event_list_item.appendChild(instance_link);
-    $(instance_link).click(listInstances);
+    var instance_link = $('<span>')
+    .addClass('instances')
+    .text('(instances)')
+    .click(listInstances);
+    $(event_list_item).append(instance_link);
 
 	/**Create the info button **/
 	var info_button = $('<span>').addClass('ui-icon-info ui-icon rrule-expand');
