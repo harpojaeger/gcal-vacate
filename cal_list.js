@@ -37,16 +37,18 @@ function list_calendars() {
     });
 
     coloredItem = function(ul, item) {
-        var li = $('<li>');
-        var div = $('<div>');
-        $(div).css({
+        var wrapper_div = $('<div>');
+        var color_div = $('<div>');
+        $(color_div).css({
             'background-color': item.element.data('backgroundColor'),
-            'display': 'inline'
-        });
-        $(div).html('&nbsp;');
-        var a = $('<a>').html(item.label)
-        $(li).append(div).append(a);
+            'display': 'inline',
+            'margin-right' : '5px;'
 
+        })
+        .html('&nbsp;&nbsp;&nbsp;&nbsp;');
+        var a = $('<a>').html(item.label)
+        $(wrapper_div).append(color_div).append(a);
+        var li = $('<li>').append(wrapper_div);
         return $(li).appendTo(ul);
     };
 
