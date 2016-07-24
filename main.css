@@ -36,6 +36,9 @@ div.output {
     display: none;
     padding-left: 10px;
 }
+.section-title {
+	font-size:1.5em;
+}
 div#events-div {
     float: left;
     margin-right: 10px
