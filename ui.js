@@ -1,6 +1,6 @@
 function eventsController() {
 	eventsTitle = $("#events_title");
-	eventsUl = $("#events-ul");
+	eventsUl = $("#events_ul");
 	eventsDiv = $('#events-div');
 	this.title = {
 		show : function() {

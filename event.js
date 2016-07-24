@@ -13,7 +13,7 @@ function Event(event) {
     .addClass('action-link')
     .click(listInstances)
     .appendTo(event_list_item);
-    $("#events-ul").append(event_list_item);
+    $("#events_ul").append(event_list_item);
     $(event_list_item).data({
         "id": this.id,
         "recurringEventId": this.recurringEventId,
@@ -41,7 +41,9 @@ function Event(event) {
     $(event_list_item).append(info_div);
     
     $(info_button).click(function() {
+    	$('div.info').not($(this).siblings('div.info')).slideUp();
         $(info_div).slideToggle();
+
     });
     
     function listInstances() {
