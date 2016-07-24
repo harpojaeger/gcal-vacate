@@ -1,82 +1,100 @@
 body {
-    font-size: 1em;
-    font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
+div#authorize_div {
+  display: none;
+}
+
 div#container {
-    display: flex;
-    /* establish flex container */
-    
-    flex-direction: column;
-    /* stack flex items vertically */
-    
-    justify-content: center;
-    align-items: center;
-    padding-top: 10px;
+  display: flex;
+  /* establish flex container */
+  flex-direction: column;
+  /* stack flex items vertically */
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
 }
-div#alert_div{
-	display:none;
+
+div#alert_div {
+  display: none;
 }
+
 div#search_div {
-    display:none;
+  display: none;
 }
+
 .cal-select-color-box {
-    margin-right: 5px;
-    display: inline;
+  margin-right: 5px;
+  display: inline;
 }
+
 div#params {
-    margin-top: 1em;
-    margin-bottom: 1em;
-    font-family: Arial, Helvetica, sans-serif;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
 div#params input {
-    width: 8em;
-    font-size: 1em;
+  width: 8em;
+  font-size: 1em;
 }
+
 div.output {
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 5px;
-    display: none;
-    padding-left: 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+  display: none;
+  padding-left: 10px;
 }
+
 .section-title {
-	font-size:1.5em;
+  font-size: 1.5em;
 }
+
 .action-link:hover {
-    text-decoration:underline;
-    cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
+
 div#events-div {
-    float: left;
-    margin-right: 10px
-    display:none;
+  float: left;
+  margin-right: 10px display: none;
 }
+
 div.info {
-    color: grey;
-    font-size: 0.75em;
-    font-style: italic;
-    display: none;
+  color: grey;
+  font-size: 0.75em;
+  font-style: italic;
+  display: none;
 }
+
 span.event-action-button {
-    margin-left: 5px;
+  margin-left: 5px;
 }
+
 li.event-active,
 div#instances-div {
-    background-color: #eeeeee;
+  background-color: #eeeeee;
 }
+
 div#instances-div {
-    float: left;
-    display: none;
+  float: left;
+  display: none;
 }
+
 #deleteall {
-    margin-left: 5px;
+  margin-left: 5px;
 }
+
 div#events-div ul,
 div#instances-div ul {
-    list-style-type: none;
-    padding-left: 0px;
-    margin-top: 1em;
+  list-style-type: none;
+  padding-left: 0px;
+  margin-top: 1em;
 }
+
 ul#instances-ul {
-    font-family: "Courier New", Courier, monospace
+  font-family: "Courier New", Courier, monospace
 }
