@@ -2,21 +2,6 @@ body {
     font-size: 1em;
     font-family: Arial, Helvetica, sans-serif;
 }
-div#params {
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-div#params input {
-    width: 8em;
-    font-size: 1em;
-}
-div#events-div {
-    float: left;
-    margin-right: 10px
-}
-div#instances-div {
-    float: left;
-}
 div#container {
     display: flex;
     /* establish flex container */
@@ -28,15 +13,52 @@ div#container {
     align-items: center;
     padding-top: 10px;
 }
+div#calendar_div{
+    display: none;
+}
+.cal-select-color-box {
+    margin-right: 5px;
+    display: inline;
+}
+div#params {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+div#params input {
+    width: 8em;
+    font-size: 1em;
+}
+div.output {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+    display: none;
+    padding-left: 10px;
+}
+div#events-div {
+    float: left;
+    margin-right: 10px
+}
+div.events ul#output li span.instances {
+    display: inline;
+    margin-left: 10px;
+}
 div.info {
     color: grey;
     font-size: 0.75em;
     font-style: italic;
     display: none;
 }
-div.events ul#output li span.instances {
-    display: inline;
-    margin-left: 10px;
+span.event-action-button {
+    margin-left: 5px;
+}
+li.event-active,
+div#instances-div {
+    background-color: #eeeeee;
+}
+div#instances-div {
+    float: left;
 }
 #deleteall {
     margin-left: 5px;
@@ -48,25 +70,4 @@ div#instances-div ul {
 }
 ul#instances-ul {
     font-family: "Courier New", Courier, monospace
-}
-li.event-active,
-div#instances-div {
-    background-color: #eeeeee;
-}
-div#search_content div#params {
-    font-family: Arial, Helvetica, sans-serif;
-}
-div.output {
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 5px;
-    display: none;
-    padding-left: 10px;
-}
-span.event-action-button {
-    margin-left: 5px;
-}
-.cal-select-color-box {
-    margin-right: 5px;
-    display: inline;
 }
