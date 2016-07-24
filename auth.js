@@ -20,17 +20,12 @@ function checkAuth() {
  * @param {Object} authResult Authorization result.
  */
 function handleAuthResult(authResult) {
-  var authorizeDiv = document.getElementById('authorize_div');
+  var authorizeDiv = $('#authorize_div');
   if (authResult && !authResult.error) {
-    // Hide auth UI, then load client library.
-    authorizeDiv.style.display = 'none';
-
+    $(authorizeDiv).hide();
     loadCalendarApi();
-
   } else {
-    // Show auth UI, allowing the user to initiate authorization by
-    // clicking authorize button.
-    authorizeDiv.style.display = 'inline';
+    $(authorizeDiv).show();
   }
 }
 
