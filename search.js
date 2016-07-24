@@ -17,6 +17,7 @@ function prepareSearch() {
         $("#alert_div").attr("title", "Error").text("Please choose a calendar and enter both start and end dates.").dialog({
         	modal: true,
         	draggable: false,
+        	resizable: false,
         	position: { my: "top", at: "top", of: window },
             buttons: [{
                 text: "OK",

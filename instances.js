@@ -60,6 +60,7 @@ function delete_all_instances(){
         .dialog({
         	modal: true,
         	draggable: false,
+        	resizable: false,
         	position: { my: "top", at: "center", of: window },
             buttons: [
             	{
