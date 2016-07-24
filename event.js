@@ -33,8 +33,7 @@ function Event(event) {
     var repeat_desc = RRule.toText();
     var info_div = $('<div>')
     .addClass('info')
-    .text(repeat_desc)
-    .hide();
+    .text(repeat_desc);
     $(event_list_item).append(info_div);
     
     $(info_button).click(function() {
