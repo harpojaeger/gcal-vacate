@@ -63,3 +63,15 @@ function instancesController() {
 		}
 	}
 }
+
+function calendarController() {
+	var calendarDiv = $("#calendar_div");
+	this.div = {
+	    show : function () {
+    		$(calendarDiv).show();
+    	},
+    	hide : function () {
+    		$(calendarDiv).hide();
+    	}
+	}
+}

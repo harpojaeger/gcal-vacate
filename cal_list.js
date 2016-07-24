@@ -17,7 +17,7 @@ function list_calendars() {
         });
         $('#submit').button();
         $('#search_content').show();
-        $("#calendar-div").show();
+        calendarController.div.show();
     });
 
 
