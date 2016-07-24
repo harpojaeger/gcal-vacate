@@ -39,11 +39,8 @@ function list_calendars() {
     coloredItem = function(ul, item) {
         var wrapper_div = $('<div>');
         var color_div = $('<div>');
-        $(color_div).css({
+        $(color_div).addClass('cal-select-color-box').css({
             'background-color': item.element.data('backgroundColor'),
-            'display': 'inline',
-            'margin-right' : '5px;'
-
         })
         .html('&nbsp;&nbsp;&nbsp;&nbsp;');
         var a = $('<a>').html(item.label)

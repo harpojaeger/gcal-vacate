@@ -79,3 +79,8 @@ div.output{
 span.event-action-button{
 	margin-left:5px;
 }
+
+.cal-select-color-box {
+	margin-right: 5px;
+	display: inline;
+}
