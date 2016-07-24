@@ -13,8 +13,14 @@ div#container {
     align-items: center;
     padding-top: 10px;
 }
-div#calendar_div{
+div#error-div{
+	display:none;
+}
+div#calendar_div {
     display: none;
+}
+div#search_content {
+    display:none;
 }
 .cal-select-color-box {
     margin-right: 5px;
