@@ -21,7 +21,7 @@ function prepareSearch() {
         	position: { my: "top", at: "top", of: window },
             buttons: [{
                 text: "OK",
-                icons: { primary: "ui-icon-check" },
+                icons: { primary: "ui-icon-check", secondary: "ui-icon-circle-check" },
                 click: function() {
                     $(this).dialog("close");
                 }
@@ -72,7 +72,6 @@ var datepickerOptions = {
 };
 
 $(function() {
-    var dateFormat = "yy-mm-dd",
         from = $("#start")
         .datepicker(datepickerOptions)
         .on("change", function() {
