@@ -20,6 +20,7 @@ function prepareSearch() {
         	position: { my: "top", at: "top", of: window },
             buttons: [{
                 text: "OK",
+                icons: { primary: "ui-icon-check" },
                 click: function() {
                     $(this).dialog("close");
                 }

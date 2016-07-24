@@ -53,9 +53,37 @@ function Instance(event){
 }
 
 function delete_all_instances(){
+        
+        $('#alert_div')
+        .attr("title", "Delete all instances?")
+        .text("Are you sure you want to delete all instances of this event between the specificed dates?  This cannot be undone.")
+        .dialog({
+        	modal: true,
+        	draggable: false,
+        	position: { my: "top", at: "center", of: window },
+            buttons: [
+            	{
+                	text: "No",
+                	icons: { primary: "ui-icon-check" },
+    	            click: function() {
+        	            $(this).dialog('close');
+        	            debug("Clicked no.");
+            	    }
+	            },
+    	        {
+        	    	text: "Yes",
+            		click: function () {
+            			$(this).dialog('close');
+            			debug("Clicked yes");
+	            	}
+    	        }
+    	    ]
+        });
+        /**
         debug("Delete all shown instances.")
         $("li.instance").each(function(index){
         	debug(index + " " + $(this).data("id"));
         	$(this).trigger("instance:delete");
-        }); 
+        });
+        **/ 
 }
