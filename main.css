@@ -1,86 +1,71 @@
 body {
-	font-size: 1em;
-	font-family: Arial,Helvetica,sans-serif;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
 div#params {
-	margin-top:1em;
-	margin-bottom:1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
-
 div#params input {
-  width: 8em;
-  font-size: 1em;
-
+    width: 8em;
+    font-size: 1em;
 }
 div#events-div {
-  float:left;
-  margin-right:10px
-
+    float: left;
+    margin-right: 10px
 }
-
 div#instances-div {
-  float:left;
-
-
+    float: left;
 }
-div#container{
-	display: flex;              /* establish flex container */
-	flex-direction: column;     /* stack flex items vertically */
+div#container {
+    display: flex;
+    /* establish flex container */
+    
+    flex-direction: column;
+    /* stack flex items vertically */
+    
     justify-content: center;
     align-items: center;
-    padding-top:10px;
+    padding-top: 10px;
 }
-
 div.info {
-	color: grey;
-	font-size: 0.75em;
-	font-style: italic;
+    color: grey;
+    font-size: 0.75em;
+    font-style: italic;
 }
-
 div.events ul#output li span.instances {
-  display:inline;
-  margin-left:10px;
+    display: inline;
+    margin-left: 10px;
 }
-#deleteall{
-	margin-left:5px;
+#deleteall {
+    margin-left: 5px;
 }
-div#events-div ul, div#instances-div ul {
-  list-style-type:none;
-  padding-left:0px;
-
+div#events-div ul,
+div#instances-div ul {
+    list-style-type: none;
+    padding-left: 0px;
 }
-
 ul#instances-ul {
-	font-family: "Courier New", Courier, monospace
-
+    font-family: "Courier New", Courier, monospace
 }
-
-/**
-li { background: white; }
-li:nth-child(even) { background: #eeeeee; }
-***/
-li.event-active,div#instances-div{
-	background-color: #eeeeee;
+li.event-active,
+div#instances-div {
+    background-color: #eeeeee;
 }
 div#search_content div#params {
-	font-family: Arial,Helvetica,sans-serif;
-
+    font-family: Arial, Helvetica, sans-serif;
 }
-
-div.output{
+div.output {
     border: 1px solid;
     border-radius: 5px;
     padding: 5px;
     display: none;
-    padding-left:10px;
+    padding-left: 10px;
 }
-
-span.event-action-button{
-	margin-left:5px;
+span.event-action-button {
+    margin-left: 5px;
 }
-
 .cal-select-color-box {
-	margin-right: 5px;
-	display: inline;
+    margin-right: 5px;
+    display: inline;
 }
