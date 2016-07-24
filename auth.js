@@ -7,11 +7,11 @@ var SCOPES = ["https://www.googleapis.com/auth/calendar"];
  * Check if current user has authorized this application.
  */
 function checkAuth() {
-    gapi.auth.authorize({
-        'client_id': CLIENT_ID,
-        'scope': SCOPES.join(' '),
-        'immediate': true
-    }, handleAuthResult);
+  gapi.auth.authorize({
+    'client_id': CLIENT_ID,
+    'scope': SCOPES.join(' '),
+    'immediate': true
+  }, handleAuthResult);
 }
 
 /**
@@ -20,18 +20,18 @@ function checkAuth() {
  * @param {Object} authResult Authorization result.
  */
 function handleAuthResult(authResult) {
-    var authorizeDiv = document.getElementById('authorize-div');
-    if (authResult && !authResult.error) {
-        // Hide auth UI, then load client library.
-        authorizeDiv.style.display = 'none';
+  var authorizeDiv = document.getElementById('authorize-div');
+  if (authResult && !authResult.error) {
+    // Hide auth UI, then load client library.
+    authorizeDiv.style.display = 'none';
 
-        loadCalendarApi();
+    loadCalendarApi();
 
-    } else {
-        // Show auth UI, allowing the user to initiate authorization by
-        // clicking authorize button.
-        authorizeDiv.style.display = 'inline';
-    }
+  } else {
+    // Show auth UI, allowing the user to initiate authorization by
+    // clicking authorize button.
+    authorizeDiv.style.display = 'inline';
+  }
 }
 
 /**
@@ -40,18 +40,18 @@ function handleAuthResult(authResult) {
  * @param {Event} event Button click event.
  */
 function handleAuthClick(event) {
-    gapi.auth.authorize({
-            client_id: CLIENT_ID,
-            scope: SCOPES,
-            immediate: false
-        },
-        handleAuthResult);
-    return false;
+  gapi.auth.authorize({
+      client_id: CLIENT_ID,
+      scope: SCOPES,
+      immediate: false
+    },
+    handleAuthResult);
+  return false;
 }
 
 /**
  * Load Google Calendar client library.
  */
 function loadCalendarApi() {
-    gapi.client.load('calendar', 'v3',list_calendars);
+  gapi.client.load('calendar', 'v3', list_calendars);
 }
