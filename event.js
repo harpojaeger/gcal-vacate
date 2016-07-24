@@ -21,8 +21,9 @@ function Event(event) {
     });
 
 	/**Create the info button **/
-	var info_button = $('<span>').addClass('ui-icon-info ui-icon event-action-button');
-	$(event_list_item).append(info_button);
+	var info_button = $('<span>')
+	.addClass('ui-icon-info ui-icon event-action-button action-link')
+	.appendTo(event_list_item);
 	
 	  /**Create the instances button 
     var instance_link = $('<span>')

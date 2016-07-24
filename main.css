@@ -44,6 +44,7 @@ div.output {
 }
 .action-link:hover {
     text-decoration:underline;
+    cursor: pointer;
 }
 div#events-div {
     float: left;
