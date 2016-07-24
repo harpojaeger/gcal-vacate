@@ -42,10 +42,7 @@ div.output {
 div#events-div {
     float: left;
     margin-right: 10px
-}
-div.events ul#output li span.instances {
-    display: inline;
-    margin-left: 10px;
+    display:none;
 }
 div.info {
     color: grey;
