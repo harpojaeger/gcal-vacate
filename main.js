@@ -3,5 +3,5 @@ $(document).ready(function() {
     eventsController = new eventsController();
     instancesController = new instancesController();
     searchController = new searchController();
-	$("#submit").click(prepareSearch);
+	
 });

@@ -15,7 +15,9 @@ function list_calendars() {
         $('#calendar-select').coloredMenu({
             renderItem: coloredItem
         });
-        $('#submit').button();
+        $('#submit')
+        .button()
+        .click(prepareSearch);
         searchController.div.show();
     });
 
