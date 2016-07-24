@@ -15,6 +15,9 @@ function prepareSearch() {
     } else {
         debug("Requisite data not present for search.");
         $("#alert_div").attr("title", "Error").text("Please choose a calendar and enter both start and end dates.").dialog({
+        	modal: true,
+        	draggable: false,
+        	position: { my: "top", at: "top", of: window },
             buttons: [{
                 text: "OK",
                 click: function() {
