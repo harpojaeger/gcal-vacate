@@ -64,14 +64,14 @@ function instancesController() {
 	}
 }
 
-function calendarController() {
-	var calendarDiv = $("#calendar_div");
+function searchController() {
+	var searchDiv = $("#search_div");
 	this.div = {
 	    show : function () {
-    		$(calendarDiv).show();
+    		$(searchDiv).show();
     	},
     	hide : function () {
-    		$(calendarDiv).hide();
+    		$(searchDiv).hide();
     	}
 	}
 }

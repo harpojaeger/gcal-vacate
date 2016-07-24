@@ -16,10 +16,8 @@ div#container {
 div#error-div{
 	display:none;
 }
-div#calendar_div {
-    display: none;
-}
-div#search_content {
+
+div#search_div {
     display:none;
 }
 .cal-select-color-box {

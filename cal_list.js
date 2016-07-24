@@ -16,8 +16,7 @@ function list_calendars() {
             renderItem: coloredItem
         });
         $('#submit').button();
-        $('#search_content').show();
-        calendarController.div.show();
+        searchController.div.show();
     });
 
 
