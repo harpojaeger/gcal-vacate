@@ -13,7 +13,7 @@ div#container {
     align-items: center;
     padding-top: 10px;
 }
-div#error-div{
+div#alert_div{
 	display:none;
 }
 div#search_div {

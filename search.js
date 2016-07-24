@@ -9,13 +9,12 @@ function prepareSearch() {
         debug("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
         listUpcomingEvents(start_date, end_date);
         instancesController.clear();
-        eventsController.title.show();
+        eventsController.div.show();
         eventsController.ul.clear();
-        instancesController.title.hide();
-        instancesController.deleteAllLink.hide();
+        instancesController.div.hide();
     } else {
         debug("Requisite data not present for search.");
-        $("#error-div").attr("title", "Error").text("Please choose a calendar and enter both start and end dates.").dialog({
+        $("#alert_div").attr("title", "Error").text("Please choose a calendar and enter both start and end dates.").dialog({
             buttons: [{
                 text: "OK",
                 click: function() {
