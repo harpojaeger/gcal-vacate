@@ -8,9 +8,11 @@ function Event(event) {
 
     /** Create the list item  with summary**/
     var event_list_item = document.createElement("li");
-    var summary = document.createElement("span");
-    $(summary).text(this.summary);
-    event_list_item.appendChild(summary)
+    var summary = $("<span>")
+    .text(this.summary)
+    .addClass('action-link')
+    .click(listInstances)
+    .appendTo(event_list_item);
     $("#events-ul").append(event_list_item);
     $(event_list_item).data({
         "id": this.id,
@@ -22,11 +24,12 @@ function Event(event) {
 	var info_button = $('<span>').addClass('ui-icon-info ui-icon event-action-button');
 	$(event_list_item).append(info_button);
 	
-	  /**Create the instances button **/
+	  /**Create the instances button 
     var instance_link = $('<span>')
     .addClass('ui-icon ui-icon-arrow-1-e event-action-button')
     .click(listInstances);
     $(event_list_item).append(instance_link);
+	**/
 	
     /**Create the "further info" div**/
     var RRule = rrulestr(this.recurrence[0]);
