@@ -1,65 +1,92 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="reset.css">
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <script type="text/javascript" src="jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="jquery-ui/jquery-ui.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="jquery-ui/jquery-ui.min.css">
-    <script src="rrule/rrule.js"></script>
-    <script src="rrule/nlp.js"></script>
-    <script src="datejs/date.js"></script>
-    <script type="text/javascript" src="event.js"></script>
-    <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript" src="auth.js"></script>
-    <script type="text/javascript" src="instances.js"></script>
-    <script type="text/javascript" src="debug.js"></script>
-    <script type="text/javascript" src="search.js"></script>
-    <script type="text/javascript" src="cal_list.js"></script>
-	<script type="text/javascript" src="ui.js"></script>
-    <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
-  </head>
-  <body>
-    <div id="authorize_div">
-      <span>Authorize access to Google Calendar API</span>
-      <!--Button for the user to click to initiate auth sequence -->
-      <button id="authorize-button" onclick="handleAuthClick(event)">
-        Authorize
-      </button>
-    </div>
-    <div id="alert_div"></div>
-    <div id="container">
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for HTML5 for Mac OS X version 5.2.0">
+  <link rel="stylesheet" type="text/css" href="reset.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <script type="text/javascript" src="jquery-3.0.0.js">
+  </script>
+  <script type="text/javascript" src="jquery-ui/jquery-ui.min.js">
+  </script>
+  <link rel="stylesheet" type="text/css" href=
+  "jquery-ui/jquery-ui.min.css">
+  <script src="rrule/rrule.js">
+  </script>
+  <script src="rrule/nlp.js">
+  </script>
+  <script src="datejs/date.js">
+  </script>
+  <script type="text/javascript" src="event.js">
+  </script>
+  <script type="text/javascript" src="main.js">
+  </script>
+  <script type="text/javascript" src="auth.js">
+  </script>
+  <script type="text/javascript" src="instances.js">
+  </script>
+  <script type="text/javascript" src="debug.js">
+  </script>
+  <script type="text/javascript" src="search.js">
+  </script>
+  <script type="text/javascript" src="cal_list.js">
+  </script>
+  <script type="text/javascript" src="ui.js">
+  </script>
+  <script src=
+  "https://apis.google.com/js/client.js?onload=checkAuth">
+  </script>
+  <title></title>
+</head>
+<body>
+  <div id="authorize_div">
+    <span>Authorize access to Google Calendar API</span> 
+    <!--Button for the user to click to initiate auth sequence -->
+     <button id="authorize-button" onclick=
+    "handleAuthClick(event)">Authorize</button>
+  </div>
+  <div id="alert_div"></div>
+  <div id="container">
     <div id="content">
-    	<div id="search_div">
-    		<div id="calendar_div" class="ui-front">
-    			<select id="calendar-select">
-    				<option value=''>Select a calendar...</option>
-		    	</select>
-    		</div>
-    		<div id="params">
-    			Search for repeating events from
-				<input type="text" id="start" class="datepicker"/>
-    			to
-		    	<input type="text" id="end" class="datepicker"/>
-    			<button type="submit" id="submit">Submit</button>
-	    	</div>
-    	</div>
-		<div id='event_ouput'>
-	    <div id="events-div" class="output">
-			<div id="events_title" class="section-title">Events</div>
-    	    <ul id="events_ul"></ul>
-	    </div>
-    
-    	<div id="instances-div" class="output">
-        	<span id="instances_title" class="section-title">Instances</span>
-    	    <span id='deleteall' class='action-link'>
-    	    	<span class='ui-icon ui-icon-trash'></span>Delete selected
-    	    </span>
-    	    <div id="instance_selection_div" class="instance-selection">
-    	      sSelect (<span id="select_all_instances" class="action-link instance-toggle-all">all</span> | <span id="deselect_all_instances" class="action-link instance-toggle-all">none</span>)
-    	    </div>
-        	<ul id="instances-ul"></ul>
+      <div id="search_div">
+        <div id="calendar_div" class="ui-front">
+          <select id="calendar-select">
+            <option value=''>
+              Select a calendar...
+            </option>
+          </select>
         </div>
-    	</div>
+        <div id="params">
+          Search for repeating events from <input type="text" id=
+          "start" class="datepicker"> to <input type="text" id=
+          "end" class="datepicker"> <button type="submit" id=
+          "submit">Submit</button>
+        </div>
+      </div>
+      <div id='event_ouput'>
+        <div id="events-div" class="output">
+          <div id="events_title" class="section-title">
+            Events
+          </div>
+          <ul id="events_ul"></ul>
+        </div>
+        <div id="instances-div" class="output">
+          <span id="instances_title" class=
+          "section-title">Instances</span> <span id='deleteall'
+          class='action-link'><span class=
+          'ui-icon ui-icon-trash'>&nbsp;</span>Delete
+          selected</span>
+          <div id="instance_selection_div" class=
+          "instance-selection">
+            Select (<span id="select_all_instances" class=
+            "action-link instance-toggle-all">all</span> |
+            <span id="deselect_all_instances" class=
+            "action-link instance-toggle-all">none</span>)
+          </div>
+          <ul id="instances-ul"></ul>
+        </div>
+      </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
