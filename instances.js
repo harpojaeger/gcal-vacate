@@ -14,12 +14,11 @@ function Instance(event) {
     when = parsedDate.toString('MM/dd h:mm tt');
   }
 
-  var instance_list_item = document.createElement("li");
-  var c = document.createTextNode(event.summary + ' (' + when + ') ');
-  instance_list_item.appendChild(c)
-  $(instance_list_item).addClass("instance");
-  $("#instances-ul").append(instance_list_item);
-  $(instance_list_item).data({
+  var instance_list_item = $('<li>')
+  .text(event.summary + ' (' + when + ') ')
+  .addClass("instance")
+  .appendTo('#instances-ul')
+  .data({
     "id": this.id,
     "recurringEventId": this.recurringEventId,
     "calendarId": calendar_ID
