@@ -67,12 +67,14 @@ function delete_all_instances() {
       },
       buttons: [{
         text: "No",
+        icon: 'ui-icon-circle-close',
         click: function() {
           $(this).dialog('close');
           debug("Clicked no.");
         }
       }, {
         text: "Yes",
+        icon: 'ui-icon-circle-check',
         click: function() {
           $(this).dialog('close');
           debug("Clicked yes");

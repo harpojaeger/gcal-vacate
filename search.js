@@ -25,11 +25,7 @@ function prepareSearch() {
       },
       buttons: [{
         text: "OK",
-        /** The icons setting is broken in jQuery 1.12.0, but I'm leaving this here in case someone (or me!) patches it. Reverting to 1.11.4 broke the selectmenu.**/
-        icons: {
-          primary: "ui-icon-check",
-          secondary: "ui-icon-circle-check"
-        },
+        icon: "ui-icon-check", 
         click: function() {
           $(this).dialog("close");
         }
