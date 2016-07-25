@@ -15,21 +15,22 @@ function Instance(event) {
   }
 
   var instance_list_item = $('<li>')
-  .text(event.summary + ' (' + when + ') ')
-  .addClass("instance")
-  .appendTo('#instances-ul')
-  .data({
-    "id": this.id,
-    "recurringEventId": this.recurringEventId,
-    "calendarId": calendar_ID
-  });
-  
+    .text(event.summary + ' (' + when + ') ')
+    .addClass("instance")
+    .appendTo('#instances-ul')
+    .data({
+      "id": this.id,
+      "recurringEventId": this.recurringEventId,
+      "calendarId": calendar_ID,
+      'shouldDelete': true
+    });
+
   var checkbox = $('<input type="checkbox" class="deleteThisInstanceCheckbox" checked>')
-  .change(function(){
-    $(instance_list_item).data('shouldDelete',$(this).prop('checked'));
-    debug($(instance_list_item).data('id') + ' has delete value: ' + $(instance_list_item).data('shouldDelete'));
-  })
-  .prependTo(instance_list_item);
+    .change(function() {
+      $(instance_list_item).data('shouldDelete', $(this).prop('checked'));
+      debug($(instance_list_item).data('id') + ' has delete value: ' + $(instance_list_item).data('shouldDelete'));
+    })
+    .prependTo(instance_list_item);
 
   /**$(instance_list_item).on("click",function(){
 		delete_instance(this)
@@ -87,8 +88,12 @@ function delete_all_instances() {
           debug("Clicked yes");
           debug("Delete all shown instances.")
           $("li.instance").each(function(index) {
-            debug(index + " " + $(this).data("id"));
-            $(this).trigger("instance:delete");
+            var data = $(this).data();
+            if (data.shouldDelete) {
+              $(this).trigger("instance:delete");
+            } else {
+              debug('Skipping ' + data.id);
+            }
           });
         }
       }]
