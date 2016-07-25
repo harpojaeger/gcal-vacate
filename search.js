@@ -20,7 +20,7 @@ function prepareSearch() {
       resizable: false,
       position: {
         my: "top",
-        at: "top",
+        at: "center",
         of: window
       },
       buttons: [{
