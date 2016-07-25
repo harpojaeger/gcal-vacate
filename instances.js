@@ -24,9 +24,10 @@ function Instance(event) {
     "calendarId": calendar_ID
   });
   
-  var checkbox = $('<input type="checkbox" checked>')
-  .click(function(){
+  var checkbox = $('<input type="checkbox" class="deleteThisInstanceCheckbox" checked>')
+  .change(function(){
     $(instance_list_item).data('shouldDelete',$(this).prop('checked'));
+    debug($(instance_list_item).data('id') + ' has delete value: ' + $(instance_list_item).data('shouldDelete'));
   })
   .prependTo(instance_list_item);
 
