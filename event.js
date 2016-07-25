@@ -45,7 +45,11 @@ function Event(event) {
     $(info_div).slideToggle();
 
   });
+  /**
+  The gameplan: split this listInstances function into two: retrieveInstances and listInstances.  The first one will actually run the query, the second will create the Instance objects (thereby outputting them to the page).  That way, we can filter out repeating events if retrieveInstances doesn't return anything (i.e. those that span the time period of interest but whose instances have been deleted).
+  **/
 
+  /** I'll leave it as listInstances for now to test compatibility **/
   function listInstances() {
     var event_li = this.parentNode
     var event = $(event_li).data()
@@ -62,25 +66,28 @@ function Event(event) {
         debug("Error " + resp.code + ": " + resp.message);
         debug(resp);
       } else {
-        var events = resp.items;
-        if (events.length > 0) {
-          var n = 0;
-          instancesController.clear();
-          for (i = 0; i < events.length; i++) {
-            var event = events[i];
-            new Instance(event)
-          }
-          console.log("Retrieved " + events.length + " instances");
-          $("#deleteall").unbind("click").click(delete_all_instances);
-          instancesController.deleteAllLink.show();
-          instancesController.title.show();
-          instancesController.div.show();
-          $('#events-div ul li').removeClass('event-active');
-          $(event_li).addClass('event-active');
+        if (resp.items.length > 0) {
+          console.log("Retrieved " + resp.items.length + " instances");
+          outputInstances(resp);
         } else {
-          debug('No instances found (this is weird).');
+          debug('No instances found for ' + event.id);
         }
       }
     });
+  }
+
+  function outputInstances(resp) {
+    var events = resp.items;
+    instancesController.clear();
+    for (i = 0; i < events.length; i++) {
+      var event = events[i];
+      new Instance(event)
+    }
+    $("#deleteall").unbind("click").click(delete_all_instances);
+    instancesController.deleteAllLink.show();
+    instancesController.title.show();
+    instancesController.div.show();
+    $('#events-div ul li').removeClass('event-active');
+    $(event_li).addClass('event-active');
   }
 }
