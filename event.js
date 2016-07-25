@@ -11,13 +11,33 @@ function Event(event) {
   var summary = $("<span>")
     .text(this.summary)
     .addClass('action-link')
-    .click(listInstances)
+    .click(showInstances)
     .appendTo(event_list_item);
   $("#events_ul").append(event_list_item);
   $(event_list_item).data({
     "id": this.id,
     "recurringEventId": this.recurringEventId,
     "calendarId": calendar_ID
+  });
+  var instances_request = gapi.client.calendar.events.instances({
+    "calendarId": calendar_ID,
+    "eventId": event.id,
+    "timeMin": $("#start").val() + "T00:00:00Z",
+    "timeMax": $("#end").val() + "T00:00:00Z",
+  });
+  instances_request.execute(function(resp) {
+    if (resp.code) {
+      debug("Error " + resp.code + ": " + resp.message);
+      debug(resp);
+    } else {
+      var instance_status_string = resp.items.length + ' instances found for ' + event.summary;
+      if (resp.items.length > 0) {
+        $(event_list_item).data('instancesObject',resp);
+      } else {
+      instance_status_string += " - skipping.";
+      }
+      debug(instance_status_string);
+    }
   });
 
   /**Create the info button **/
@@ -46,38 +66,16 @@ function Event(event) {
 
   });
   /**
-  The gameplan: split this listInstances function into two: retrieveInstances and listInstances.  The first one will actually run the query, the second will create the Instance objects (thereby outputting them to the page).  That way, we can filter out repeating events if retrieveInstances doesn't return anything (i.e. those that span the time period of interest but whose instances have been deleted).
-  **/
+  The gameplan: split this listInstances function into two: retrieveInstances and listInstances.  The first one will actually run the query, the second will create the Instance objects (thereby outputting them to the page).  That way, we can filter out repeating events if retrieveInstances doesn't return anything (i.e. those that span the time period of interest but whose instances have been deleted).**/
 
-  /** I'll leave it as listInstances for now to test compatibility **/
-  function listInstances() {
-    var event_li = this.parentNode
-    var event = $(event_li).data()
-    var instances_request = gapi.client.calendar.events.instances({
-      "calendarId": event.calendarId,
-      "eventId": event.id,
-      "timeMin": $("#start").val() + "T00:00:00Z",
-      "timeMax": $("#end").val() + "T00:00:00Z",
-    });
+  function showInstances() {
+    var event_li = this.parentNode;
+    var resp = $(event_li).data('instancesObject');
 
-    instances_request.execute(function(resp) {
-      var code = resp.code;
-      if (resp.code) {
-        debug("Error " + resp.code + ": " + resp.message);
-        debug(resp);
-      } else {
-        if (resp.items.length > 0) {
-          console.log("Retrieved " + resp.items.length + " instances");
-          outputInstances(resp);
-        } else {
-          debug('No instances found for ' + event.id);
-        }
-      }
-    });
-  }
-
-  function outputInstances(resp) {
-    var events = resp.items;
+    
+    console.log("Have " + resp.items.length + " instances to display.");
+        
+  var events = resp.items;
     instancesController.clear();
     for (i = 0; i < events.length; i++) {
       var event = events[i];
@@ -89,5 +87,8 @@ function Event(event) {
     instancesController.div.show();
     $('#events-div ul li').removeClass('event-active');
     $(event_li).addClass('event-active');
+   
   }
+
+  
 }
