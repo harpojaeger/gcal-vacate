@@ -68,7 +68,7 @@ function Event(event) {
           instancesController.clear();
           for (i = 0; i < events.length; i++) {
             var event = events[i];
-            v = new Instance(event)
+            new Instance(event)
           }
           console.log("Retrieved " + events.length + " instances");
           $("#deleteall").unbind("click").click(delete_all_instances);
