@@ -23,6 +23,12 @@ function Instance(event) {
     "recurringEventId": this.recurringEventId,
     "calendarId": calendar_ID
   });
+  
+  var checkbox = $('<input type="checkbox" checked>')
+  .click(function(){
+    $(instance_list_item).data('shouldDelete',$(this).prop('checked'));
+  })
+  .prependTo(instance_list_item);
 
   /**$(instance_list_item).on("click",function(){
 		delete_instance(this)
