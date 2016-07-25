@@ -54,7 +54,7 @@ function listUpcomingEvents(start_date, end_date) {
         var recurs = !((typeof event.recurrence) == "undefined");
         if (event.status == "confirmed" && recurs) {
           n++;
-          v = new Event(event)
+          new Event(event)
         }
       }
 
