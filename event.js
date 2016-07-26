@@ -8,16 +8,16 @@ function Event(event, resp) {
   this.recurrence = event.recurrence;
 
   /** Create the list item  with summary**/
-  
+
   var summary = $("<span>")
     .text(this.summary)
     .addClass('action-link')
     .click(showInstances);
-    
-    var event_list_item = $('<li>')
-   .data('instancesObject', resp)
-   .append(summary)
-   .appendTo('#events_ul');
+
+  var event_list_item = $('<li>')
+    .data('instancesObject', resp)
+    .append(summary)
+    .appendTo('#events_ul');
 
 
   /**Create the info button **/
