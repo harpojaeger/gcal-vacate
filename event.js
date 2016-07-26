@@ -1,4 +1,4 @@
-function Event(event, resp) {
+function Event(event, instances_resp) {
   this.eventData = event;
 
   /** Create the summary**/
@@ -24,15 +24,15 @@ function Event(event, resp) {
 
   /** Create the list item, append children & add it to the DOM **/
   var event_list_item = $('<li>')
-    .data('instancesObject', resp)
+    .data('instancesObject', instances_resp)
     .append(summary, info_button, info_div)
     .appendTo('#events_ul');
 
   function showInstances() {
     var event_li = this.parentNode;
-    var resp = $(event_li).data('instancesObject');
-    console.log("Displaying " + resp.items.length + " instances.");
-    var events = resp.items;
+    var instances_resp = $(event_li).data('instancesObject');
+    console.log("Displaying " + instances_resp.items.length + " instances.");
+    var events = instances_resp.items;
     instancesController.clear();
     for (i = 0; i < events.length; i++) {
       var event = events[i];
