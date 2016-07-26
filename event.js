@@ -1,4 +1,4 @@
-function Event(event, instances_resp) {
+function BaseEvent(event, instances_resp) {
   this.eventData = event;
 
   /** Create the summary**/

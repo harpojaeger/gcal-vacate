@@ -55,7 +55,7 @@ function listUpcomingEvents(start_date, end_date) {
       } else {
         var status_string = ('Found ' + instances_resp.items.length + ' instances of ' + event.summary);
         if (instances_resp.items.length > 0) {
-          new Event(event, instances_resp);
+          new BaseEvent(event, instances_resp);
         } else {
           status_string += " - skipping.";
         }
