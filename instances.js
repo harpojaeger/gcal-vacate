@@ -63,7 +63,7 @@ function delete_all_instances() {
 
   $('#alert_div')
     .attr("title", "Delete all instances?")
-    .text("Are you sure you want to delete all instances of this event between the specificed dates?  This cannot be undone.")
+    .text("Are you sure you want to delete all selected instances of this event?  This cannot be undone.")
     .dialog({
       modal: true,
       draggable: false,
