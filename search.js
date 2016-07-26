@@ -71,14 +71,18 @@ function listUpcomingEvents(start_date, end_date) {
       for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.status == "confirmed") {
-          var instances_request = gapi.client.calendar.events.instances({
-            "calendarId": calendar_ID,
-            "eventId": event.id,
-            "timeMin": $("#start").val() + "T00:00:00" + timezoneSuffix,
-            "timeMax": $("#end").val() + "T00:00:00" + timezoneSuffix,
-          });
-          this_func = instancesRespProcessor(event);
-          instances_request.execute(this_func);
+          if (typeof(event.recurrence) == 'undefined') {
+            debug("Attention: non-recurring event encountered (" + event.summary + ")!  This is likely a changed instance of a recurring event. Skipping instances request.");
+          } else {
+            var instances_request = gapi.client.calendar.events.instances({
+              "calendarId": calendar_ID,
+              "eventId": event.id,
+              "timeMin": $("#start").val() + "T00:00:00" + timezoneSuffix,
+              "timeMax": $("#end").val() + "T00:00:00" + timezoneSuffix,
+            });
+            this_func = instancesRespProcessor(event);
+            instances_request.execute(this_func);
+          }
         }
       }
       eventsController.div.show();

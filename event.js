@@ -33,7 +33,6 @@ function BaseEvent(event, instances_resp) {
     var event_li = this.parentNode;
     var instances_resp = $(event_li).data('eventObject').instances_resp;
     var baseEventData = $(event_li).data('eventObject').baseEventData;
-    debug($(event_li).data());
     var instances = instances_resp.items;
     console.log("Displaying " + instances.length + " instances of " + baseEventData.summary);
     instancesController.clear();
