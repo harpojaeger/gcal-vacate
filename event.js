@@ -6,20 +6,11 @@ function Event(event, resp) {
   this.end = event.end;
   this.recurrence = event.recurrence;
 
-  /** Create the list item  with summary**/
+  /** Create the summary**/
   var summary = $("<span>")
     .text(this.summary)
     .addClass('action-link')
     .click(showInstances);
-  var event_list_item = $('<li>')
-    .data('instancesObject', resp)
-    .append(summary)
-    .appendTo('#events_ul');
-
-  /**Create the info button **/
-  var info_button = $('<span>')
-    .addClass('ui-icon-info ui-icon event-action-button action-link')
-    .appendTo(event_list_item);
 
   /**Create the "further info" div**/
   var RRule = rrulestr(this.recurrence[0]);
@@ -27,11 +18,20 @@ function Event(event, resp) {
   var info_div = $('<div>')
     .addClass('info')
     .text(repeat_desc);
-  $(event_list_item).append(info_div);
-  $(info_button).click(function() {
-    $('div.info').not($(this).siblings('div.info')).slideUp();
-    $(info_div).slideToggle();
-  });
+
+  /**Create the info toggle button **/
+  var info_button = $('<span>')
+    .addClass('ui-icon-info ui-icon event-action-button action-link')
+    .click(function() {
+      $('div.info').not($(this).siblings('div.info')).slideUp();
+      $(info_div).slideToggle();
+    });
+
+  /** Create the list item, append children & add it to the DOM **/
+  var event_list_item = $('<li>')
+    .data('instancesObject', resp)
+    .append(summary, info_button, info_div)
+    .appendTo('#events_ul');
 
   function showInstances() {
     var event_li = this.parentNode;
