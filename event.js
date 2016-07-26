@@ -40,7 +40,7 @@ function Event(event, resp) {
     var resp = $(event_li).data('instancesObject');
 
 
-    console.log("Have " + resp.items.length + " instances to display.");
+    console.log("Displaying " + resp.items.length + " instances.");
 
     var events = resp.items;
     instancesController.clear();
