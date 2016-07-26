@@ -25,7 +25,7 @@ function prepareSearch() {
       },
       buttons: [{
         text: "OK",
-        icon: "ui-icon-check", 
+        icon: "ui-icon-check",
         click: function() {
           $(this).dialog("close");
         }
@@ -36,7 +36,7 @@ function prepareSearch() {
 }
 
 function listUpcomingEvents(start_date, end_date) {
-  var request = gapi.client.calendar.events.list({
+  var events_request = gapi.client.calendar.events.list({
     'calendarId': calendar_ID,
     'timeMin': start_date,
     'timeMax': end_date,
@@ -45,20 +45,42 @@ function listUpcomingEvents(start_date, end_date) {
     'maxResults': 2500
   });
 
-  request.execute(function(resp) {
-    var events = resp.items;
+  events_request.execute(function(events_resp) {
+    debug("Executed events request.");
+
+    var events = events_resp.items;
+    console.log("Retrieved " + events.length + " repeating events.");
     if (events.length > 0) {
       var n = 0;
       for (i = 0; i < events.length; i++) {
         var event = events[i];
-        var recurs = !((typeof event.recurrence) == "undefined");
-        if (event.status == "confirmed" && recurs) {
+        var n = 0;
+        if (event.status == "confirmed") {
           n++;
-          new Event(event)
+          debug('Running instances request for ' + event.summary);
+          var instances_request = gapi.client.calendar.events.instances({
+            "calendarId": calendar_ID,
+            "eventId": event.id,
+            "timeMin": $("#start").val() + "T00:00:00Z",
+            "timeMax": $("#end").val() + "T00:00:00Z",
+          });
+          instances_request.execute(function(instances_resp) {
+            if (instances_resp.code) {
+              debug("Error " + instances_resp.code + ": " + instance_resp.message);
+              debug(instances_resp);
+            } else {
+              if (instances_resp.items.length > 0) {
+                debug(event.summary + ': ' + instances_resp.items.length + ' instances found.');
+                /**new Event(event, instances_resp);**/
+              }
+            }
+          });
         }
+
       }
 
-      console.log("Retrieved " + n + " repeating events.");
+
+
       eventsController.div.show();
     } else {
       debug('No upcoming events found.');

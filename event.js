@@ -1,4 +1,5 @@
-function Event(event) {
+function Event(event, resp) {
+
   this.id = event.id;
   this.recurringEventId = event.recurringEventId;
   this.summary = event.summary;
@@ -19,26 +20,7 @@ function Event(event) {
     "recurringEventId": this.recurringEventId,
     "calendarId": calendar_ID
   });
-  var instances_request = gapi.client.calendar.events.instances({
-    "calendarId": calendar_ID,
-    "eventId": event.id,
-    "timeMin": $("#start").val() + "T00:00:00Z",
-    "timeMax": $("#end").val() + "T00:00:00Z",
-  });
-  instances_request.execute(function(resp) {
-    if (resp.code) {
-      debug("Error " + resp.code + ": " + resp.message);
-      debug(resp);
-    } else {
-      var instance_status_string = resp.items.length + ' instances found for ' + event.summary;
-      if (resp.items.length > 0) {
-        $(event_list_item).data('instancesObject',resp);
-      } else {
-      instance_status_string += " - skipping.";
-      }
-      debug(instance_status_string);
-    }
-  });
+  $(event_list_item).data('instancesObject', resp);
 
   /**Create the info button **/
   var info_button = $('<span>')
@@ -72,10 +54,10 @@ function Event(event) {
     var event_li = this.parentNode;
     var resp = $(event_li).data('instancesObject');
 
-    
+
     console.log("Have " + resp.items.length + " instances to display.");
-        
-  var events = resp.items;
+
+    var events = resp.items;
     instancesController.clear();
     for (i = 0; i < events.length; i++) {
       var event = events[i];
@@ -87,8 +69,8 @@ function Event(event) {
     instancesController.div.show();
     $('#events-div ul li').removeClass('event-active');
     $(event_li).addClass('event-active');
-   
+
   }
 
-  
+
 }
