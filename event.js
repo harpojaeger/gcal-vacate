@@ -1,14 +1,14 @@
 function Event(event, resp) {
-  this.event = event;
+  this.eventData = event;
 
   /** Create the summary**/
   var summary = $("<span>")
-    .text(this.event.summary)
+    .text(this.eventData.summary)
     .addClass('action-link')
     .click(showInstances);
 
   /**Create the "further info" div**/
-  var RRule = rrulestr(this.event.recurrence[0]);
+  var RRule = rrulestr(this.eventData.recurrence[0]);
   var repeat_desc = RRule.toText();
   var info_div = $('<div>')
     .addClass('info')
