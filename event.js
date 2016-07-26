@@ -8,29 +8,19 @@ function Event(event, resp) {
   this.recurrence = event.recurrence;
 
   /** Create the list item  with summary**/
-
   var summary = $("<span>")
     .text(this.summary)
     .addClass('action-link')
     .click(showInstances);
-
   var event_list_item = $('<li>')
     .data('instancesObject', resp)
     .append(summary)
     .appendTo('#events_ul');
 
-
   /**Create the info button **/
   var info_button = $('<span>')
     .addClass('ui-icon-info ui-icon event-action-button action-link')
     .appendTo(event_list_item);
-
-  /**Create the instances button 
-    var instance_link = $('<span>')
-    .addClass('ui-icon ui-icon-arrow-1-e event-action-button')
-    .click(listInstances);
-    $(event_list_item).append(instance_link);
-	**/
 
   /**Create the "further info" div**/
   var RRule = rrulestr(this.recurrence[0]);
@@ -39,7 +29,6 @@ function Event(event, resp) {
     .addClass('info')
     .text(repeat_desc);
   $(event_list_item).append(info_div);
-
   $(info_button).click(function() {
     $('div.info').not($(this).siblings('div.info')).slideUp();
     $(info_div).slideToggle();
