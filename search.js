@@ -66,19 +66,11 @@ function listUpcomingEvents(start_date, end_date) {
   }
 
   events_request.execute(function(events_resp) {
-    debug("Executed events request.");
-
     var events = events_resp.items;
-    console.log("Retrieved " + events.length + " repeating events.");
     if (events.length > 0) {
-      var n = 0;
-
       for (i = 0; i < events.length; i++) {
         var event = events[i];
-        var n = 0;
         if (event.status == "confirmed") {
-          n++;
-          debug('Running instances request for ' + event.summary);
           var instances_request = gapi.client.calendar.events.instances({
             "calendarId": calendar_ID,
             "eventId": event.id,
@@ -97,6 +89,8 @@ function listUpcomingEvents(start_date, end_date) {
 }
 
 
+/** Set up the datepickers **/
+
 var datepickerOptions = {
   dateFormat: 'yy-mm-dd',
   changeMonth: true,
@@ -104,7 +98,6 @@ var datepickerOptions = {
   showOtherMonths: true,
   selectOtherMonths: true,
 };
-
 $(function() {
   from = $("#start")
     .datepicker(datepickerOptions)
