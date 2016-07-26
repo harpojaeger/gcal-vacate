@@ -35,6 +35,8 @@ function prepareSearch() {
 
 }
 
+
+
 function listUpcomingEvents(start_date, end_date) {
   var events_request = gapi.client.calendar.events.list({
     'calendarId': calendar_ID,
@@ -45,6 +47,24 @@ function listUpcomingEvents(start_date, end_date) {
     'maxResults': 2500
   });
 
+  function instancesRespProcessor(event) {
+    var f = function(instances_resp) {
+      if (instances_resp.code) {
+        debug("Error " + instances_resp.code + ": " + instance_resp.message);
+        debug(instances_resp);
+      } else {
+        var status_string = ('Found ' + instances_resp.items.length + ' instances of ' + event.summary);
+        if (instances_resp.items.length > 0) {
+          new Event(event, instances_resp);
+        } else {
+          status_string += " - skipping.";
+        }
+        debug(status_string);
+      }
+    }
+    return f;
+  }
+
   events_request.execute(function(events_resp) {
     debug("Executed events request.");
 
@@ -52,6 +72,7 @@ function listUpcomingEvents(start_date, end_date) {
     console.log("Retrieved " + events.length + " repeating events.");
     if (events.length > 0) {
       var n = 0;
+
       for (i = 0; i < events.length; i++) {
         var event = events[i];
         var n = 0;
@@ -64,23 +85,10 @@ function listUpcomingEvents(start_date, end_date) {
             "timeMin": $("#start").val() + "T00:00:00Z",
             "timeMax": $("#end").val() + "T00:00:00Z",
           });
-          instances_request.execute(function(instances_resp) {
-            if (instances_resp.code) {
-              debug("Error " + instances_resp.code + ": " + instance_resp.message);
-              debug(instances_resp);
-            } else {
-              if (instances_resp.items.length > 0) {
-                debug(event.summary + ': ' + instances_resp.items.length + ' instances found.');
-                /**new Event(event, instances_resp);**/
-              }
-            }
-          });
+          this_func = instancesRespProcessor(event);
+          instances_request.execute(this_func);
         }
-
       }
-
-
-
       eventsController.div.show();
     } else {
       debug('No upcoming events found.');
