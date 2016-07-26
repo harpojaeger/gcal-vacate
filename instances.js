@@ -87,14 +87,21 @@ function delete_all_instances() {
           $(this).dialog('close');
           debug("Clicked yes");
           debug("Delete all shown instances.")
+          var allInstancesDeleted = true;
           $("li.instance").each(function(index) {
             var data = $(this).data();
             if (data.shouldDelete) {
               $(this).trigger("instance:delete");
             } else {
               debug('Skipping ' + data.id);
+              allInstancesDeleted = false;
             }
           });
+          if (allInstancesDeleted) {
+            $('ul#events_ul li.event-active').slideUp(function() {
+              $(this).remove();
+            });
+          }
         }
       }]
     });
