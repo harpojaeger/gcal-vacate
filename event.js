@@ -34,8 +34,6 @@ function Event(event, resp) {
     $(info_div).slideToggle();
 
   });
-  /**
-  The gameplan: split this listInstances function into two: retrieveInstances and listInstances.  The first one will actually run the query, the second will create the Instance objects (thereby outputting them to the page).  That way, we can filter out repeating events if retrieveInstances doesn't return anything (i.e. those that span the time period of interest but whose instances have been deleted).**/
 
   function showInstances() {
     var event_li = this.parentNode;
