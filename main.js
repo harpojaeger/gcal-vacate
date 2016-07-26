@@ -1,5 +1,6 @@
 $(document).ready(function() {
   debug("Document ready.");
+  timezoneSuffix = calculateTimezone();
   eventsController = new eventsController();
   instancesController = new instancesController();
   searchController = new searchController();

@@ -4,8 +4,8 @@ function prepareSearch() {
   var end_date = $("#end").val();
   calendar_ID = $("#calendar-select").val();
   if ($('#calendar-select').val().length && start_date.length && end_date.length) {
-    start_date += "T00:00:00Z";
-    end_date += "T00:00:00Z";
+    start_date += "T00:00:00" + timezoneSuffix;
+    end_date += "T00:00:00" + timezoneSuffix;
     debug("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
     listUpcomingEvents(start_date, end_date);
     instancesController.clear();
@@ -74,8 +74,8 @@ function listUpcomingEvents(start_date, end_date) {
           var instances_request = gapi.client.calendar.events.instances({
             "calendarId": calendar_ID,
             "eventId": event.id,
-            "timeMin": $("#start").val() + "T00:00:00Z",
-            "timeMax": $("#end").val() + "T00:00:00Z",
+            "timeMin": $("#start").val() + "T00:00:00" + timezoneSuffix,
+            "timeMax": $("#end").val() + "T00:00:00" + timezoneSuffix,
           });
           this_func = instancesRespProcessor(event);
           instances_request.execute(this_func);
