@@ -15,11 +15,6 @@ function Event(event, resp) {
     .click(showInstances)
     .appendTo(event_list_item);
   $("#events_ul").append(event_list_item);
-  $(event_list_item).data({
-    "id": this.id,
-    "recurringEventId": this.recurringEventId,
-    "calendarId": calendar_ID
-  });
   $(event_list_item).data('instancesObject', resp);
 
   /**Create the info button **/
