@@ -1,5 +1,4 @@
 function Event(event, resp) {
-
   this.id = event.id;
   this.recurringEventId = event.recurringEventId;
   this.summary = event.summary;
@@ -32,16 +31,12 @@ function Event(event, resp) {
   $(info_button).click(function() {
     $('div.info').not($(this).siblings('div.info')).slideUp();
     $(info_div).slideToggle();
-
   });
 
   function showInstances() {
     var event_li = this.parentNode;
     var resp = $(event_li).data('instancesObject');
-
-
     console.log("Displaying " + resp.items.length + " instances.");
-
     var events = resp.items;
     instancesController.clear();
     for (i = 0; i < events.length; i++) {
@@ -54,8 +49,5 @@ function Event(event, resp) {
     instancesController.div.show();
     $('#events-div ul li').removeClass('event-active');
     $(event_li).addClass('event-active');
-
   }
-
-
 }
