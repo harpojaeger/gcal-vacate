@@ -25,18 +25,20 @@ function Event(event, instances_resp) {
   /** Create the list item, append children & add it to the DOM **/
   var event_list_item = $('<li>')
     .data('instancesObject', instances_resp)
+    .data('eventObject', this)
     .append(summary, info_button, info_div)
     .appendTo('#events_ul');
 
   function showInstances() {
     var event_li = this.parentNode;
     var instances_resp = $(event_li).data('instancesObject');
-    console.log("Displaying " + instances_resp.items.length + " instances.");
-    var events = instances_resp.items;
+    var baseEvent = $(event_li).data('eventObject').eventData;
+    console.log("Displaying " + instances_resp.items.length + " instances of " + baseEvent.summary);
+    var instances = instances_resp.items;
     instancesController.clear();
-    for (i = 0; i < events.length; i++) {
-      var event = events[i];
-      new Instance(event)
+    for (i = 0; i < instances.length; i++) {
+      var instance = instances[i];
+      new Instance(instance)
     }
     $("#deleteall").unbind("click").click(delete_all_instances);
     instancesController.deleteAllLink.show();
