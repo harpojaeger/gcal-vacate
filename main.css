@@ -88,3 +88,6 @@ div#instances-div ul {
 ul#instances-ul {
   font-family: "Courier New", Courier, monospace
 }
+input.deleteThisInstanceCheckbox {
+  margin-right: 5px;
+}
