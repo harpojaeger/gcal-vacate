@@ -2,6 +2,7 @@ function BaseEvent(event, instances_resp) {
   this.baseEventData = event;
   this.instances_resp = instances_resp;
 
+  var event_list_item = $('<li>');
   /**Create the instances div **/
   var event_instances_div = $('<div>')
     .addClass('event-instances-div');
@@ -15,10 +16,22 @@ function BaseEvent(event, instances_resp) {
 
   var select_all_link = $('<span>')
     .addClass('action-link instance-select-all')
-    .text('all');
+    .text('all')
+    .click(function() {
+      debug('Select all instances for deletion.');
+      $(event_list_item)
+        .find('.deleteThisInstanceCheckbox:not(:checked)')
+        .click();
+    });
   var select_none_link = $('<span>')
     .addClass('action-link instance-select-none')
-    .text('none');
+    .text('none')
+    .click(function() {
+      debug('Deselect all instances for deletion.');
+      $(event_list_item)
+        .find('.deleteThisInstanceCheckbox:checked')
+        .click();
+    });
 
   var instance_selection_controls = $('<span>')
     .addClass('instance-selection')
@@ -70,7 +83,7 @@ function BaseEvent(event, instances_resp) {
     });
 
   /** Create the list item, append children & add it to the DOM **/
-  var event_list_item = $('<li>')
+  $(event_list_item)
     .data('eventObject', this)
     .append(summary, event_deletion_controls, event_instances_div)
     .appendTo('#events_ul');
