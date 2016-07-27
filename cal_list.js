@@ -18,7 +18,7 @@ function list_calendars() {
     $('#submit')
       .button()
       .click(prepareSearch);
-    searchController.div.show();
+    containerController.div.show();
   });
 
 

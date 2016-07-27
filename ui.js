@@ -1,3 +1,12 @@
+function containerController() {
+  containerDiv = $('#container');
+  this.div = {
+    show: function() {
+      $(containerDiv).show();
+    }
+  }
+}
+
 function eventsController() {
   eventsTitle = $("#events_title");
   eventsUl = $("#events_ul");
@@ -23,7 +32,6 @@ function eventsController() {
       $(eventsDiv).hide();
     }
   }
-
 }
 
 function instancesController() {
@@ -34,7 +42,6 @@ function instancesController() {
   this.clear = function() {
     $(instancesUl).empty();
   }
-
   this.title = {
     hide: function() {
       $(instancesTitle).hide();
@@ -43,7 +50,6 @@ function instancesController() {
       $(instancesTitle).show();
     }
   }
-
   this.div = {
     show: function() {
       $(instancesDiv).show();
@@ -51,9 +57,7 @@ function instancesController() {
     hide: function() {
       $(instancesDiv).hide();
     }
-
   }
-
   this.deleteAllLink = {
     hide: function() {
       $(deleteLink).hide();
