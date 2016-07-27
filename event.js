@@ -13,13 +13,21 @@ function BaseEvent(event, instances_resp) {
   var event_deletion_controls = $('<div>')
     .addClass('event-deletion-controls');
 
+  var select_all_link = $('<span>')
+    .addClass('action-link instance-select-all')
+    .text('all');
+  var select_none_link = $('<span>')
+    .addClass('action-link instance-select-none')
+    .text('none');
+
   var instance_selection_controls = $('<span>')
     .addClass('instance-selection')
     .append(
       'select (',
-      $('<span>').addClass('action-link instance-select-all').text('all'),
+      select_all_link,
       ' | ',
-      $('<span>').addClass('action-link instance-select-none').text('none'), ')')
+      select_none_link,
+      ')')
     .appendTo(event_deletion_controls);
 
   var delete_link = $('<span>')
@@ -49,7 +57,7 @@ function BaseEvent(event, instances_resp) {
       $(this).toggleClass('event-active');
       $('#events-div ul li div.event-deletion-controls').not(event_deletion_controls).fadeOut();
       $(event_deletion_controls).fadeToggle()
-      .css('display', 'inline');
+        .css('display', 'inline');
     })
     .attr('title', repeat_desc)
     .tooltip({
