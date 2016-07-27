@@ -26,7 +26,9 @@ function BaseEvent(event, instances_resp) {
   /**Create the instances div **/
   var event_instances_div = $('<div>')
     .addClass('instances-div');
-
+  var event_instances_ul = $('<ul>')
+    .addClass('instances-ul')
+    .appendTo(event_instances_div);
   /** Create the list item, append children & add it to the DOM **/
   var event_list_item = $('<li>')
     .data('eventObject', this)
@@ -42,7 +44,7 @@ function BaseEvent(event, instances_resp) {
     instancesController.clear();
     for (i = 0; i < instances.length; i++) {
       var instance = instances[i];
-      new Instance(instance)
+      new Instance(instance,event_instances_ul)
     }
     $("#deleteall").unbind("click").click(delete_all_instances);
     instancesController.deleteAllLink.show();

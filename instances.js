@@ -1,4 +1,5 @@
-function Instance(event) {
+function Instance(event,eventInstancesUl) {
+  debug(eventInstancesUl);
   this.id = event.id
   this.recurringEventId = event.recurringEventId;
   this.summary = event.summary;
@@ -14,10 +15,11 @@ function Instance(event) {
     when = parsedDate.toString('MM/dd h:mm tt');
   }
 
+
   var instance_list_item = $('<li>')
     .text(event.summary + ' (' + when + ') ')
     .addClass("instance")
-    .appendTo('#instances-ul')
+    .appendTo(eventInstancesUl)
     .data({
       "id": this.id,
       "recurringEventId": this.recurringEventId,
