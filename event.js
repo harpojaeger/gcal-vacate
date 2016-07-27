@@ -36,10 +36,15 @@ function BaseEvent(event, instances_resp) {
       track: true
     });
 
+  /** Create the deletion controls **/
+  var event_deletion_controls = $('<div>')
+  .addClass('event-deletion-controls')
+  .html('<span id="deleteall"          class="action-link"><span class="ui-icon ui-icon-trash">&nbsp;</span>Delete          selected</span><div id="instance_selection_div" class="instance-selection">            Select (<span id="select_all_instances" class="action-link instance-toggle-all">all</span> | <span id="deselect_all_instances" class=            "action-link instance-toggle-all">none</span>)</div>');
+
   /** Create the list item, append children & add it to the DOM **/
   var event_list_item = $('<li>')
     .data('eventObject', this)
-    .append(summary, event_instances_div)
+    .append(summary, event_deletion_controls, event_instances_div)
     .appendTo('#events_ul');
   listInstances(event_list_item)
 
