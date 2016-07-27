@@ -1,5 +1,4 @@
 function Instance(event,eventInstancesUl) {
-  debug(eventInstancesUl);
   this.id = event.id
   this.recurringEventId = event.recurringEventId;
   this.summary = event.summary;

@@ -2,42 +2,44 @@ function BaseEvent(event, instances_resp) {
   this.baseEventData = event;
   this.instances_resp = instances_resp;
 
-/**Create the instances div **/
+  /**Create the instances div **/
   var event_instances_div = $('<div>')
-    .addClass('instances-div');
+    .addClass('event-instances-div');
   var event_instances_ul = $('<ul>')
     .addClass('instances-ul')
     .appendTo(event_instances_div);
+
+  /**Fetch recurrence information for the tooltip**/
+  var RRule = rrulestr(this.baseEventData.recurrence[0]);
+  var repeat_desc = RRule.toText();
 
   /** Create the summary**/
   var summary = $("<span>")
     .text(this.baseEventData.summary)
     .addClass('action-link')
     .click(function() {
-      $('div.instances-div').not($(this).siblings('div.instances-div')).slideUp();
+      $('div.event-instances-div').
+      not($(this)
+          .siblings('div.event-instances-div'))
+        .slideUp();
       $(event_instances_div).slideToggle();
+      $('#events-div ul li span').removeClass('event-active');
+      $(this).addClass('event-active');
+    })
+    .attr('title', repeat_desc)
+    .tooltip({
+      show: {
+        duration: 500,
+        delay: 500
+      },
+      tooltipClass: 'rrule-tooltip',
+      track: true
     });
 
-  /**Create the "further info" div**/
-  var RRule = rrulestr(this.baseEventData.recurrence[0]);
-  var repeat_desc = RRule.toText();
-  var info_div = $('<div>')
-    .addClass('info')
-    .text(repeat_desc);
-
-  /**Create the info toggle button **/
-  var info_button = $('<span>')
-    .addClass('ui-icon-info ui-icon event-action-button action-link')
-    .click(function() {
-      $('div.info').not($(this).siblings('div.info')).slideUp();
-      $(info_div).slideToggle();
-    });
-    
-  
   /** Create the list item, append children & add it to the DOM **/
   var event_list_item = $('<li>')
     .data('eventObject', this)
-    .append(summary, info_button, event_instances_div, info_div)
+    .append(summary, event_instances_div)
     .appendTo('#events_ul');
   listInstances(event_list_item)
 
@@ -50,13 +52,11 @@ function BaseEvent(event, instances_resp) {
     instancesController.clear();
     for (i = 0; i < instances.length; i++) {
       var instance = instances[i];
-      new Instance(instance,event_instances_ul)
+      new Instance(instance, event_instances_ul)
     }
     $("#deleteall").unbind("click").click(delete_all_instances);
     instancesController.deleteAllLink.show();
     instancesController.title.show();
     instancesController.div.show();
-    $('#events-div ul li').removeClass('event-active');
-    $(event_li).addClass('event-active');
   }
 }
