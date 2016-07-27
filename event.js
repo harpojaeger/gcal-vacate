@@ -42,12 +42,12 @@ function BaseEvent(event, instances_resp) {
   
   var instance_selection_controls = $('<span>')
   .addClass('instance-selection')
-  .append('Select (',$('<span>').addClass('action-link instance-select-all').text('all'),' | ',$('<span>').addClass('action-link instance-select-none').text('none'),')')
+  .append('select (',$('<span>').addClass('action-link instance-select-all').text('all'),' | ',$('<span>').addClass('action-link instance-select-none').text('none'),')')
   .appendTo(event_deletion_controls);
   
   var delete_link = $('<span>')
   .addClass('action-link')
-  .text('Delete')
+  .text('delete')
   .prepend($('<span>').addClass('ui-icon ui-icon-trash').html('&nbsp;'))
   .appendTo(event_deletion_controls);
 
