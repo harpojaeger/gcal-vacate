@@ -23,8 +23,8 @@ function BaseEvent(event, instances_resp) {
           .siblings('div.event-instances-div'))
         .slideUp();
       $(event_instances_div).slideToggle();
-      $('#events-div ul li span').removeClass('event-active');
-      $(this).addClass('event-active');
+      $('#events-div ul li span').not(this).removeClass('event-active');
+      $(this).toggleClass('event-active');
     })
     .attr('title', repeat_desc)
     .tooltip({
