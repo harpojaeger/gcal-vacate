@@ -22,11 +22,15 @@ function BaseEvent(event, instances_resp) {
       $('div.info').not($(this).siblings('div.info')).slideUp();
       $(info_div).slideToggle();
     });
+    
+  /**Create the instances div **/
+  var event_instances_div = $('<div>')
+    .addClass('instances-div');
 
   /** Create the list item, append children & add it to the DOM **/
   var event_list_item = $('<li>')
     .data('eventObject', this)
-    .append(summary, info_button, info_div)
+    .append(summary, info_button, event_instances_div, info_div)
     .appendTo('#events_ul');
 
   function showInstances() {
