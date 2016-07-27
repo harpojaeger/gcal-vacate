@@ -2,11 +2,21 @@ function BaseEvent(event, instances_resp) {
   this.baseEventData = event;
   this.instances_resp = instances_resp;
 
+/**Create the instances div **/
+  var event_instances_div = $('<div>')
+    .addClass('instances-div');
+  var event_instances_ul = $('<ul>')
+    .addClass('instances-ul')
+    .appendTo(event_instances_div);
+
   /** Create the summary**/
   var summary = $("<span>")
     .text(this.baseEventData.summary)
     .addClass('action-link')
-    .click(showInstances);
+    .click(function() {
+      $('div.instances-div').not($(this).siblings('div.instances-div')).slideUp();
+      $(event_instances_div).slideToggle();
+    });
 
   /**Create the "further info" div**/
   var RRule = rrulestr(this.baseEventData.recurrence[0]);
@@ -23,20 +33,16 @@ function BaseEvent(event, instances_resp) {
       $(info_div).slideToggle();
     });
     
-  /**Create the instances div **/
-  var event_instances_div = $('<div>')
-    .addClass('instances-div');
-  var event_instances_ul = $('<ul>')
-    .addClass('instances-ul')
-    .appendTo(event_instances_div);
+  
   /** Create the list item, append children & add it to the DOM **/
   var event_list_item = $('<li>')
     .data('eventObject', this)
     .append(summary, info_button, event_instances_div, info_div)
     .appendTo('#events_ul');
+  listInstances(event_list_item)
 
-  function showInstances() {
-    var event_li = this.parentNode;
+  function listInstances(event_li) {
+
     var instances_resp = $(event_li).data('eventObject').instances_resp;
     var baseEventData = $(event_li).data('eventObject').baseEventData;
     var instances = instances_resp.items;

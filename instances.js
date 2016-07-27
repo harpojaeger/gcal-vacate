@@ -15,7 +15,6 @@ function Instance(event,eventInstancesUl) {
     when = parsedDate.toString('MM/dd h:mm tt');
   }
 
-
   var instance_list_item = $('<li>')
     .text(event.summary + ' (' + when + ') ')
     .addClass("instance")
