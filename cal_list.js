@@ -39,13 +39,14 @@ function list_calendars() {
 
   coloredItem = function(ul, item) {
     var wrapper_div = $('<div>');
-    var color_div = $('<div>');
-    $(color_div).addClass('cal-select-color-box').css({
+    var color_div = $('<div>')
+    .addClass('cal-select-color-box')
+    .css({
         'background-color': item.element.data('backgroundColor'),
       })
       .html('&nbsp;&nbsp;&nbsp;&nbsp;');
     var a = $('<a>').html(item.label)
-    $(wrapper_div).append(color_div).append(a);
+    $(wrapper_div).append(color_div,a);
     var li = $('<li>').append(wrapper_div);
     return $(li).appendTo(ul);
   };
