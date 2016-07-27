@@ -96,4 +96,7 @@ div.event-instances-div {
 }
 div.event-deletion-controls {
   font-size: .75em;
+  display: inline;
+  margin-left: 5px;
+  color: gray;
 }
