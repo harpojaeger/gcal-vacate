@@ -9,33 +9,6 @@ function BaseEvent(event, instances_resp) {
     .addClass('instances-ul')
     .appendTo(event_instances_div);
 
-  /**Fetch recurrence information for the tooltip**/
-  var RRule = rrulestr(this.baseEventData.recurrence[0]);
-  var repeat_desc = RRule.toText();
-
-  /** Create the summary**/
-  var summary = $("<span>")
-    .text(this.baseEventData.summary)
-    .addClass('action-link')
-    .click(function() {
-      $('div.event-instances-div').
-      not($(this)
-          .siblings('div.event-instances-div'))
-        .slideUp();
-      $(event_instances_div).slideToggle();
-      $('#events-div ul li span').not(this).removeClass('event-active');
-      $(this).toggleClass('event-active');
-    })
-    .attr('title', repeat_desc)
-    .tooltip({
-      show: {
-        duration: 500,
-        delay: 500
-      },
-      tooltipClass: 'rrule-tooltip',
-      track: true
-    });
-
   /** Create the deletion controls **/
   var event_deletion_controls = $('<div>')
     .addClass('event-deletion-controls');
@@ -57,6 +30,36 @@ function BaseEvent(event, instances_resp) {
       .addClass('ui-icon ui-icon-trash')
       .html('&nbsp;'))
     .appendTo(event_deletion_controls);
+
+  /**Fetch recurrence information for the tooltip**/
+  var RRule = rrulestr(this.baseEventData.recurrence[0]);
+  var repeat_desc = RRule.toText();
+
+  /** Create the summary**/
+  var summary = $("<span>")
+    .text(this.baseEventData.summary)
+    .addClass('action-link')
+    .click(function() {
+      $('div.event-instances-div')
+        .not($(this)
+          .siblings('div.event-instances-div'))
+        .slideUp();
+      $(event_instances_div).slideToggle();
+      $('#events-div ul li span').not(this).removeClass('event-active');
+      $(this).toggleClass('event-active');
+      $('#events-div ul li div.event-deletion-controls').not(event_deletion_controls).fadeOut();
+      $(event_deletion_controls).fadeToggle()
+      .css('display', 'inline');
+    })
+    .attr('title', repeat_desc)
+    .tooltip({
+      show: {
+        duration: 500,
+        delay: 500
+      },
+      tooltipClass: 'rrule-tooltip',
+      track: true
+    });
 
   /** Create the list item, append children & add it to the DOM **/
   var event_list_item = $('<li>')

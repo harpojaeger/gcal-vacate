@@ -99,4 +99,5 @@ div.event-deletion-controls {
   display: inline;
   margin-left: 5px;
   color: gray;
+  display: none;
 }
