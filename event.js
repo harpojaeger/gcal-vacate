@@ -38,25 +38,25 @@ function BaseEvent(event, instances_resp) {
 
   /** Create the deletion controls **/
   var event_deletion_controls = $('<div>')
-  .addClass('event-deletion-controls');
-  
+    .addClass('event-deletion-controls');
+
   var instance_selection_controls = $('<span>')
-  .addClass('instance-selection')
-  .append(
-    'select (',
-    $('<span>').addClass('action-link instance-select-all').text('all'),
-    ' | ',
-    $('<span>').addClass('action-link instance-select-none').text('none'),')')
-  .appendTo(event_deletion_controls);
-  
+    .addClass('instance-selection')
+    .append(
+      'select (',
+      $('<span>').addClass('action-link instance-select-all').text('all'),
+      ' | ',
+      $('<span>').addClass('action-link instance-select-none').text('none'), ')')
+    .appendTo(event_deletion_controls);
+
   var delete_link = $('<span>')
-  .addClass('action-link')
-  .text('delete')
-  .prepend(
-    $('<span>')
-    .addClass('ui-icon ui-icon-trash')
-    .html('&nbsp;'))
-  .appendTo(event_deletion_controls);
+    .addClass('action-link')
+    .text('delete')
+    .prepend(
+      $('<span>')
+      .addClass('ui-icon ui-icon-trash')
+      .html('&nbsp;'))
+    .appendTo(event_deletion_controls);
 
   /** Create the list item, append children & add it to the DOM **/
   var event_list_item = $('<li>')
