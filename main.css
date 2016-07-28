@@ -77,6 +77,10 @@ input.deleteThisInstanceCheckbox {
 }
 div.event-instances-div {
   display: none;
+  font-size: .75em;
+}
+ul.instances-ul {
+  margin: 2px 12px 0px 5px;
 }
 .ui-tooltip-content {
   font-size: .5em;

@@ -25,7 +25,7 @@ function BaseEvent(event, instances_resp) {
     .click(function() {
       debug('Select all instances for deletion.');
       $(event_list_item)
-        .find('.deleteThisInstanceCheckbox:not(:checked)')
+        .find('span.ui-icon-radio-off')
         .click();
     });
   var select_none_link = $('<span>')
@@ -34,7 +34,7 @@ function BaseEvent(event, instances_resp) {
     .click(function() {
       debug('Deselect all instances for deletion.');
       $(event_list_item)
-        .find('.deleteThisInstanceCheckbox:checked')
+        .find('span.ui-icon-bullet')
         .click();
     });
 

@@ -24,14 +24,16 @@ function Instance(event, eventInstancesUl) {
 
   var checkbox_label = $('<label>')
     .attr('for', this.id)
-    .addClass('ui-icon ui-icon-bullet')
     .click(function() {
-      $(this).toggleClass('ui-icon-bullet ui-icon-radio-off');
-    });
+      $(this).children('span.instance-deletion-checkbox-label')
+        .toggleClass('ui-icon-bullet ui-icon-radio-off');
+    })
+    .text(event.summary + ' (' + when + ')')
+    .prepend($('<span>')
+      .addClass('instance-deletion-checkbox-label ui-icon ui-icon-bullet'));
 
   $(instance_list_item)
     .append(checkbox, checkbox_label)
-    .append(event.summary + ' (' + when + ') ')
     .addClass("instance")
     .appendTo(eventInstancesUl)
     .data({
