@@ -55,7 +55,10 @@ function BaseEvent(event, instances_resp) {
       $('<span>')
       .addClass('ui-icon ui-icon-trash')
       .html('&nbsp;'))
-    .appendTo(event_deletion_controls);
+    .appendTo(event_deletion_controls)
+    .click(function() {
+      delete_all_instances(event_list_item);
+    });
 
   /**Fetch recurrence information for the tooltip**/
   var RRule = rrulestr(this.baseEventData.recurrence[0]);
@@ -71,13 +74,15 @@ function BaseEvent(event, instances_resp) {
         .not($(this)
           .siblings('div.event-instances-div'))
         .slideUp();
+
       $('span.event-list-triangle').not(triangle)
         .removeClass('ui-icon-triangle-1-s')
         .addClass('ui-icon-triangle-1-e');
       $(triangle).toggleClass('ui-icon-triangle-1-e ui-icon-triangle-1-s');
+
       $(event_instances_div).slideToggle();
       $('#events-div ul li span').not(this).removeClass('event-active');
-      $(this).toggleClass('event-active');
+
       $('#events-div ul li div.event-deletion-controls').not(event_deletion_controls).fadeOut();
       $(event_deletion_controls).fadeToggle()
         .css('display', 'inline');

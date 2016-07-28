@@ -66,11 +66,6 @@ div#events_title {
 span.event-action-button {
   margin-left: 5px;
 }
-span.event-active {
-  background-color: #eeeeee;
-  border-radius: 3px;
-  padding: 0px 5px 0px 0px;
-}
 div#instances-div {
   float: right;
   display: none;

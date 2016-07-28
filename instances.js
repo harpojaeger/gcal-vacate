@@ -1,4 +1,4 @@
-function Instance(event,eventInstancesUl) {
+function Instance(event, eventInstancesUl) {
   this.id = event.id
   this.recurringEventId = event.recurringEventId;
   this.summary = event.summary;
@@ -59,8 +59,7 @@ function Instance(event,eventInstancesUl) {
 
 }
 
-function delete_all_instances() {
-
+function delete_all_instances(event_li) {
   $('#alert_div')
     .attr("title", "Delete all instances?")
     .text("Are you sure you want to delete all selected instances of this event?  This cannot be undone.")
@@ -88,7 +87,7 @@ function delete_all_instances() {
           debug("Clicked yes");
           debug("Delete all shown instances.")
           var allInstancesDeleted = true;
-          $("li.instance").each(function(index) {
+          $(event_li).find("li.instance").each(function(index) {
             var data = $(this).data();
             if (data.shouldDelete) {
               $(this).trigger("instance:delete");
