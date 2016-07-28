@@ -73,7 +73,7 @@ div#instances-div {
   margin-left:5px
 }
 input.deleteThisInstanceCheckbox {
-  margin-right: 5px;
+  display:none;
 }
 div.event-instances-div {
   display: none;

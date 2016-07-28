@@ -14,8 +14,24 @@ function Instance(event, eventInstancesUl) {
     when = parsedDate.toString('MM/dd h:mm tt');
   }
 
-  var instance_list_item = $('<li>')
-    .text(event.summary + ' (' + when + ') ')
+  var instance_list_item = $('<li>');
+  var checkbox = $('<input type="checkbox" class="deleteThisInstanceCheckbox" checked>')
+    .change(function() {
+      $(instance_list_item).data('shouldDelete', $(this).prop('checked'));
+      debug($(instance_list_item).data('id') + ' has delete value: ' + $(instance_list_item).data('shouldDelete'));
+    })
+    .attr('id', this.id);
+
+  var checkbox_label = $('<label>')
+    .attr('for', this.id)
+    .addClass('ui-icon ui-icon-bullet')
+    .click(function() {
+      $(this).toggleClass('ui-icon-bullet ui-icon-radio-off');
+    });
+
+  $(instance_list_item)
+    .append(checkbox, checkbox_label)
+    .append(event.summary + ' (' + when + ') ')
     .addClass("instance")
     .appendTo(eventInstancesUl)
     .data({
@@ -25,12 +41,7 @@ function Instance(event, eventInstancesUl) {
       'shouldDelete': true
     });
 
-  var checkbox = $('<input type="checkbox" class="deleteThisInstanceCheckbox" checked>')
-    .change(function() {
-      $(instance_list_item).data('shouldDelete', $(this).prop('checked'));
-      debug($(instance_list_item).data('id') + ' has delete value: ' + $(instance_list_item).data('shouldDelete'));
-    })
-    .prependTo(instance_list_item);
+
 
   /**$(instance_list_item).on("click",function(){
 		delete_instance(this)
