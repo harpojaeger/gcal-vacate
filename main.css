@@ -77,14 +77,6 @@ div#instances-div {
   border: 5px solid #eeeeee;
   margin-left:5px
 }
-div#events-div ul,
-div#instances-div ul {
-  list-style-type: none;
-  padding-left: 0px;
-}
-ul#instances-ul {
-  font-size: .75em;
-}
 input.deleteThisInstanceCheckbox {
   margin-right: 5px;
 }

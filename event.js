@@ -1,8 +1,10 @@
 function BaseEvent(event, instances_resp) {
   this.baseEventData = event;
   this.instances_resp = instances_resp;
-
+  
+ /**Create the list item **/
   var event_list_item = $('<li>');
+  
   /**Create the instances div **/
   var event_instances_div = $('<div>')
     .addClass('event-instances-div');
@@ -82,12 +84,12 @@ function BaseEvent(event, instances_resp) {
       track: true
     });
 
-  /** Create the list item, append children & add it to the DOM **/
+  /** Append children to the list item & add it to the DOM **/
   $(event_list_item)
     .data('eventObject', this)
     .append(summary, event_deletion_controls, event_instances_div)
     .appendTo('#events_ul');
-  listInstances(event_list_item)
+  listInstances(event_list_item);
 
   function listInstances(event_li) {
 
