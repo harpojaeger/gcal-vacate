@@ -54,23 +54,11 @@ div#events-div {
   float: left;
   margin-right: 10px display: none;
 }
-div.info {
-  color: grey;
-  font-size: 0.75em;
-  font-style: italic;
-  display: none;
-}
 div#events_title {
   margin-bottom: 1em;
 }
 span.event-action-button {
   margin-left: 5px;
-}
-div#instances-div {
-  float: right;
-  display: none;
-  border: 5px solid #eeeeee;
-  margin-left:5px
 }
 input.deleteThisInstanceCheckbox {
   display:none;
