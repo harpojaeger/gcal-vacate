@@ -1,10 +1,13 @@
 function BaseEvent(event, instances_resp) {
   this.baseEventData = event;
   this.instances_resp = instances_resp;
-  
- /**Create the list item **/
+
+  /**Create the list item **/
   var event_list_item = $('<li>');
-  
+
+  /**Create the triangle list marker **/
+  var triangle = $('<span>').addClass('event-list-triangle ui-icon ui-icon-triangle-1-e');
+
   /**Create the instances div **/
   var event_instances_div = $('<div>')
     .addClass('event-instances-div');
@@ -61,12 +64,17 @@ function BaseEvent(event, instances_resp) {
   /** Create the summary**/
   var summary = $("<span>")
     .text(this.baseEventData.summary)
+    .prepend(triangle)
     .addClass('action-link')
     .click(function() {
       $('div.event-instances-div')
         .not($(this)
           .siblings('div.event-instances-div'))
         .slideUp();
+      $('span.event-list-triangle').not(triangle)
+        .removeClass('ui-icon-triangle-1-s')
+        .addClass('ui-icon-triangle-1-e');
+      $(triangle).toggleClass('ui-icon-triangle-1-e ui-icon-triangle-1-s');
       $(event_instances_div).slideToggle();
       $('#events-div ul li span').not(this).removeClass('event-active');
       $(this).toggleClass('event-active');
