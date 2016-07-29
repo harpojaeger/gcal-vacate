@@ -8,10 +8,10 @@ function Instance(event, eventInstancesUl) {
   if (!when) {
     when = event.start.date;
     parsedDate = Date.parse(when);
-    when = parsedDate.toString('MM/dd');
+    when = parsedDate.toString('ddd MMM dd');
   } else {
     parsedDate = Date.parse(when);
-    when = parsedDate.toString('MM/dd h:mm tt');
+    when = parsedDate.toString('ddd MMM dd, h:mm tt');
   }
 
   var instance_list_item = $('<li>');
