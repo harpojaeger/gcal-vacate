@@ -18,9 +18,11 @@ div#container {
   padding: 10px;
   border-radius: 5px;
   margin: 10px auto 10px auto;
-  display: none;
 }
 div#alert_div {
+  display: none;
+}
+div#search_div {
   display: none;
 }
 .cal-select-color-box {
