@@ -110,7 +110,7 @@ function delete_all_instances(event_li) {
             }
           });
           if (allInstancesDeleted) {
-            $('ul#events_ul li.event-active').slideUp(function() {
+            $(event_li).slideUp(function() {
               $(this).remove();
             });
           }
