@@ -52,7 +52,9 @@ div.output {
 }
 div#events-div {
   float: left;
-  margin-right: 10px display: none;
+  margin-right: 10px;
+  display: none;
+  line-height: 1.5em;
 }
 div#events_title {
   margin-bottom: 1em;
@@ -68,7 +70,8 @@ div.event-instances-div {
   font-size: .75em;
 }
 ul.instances-ul {
-  margin: 2px 12px 0px 5px;
+  margin: 0px 0px 10px 15px;
+  line-height:1.5em;
 }
 .ui-tooltip-content {
   font-size: .5em;
@@ -79,4 +82,7 @@ div.event-deletion-controls {
   margin-left: 5px;
   color: gray;
   display: none;
+}
+li.instance:nth-child(even) label {
+  background-color: #dddddd;
 }
