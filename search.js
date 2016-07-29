@@ -71,9 +71,7 @@ function listUpcomingEvents(start_date, end_date) {
       for (i = 0; i < events.length; i++) {
         var event = events[i];
         if (event.status == "confirmed") {
-          if (typeof(event.recurrence) == 'undefined') {
-            debug("Attention: non-recurring event encountered (" + event.summary + ")!  This is likely a changed instance of a recurring event. Skipping instances request.");
-          } else {
+          if (typeof(event.recurrence) !== 'undefined') {
             var instances_request = gapi.client.calendar.events.instances({
               "calendarId": calendar_ID,
               "eventId": event.id,
