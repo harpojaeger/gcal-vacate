@@ -25,6 +25,7 @@ function handleAuthResult(authResult) {
     $(authorizeDiv).hide();
     loadCalendarApi();
   } else {
+    $('#authorize_button').button({ icon: 'ui-icon-calendar' });
     $(authorizeDiv).show();
   }
 }

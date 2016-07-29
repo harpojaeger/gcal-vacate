@@ -11,6 +11,11 @@ body {
 }
 div#authorize_div {
   display: none;
+  width: 500px;
+  line-height: 1.5em;
+}
+#authorize_button {
+  margin: 0px;
 }
 div#container {
   background-color: white;
