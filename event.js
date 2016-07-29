@@ -109,7 +109,6 @@ function BaseEvent(event, instances_resp) {
     var instances_resp = $(event_li).data('eventObject').instances_resp;
     var baseEventData = $(event_li).data('eventObject').baseEventData;
     var instances = instances_resp.items;
-    console.log("Displaying " + instances.length + " instances of " + baseEventData.summary);
     instancesController.clear();
     for (i = 0; i < instances.length; i++) {
       var instance = instances[i];
