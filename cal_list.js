@@ -16,7 +16,7 @@ function list_calendars() {
       renderItem: coloredItem
     });
     $('#submit')
-      .button()
+      .button( {icon: 'ui-icon-search'} )
       .click(prepareSearch);
     searchController.div.show();
   });
