@@ -23,6 +23,7 @@ div#container {
   padding: 10px;
   border-radius: 5px;
   margin: 10px auto 10px auto;
+  overflow: scroll;
 }
 div#alert_div {
   display: none;
