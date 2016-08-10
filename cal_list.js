@@ -55,12 +55,12 @@ function list_calendars() {
 }
 
 function Calendar(c) {
-  var o = document.createElement("option");
-  $(o).text(c.summary);
-  $(o).attr("value", c.id);
-  $(calendar_select).append(o);
-  $(o).data({
-    'backgroundColor': c.backgroundColor,
-    'foregroundColor': c.foregroundColor
-  });
+  var o = $('<option>')
+    .text(c.summary);
+    .attr("value", c.id)
+    .data({
+      'backgroundColor': c.backgroundColor,
+      'foregroundColor': c.foregroundColor
+    })
+    .appendTo(calendar_select);
 }
