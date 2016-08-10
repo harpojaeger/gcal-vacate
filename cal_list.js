@@ -18,6 +18,7 @@ function list_calendars() {
     $('#submit')
       .button( {icon: 'ui-icon-search'} )
       .click(prepareSearch);
+    containerController.div.show();
     searchController.div.show();
   });
 
@@ -36,7 +37,7 @@ function list_calendars() {
 
 
   });
-
+  
   coloredItem = function(ul, item) {
     var wrapper_div = $('<div>');
     var color_div = $('<div>')
@@ -55,8 +56,8 @@ function list_calendars() {
 }
 
 function Calendar(c) {
-  var o = $('<option>')
-    .text(c.summary);
+  var o = $	('<option>')
+    .text(c.summary)
     .attr("value", c.id)
     .data({
       'backgroundColor': c.backgroundColor,

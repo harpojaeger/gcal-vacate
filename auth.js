@@ -21,8 +21,6 @@ function checkAuth() {
  * @param {Object} authResult Authorization result.
  */
 function handleAuthResult(authResult) {
-  containerController.div.show();
-  debug('Received auth result' + authResult);
   if (authResult && !authResult.error) {
     authController.div.hide();
     loadCalendarApi();
