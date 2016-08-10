@@ -7,6 +7,7 @@ var SCOPES = ["https://www.googleapis.com/auth/calendar"];
  * Check if current user has authorized this application.
  */
 function checkAuth() {
+  debug('Authorizing.');
   gapi.auth.authorize({
     'client_id': CLIENT_ID,
     'scope': SCOPES.join(' '),
@@ -20,13 +21,14 @@ function checkAuth() {
  * @param {Object} authResult Authorization result.
  */
 function handleAuthResult(authResult) {
-  var authorizeDiv = $('#authorize_div');
+  containerController.div.show();
+  debug('Received auth result' + authResult);
   if (authResult && !authResult.error) {
-    $(authorizeDiv).hide();
+    authController.div.hide();
     loadCalendarApi();
   } else {
     $('#authorize_button').button({ icon: 'ui-icon-calendar' });
-    $(authorizeDiv).show();
+    authController.div.show();
   }
 }
 

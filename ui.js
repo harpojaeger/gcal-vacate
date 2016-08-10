@@ -7,6 +7,18 @@ function containerController() {
   }
 }
 
+function authController() {
+  authDiv = $('#authorize_div');
+  this.div = {
+    show: function(){
+      $(authDiv).show();
+    },
+    hide: function(){
+      $(authDiv).hide();
+    }
+  }
+}
+
 function eventsController() {
   eventsTitle = $("#events_title");
   eventsUl = $("#events_ul");

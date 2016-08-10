@@ -24,6 +24,7 @@ div#container {
   border-radius: 5px;
   margin: 10px auto 10px auto;
   overflow: scroll;
+  display: none;
 }
 div#alert_div {
   display: none;
