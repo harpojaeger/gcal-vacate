@@ -26,6 +26,7 @@ function handleAuthResult(authResult) {
     loadCalendarApi();
   } else {
     $('#authorize_button').button({ icon: 'ui-icon-calendar' });
+    containerController.div.show();
     authController.div.show();
   }
 }
