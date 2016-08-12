@@ -49,7 +49,7 @@ function Instance(event, eventInstancesUl) {
 		delete_instance(this)
     });**/
   $(instance_list_item).on("instance:delete", function() {
-    delete_instance(this)
+    return delete_instance(this);
   });
 
   function delete_instance(instance) {
@@ -58,16 +58,19 @@ function Instance(event, eventInstancesUl) {
       'calendarId': event.calendarId,
       'eventId': event.id
     });
-    delete_request.execute(function(resp) {
-      if (resp.code) {
-        debug("Error " + resp.code + ": " + resp.message);
-      } else {
-        debug("Deleted " + event.id + " successfully.")
-        $(instance).slideUp(function() {
-          $(instance).remove();
-        });
-      }
-    });
+    delete_func = function() {
+      delete_request.execute(function(resp) {
+        if (resp.code) {
+          debug("Error " + resp.code + ": " + resp.message);
+        } else {
+          debug("Deleted " + event.id + " successfully.")
+          $(instance).slideUp(function() {
+            $(instance).remove();
+          });
+        }
+      });
+    }
+    return delete_func;
   }
 
 }
@@ -103,7 +106,8 @@ function delete_all_instances(event_li) {
           $(event_li).find("li.instance").each(function(index) {
             var data = $(this).data();
             if (data.shouldDelete) {
-              $(this).trigger("instance:delete");
+              f = $(this).triggerHandler("instance:delete");
+              f();
             } else {
               debug('Skipping ' + data.id);
               allInstancesDeleted = false;
