@@ -42,37 +42,6 @@ function Instance(event, eventInstancesUl) {
       "calendarId": calendar_ID,
       'shouldDelete': true
     });
-
-
-
-  /**$(instance_list_item).on("click",function(){
-		delete_instance(this)
-    });**/
-  $(instance_list_item).on("instance:delete", function() {
-    return delete_instance(this);
-  });
-
-  function delete_instance(instance) {
-    event = $(instance).data();
-    var delete_request = gapi.client.calendar.events.delete({
-      'calendarId': event.calendarId,
-      'eventId': event.id
-    });
-    delete_func = function() {
-      delete_request.execute(function(resp) {
-        if (resp.code) {
-          debug("Error " + resp.code + ": " + resp.message);
-        } else {
-          debug("Deleted " + event.id + " successfully.")
-          $(instance).slideUp(function() {
-            $(instance).remove();
-          });
-        }
-      });
-    }
-    return delete_func;
-  }
-
 }
 
 function delete_all_instances(event_li) {
@@ -104,10 +73,24 @@ function delete_all_instances(event_li) {
           debug("Delete all shown instances.")
           var allInstancesDeleted = true;
           $(event_li).find("li.instance").each(function(index) {
+            var instance = this;
             var data = $(this).data();
             if (data.shouldDelete) {
-              f = $(this).triggerHandler("instance:delete");
-              f();
+              var deletionRequest = gapi.client.calendar.events.delete({
+                'calendarId': data.calendarId,
+                'eventId': data.id
+              });
+              debug(deletionRequest);
+              deletionRequest.execute(function(resp) {
+                if (resp.code) {
+                  debug("Error " + resp.code + ": " + resp.message);
+                } else {
+                  debug("Deleted " + data.id + " successfully.")
+                  $(instance).slideUp(function() {
+                    $(instance).remove();
+                  });
+                }
+              });
             } else {
               debug('Skipping ' + data.id);
               allInstancesDeleted = false;
