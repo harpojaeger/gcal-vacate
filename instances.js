@@ -26,11 +26,11 @@ function Instance(event, eventInstancesUl) {
     .attr('for', this.id)
     .click(function() {
       $(this).children('span.instance-deletion-checkbox-label')
-        .toggleClass('ui-icon-bullet ui-icon-radio-off');
+        .toggleClass('ui-icon-check ui-icon-minus');
     })
     .text(event.summary + ' (' + when + ')')
     .prepend($('<span>')
-      .addClass('instance-deletion-checkbox-label ui-icon ui-icon-bullet'));
+      .addClass('instance-deletion-checkbox-label ui-icon ui-icon-check'));
 
   $(instance_list_item)
     .append(checkbox, checkbox_label)
