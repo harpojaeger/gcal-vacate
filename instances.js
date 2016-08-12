@@ -44,7 +44,7 @@ function Instance(event, eventInstancesUl) {
     });
 }
 
-function delete_all_instances(event_li) {
+function displayDeleteConfirmation(event_li) {
   $('#alert_div')
     .attr("title", "Delete all instances?")
     .text("Are you sure you want to delete all selected instances of this event?  This cannot be undone.")
@@ -70,39 +70,45 @@ function delete_all_instances(event_li) {
         click: function() {
           $(this).dialog('close');
           debug("Clicked yes");
-          debug("Delete all shown instances.")
-          var allInstancesDeleted = true;
-          $(event_li).find("li.instance").each(function(index) {
-            var instance = this;
-            var data = $(this).data();
-            if (data.shouldDelete) {
-              var deletionRequest = gapi.client.calendar.events.delete({
-                'calendarId': data.calendarId,
-                'eventId': data.id
-              });
-              debug(deletionRequest);
-              deletionRequest.execute(function(resp) {
-                if (resp.code) {
-                  debug("Error " + resp.code + ": " + resp.message);
-                } else {
-                  debug("Deleted " + data.id + " successfully.")
-                  $(instance).slideUp(function() {
-                    $(instance).remove();
-                  });
-                }
-              });
-            } else {
-              debug('Skipping ' + data.id);
-              allInstancesDeleted = false;
-            }
-          });
-          if (allInstancesDeleted) {
-            $(event_li).slideUp(function() {
-              $(this).remove();
-            });
-          }
+          delete_all_instances(event_li)
+
         }
       }]
     });
+}
 
+function delete_all_instances(event_li) {
+  debug("Delete all shown instances.")
+  var allInstancesDeleted = true;
+  var batch = gapi.client.newBatch();
+  $(event_li).find("li.instance").each(function(index) {
+    var data = $(this).data();
+    if (data.shouldDelete) {
+      var deletionRequest = gapi.client.calendar.events.delete({
+        'calendarId': data.calendarId,
+        'eventId': data.id
+      });
+      batch.add(deletionRequest, {
+        'id': data.id
+      });
+    } else {
+      debug('Skipping ' + data.id);
+      allInstancesDeleted = false;
+    }
+  });
+
+  batch.then(function(resp) {
+    debug(resp);
+    debug("Deleted " + data.id + " successfully.")
+    $(instance).slideUp(function() {
+      $(instance).remove();
+    });
+  }, function(reason) {
+    debug(reason);
+  });
+  if (allInstancesDeleted) {
+    $(event_li).slideUp(function() {
+      $(this).remove();
+    });
+  }
 }

@@ -57,7 +57,7 @@ function BaseEvent(event, instances_resp) {
       .html('&nbsp;'))
     .appendTo(event_deletion_controls)
     .click(function() {
-      delete_all_instances(event_list_item);
+      displayDeleteConfirmation(event_list_item);
     });
 
   /**Fetch recurrence information for the tooltip**/
