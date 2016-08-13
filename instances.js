@@ -91,25 +91,32 @@ function delete_all_instances(event_li) {
       batch.add(deletionRequest, {
         'id': data.id
       });
+      deletionRequest.then(batchSuccess,batchFailure,this);
     } else {
       console.log('Skipping ' + data.id);
       allInstancesDeleted = false;
     }
   });
 
-  batch.then(function(resp) {
-    console.log(resp);
-    console.log("Deleted " + data.id + " successfully.")
-    $(instance).slideUp(function() {
-      $(instance).remove();
-    });
-  }, function(reason) {
-    console.log("Fatal error – probably either a network or API problem.  Try again, please.");
-    console.log(reason);
-  });
+  batch.then();
+  /**
   if (allInstancesDeleted) {
     $(event_li).slideUp(function() {
       $(this).remove();
     });
   }
+  **/
+}
+
+function batchSuccess(resp) {
+  console.log('Success.');
+  console.log(resp);
+  $(this).slideUp(function() {
+    $(this).remove();
+  });
+}
+
+function batchFailure(reason) {
+  console.log('Fatal error.  Probably either a network or API problem.  Try again, please.');
+  console.log(reason);
 }
