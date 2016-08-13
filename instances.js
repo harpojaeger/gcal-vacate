@@ -18,7 +18,7 @@ function Instance(event, eventInstancesUl) {
   var checkbox = $('<input type="checkbox" class="deleteThisInstanceCheckbox" checked>')
     .change(function() {
       $(instance_list_item).data('shouldDelete', $(this).prop('checked'));
-      debug($(instance_list_item).data('id') + ' has delete value: ' + $(instance_list_item).data('shouldDelete'));
+      console.log($(instance_list_item).data('id') + ' has delete value: ' + $(instance_list_item).data('shouldDelete'));
     })
     .attr('id', this.id);
 
@@ -62,14 +62,14 @@ function displayDeleteConfirmation(event_li) {
         icon: 'ui-icon-circle-close',
         click: function() {
           $(this).dialog('close');
-          debug("Clicked no.");
+          console.log("Clicked no.");
         }
       }, {
         text: "Yes",
         icon: 'ui-icon-circle-check',
         click: function() {
           $(this).dialog('close');
-          debug("Clicked yes");
+          console.log("Clicked yes");
           delete_all_instances(event_li)
 
         }
@@ -78,7 +78,7 @@ function displayDeleteConfirmation(event_li) {
 }
 
 function delete_all_instances(event_li) {
-  debug("Delete all shown instances.")
+  console.log("Delete all shown instances.")
   var allInstancesDeleted = true;
   var batch = gapi.client.newBatch();
   $(event_li).find("li.instance").each(function(index) {
@@ -92,20 +92,20 @@ function delete_all_instances(event_li) {
         'id': data.id
       });
     } else {
-      debug('Skipping ' + data.id);
+      console.log('Skipping ' + data.id);
       allInstancesDeleted = false;
     }
   });
 
   batch.then(function(resp) {
-    debug(resp);
-    debug("Deleted " + data.id + " successfully.")
+    console.log(resp);
+    console.log("Deleted " + data.id + " successfully.")
     $(instance).slideUp(function() {
       $(instance).remove();
     });
   }, function(reason) {
-    debug("Fatal error – probably either a network or API problem.  Try again, please.");
-    debug(reason);
+    console.log("Fatal error – probably either a network or API problem.  Try again, please.");
+    console.log(reason);
   });
   if (allInstancesDeleted) {
     $(event_li).slideUp(function() {

@@ -23,7 +23,7 @@ function BaseEvent(event, instances_resp) {
     .addClass('action-link instance-select-all')
     .text('all')
     .click(function() {
-      debug('Select all instances for deletion.');
+      console.log('Select all instances for deletion.');
       $(event_list_item)
         .find('span.ui-icon-minus')
         .click();
@@ -32,7 +32,7 @@ function BaseEvent(event, instances_resp) {
     .addClass('action-link instance-select-none')
     .text('none')
     .click(function() {
-      debug('Deselect all instances for deletion.');
+      console.log('Deselect all instances for deletion.');
       $(event_list_item)
         .find('span.ui-icon-check')
         .click();

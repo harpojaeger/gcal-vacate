@@ -7,7 +7,7 @@ var SCOPES = ["https://www.googleapis.com/auth/calendar"];
  * Check if current user has authorized this application.
  */
 function checkAuth() {
-  debug('Authorizing.');
+  console.log('Authorizing.');
   gapi.auth.authorize({
     'client_id': CLIENT_ID,
     'scope': SCOPES.join(' '),

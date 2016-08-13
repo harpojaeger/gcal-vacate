@@ -1,5 +1,5 @@
 function list_calendars() {
-  debug("Listing calendars");
+  console.log("Listing calendars");
   var request = gapi.client.calendar.calendarList.list({
     "minAccessRole": "writer"
   });
@@ -11,7 +11,7 @@ function list_calendars() {
       var calendar = calendars[i];
       new Calendar(calendar);
     }
-    debug("Retrieved " + calendars.length + " calendars.");
+    console.log("Retrieved " + calendars.length + " calendars.");
     $('#calendar-select').coloredMenu({
       renderItem: coloredItem
     });

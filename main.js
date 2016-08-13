@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  debug("Document ready.");
+  console.log("Document ready.");
   timezoneSuffix = calculateTimezone();
   containerController = new containerController();
   eventsController = new eventsController();
@@ -8,11 +8,11 @@ $(document).ready(function() {
   authController = new authController();
   $('span.instance-toggle-all').click(function(){
     if($(this).attr('id') == 'select_all_instances') {
-      debug('Select all instances for deletion.');
+      console.log('Select all instances for deletion.');
       $('.deleteThisInstanceCheckbox:not(:checked)').click();
     } else {
       $('.deleteThisInstanceCheckbox:checked').click();
-      debug('Deselect all instances for deletion.');
+      console.log('Deselect all instances for deletion.');
     }   
   });
 

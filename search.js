@@ -6,14 +6,14 @@ function prepareSearch() {
   if ($('#calendar-select').val().length && start_date.length && end_date.length) {
     start_date += "T00:00:00" + timezoneSuffix;
     end_date += "T00:00:00" + timezoneSuffix;
-    debug("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
+    console.log("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
     listUpcomingEvents(start_date, end_date);
     instancesController.clear();
     eventsController.div.show();
     eventsController.ul.clear();
     instancesController.div.hide();
   } else {
-    debug("Requisite data not present for search.");
+    console.log("Requisite data not present for search.");
     $("#alert_div").attr("title", "Error").text("Please choose a calendar and enter both start and end dates.").dialog({
       modal: true,
       draggable: false,
@@ -50,8 +50,8 @@ function listUpcomingEvents(start_date, end_date) {
   function instancesRespProcessor(event) {
     var f = function(instances_resp) {
       if (instances_resp.code) {
-        debug("Error " + instances_resp.code + ": " + instance_resp.message);
-        debug(instances_resp);
+        console.log("Error " + instances_resp.code + ": " + instance_resp.message);
+        console.log(instances_resp);
       } else {
         var status_string = ('Found ' + instances_resp.items.length + ' instances of ' + event.summary);
         if (instances_resp.items.length > 0) {
@@ -59,7 +59,7 @@ function listUpcomingEvents(start_date, end_date) {
         } else {
           status_string += " - skipping.";
         }
-        debug(status_string);
+        console.log(status_string);
       }
     }
     return f;
@@ -85,7 +85,7 @@ function listUpcomingEvents(start_date, end_date) {
       }
       eventsController.div.show();
     } else {
-      debug('No upcoming events found.');
+      console.log('No upcoming events found.');
     }
   });
 }
