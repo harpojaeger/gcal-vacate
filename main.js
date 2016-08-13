@@ -6,6 +6,4 @@ $(document).ready(function() {
   instancesController = new instancesController();
   searchController = new searchController();
   authController = new authController();
- 
-
 });
