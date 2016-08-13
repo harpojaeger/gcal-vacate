@@ -91,14 +91,21 @@ function delete_all_instances(event_li) {
       batch.add(deletionRequest, {
         'id': data.id
       });
-      deletionRequest.then(batchSuccess,batchFailure,this);
+      deletionRequest.then(InstanceRequestFulfilled, InstanceRequestRejected, this);
     } else {
       console.log('Skipping ' + data.id);
       allInstancesDeleted = false;
     }
   });
 
-  batch.then();
+  batch.then(
+    function(resp) {
+      console.log('Batch status is ' + resp.status);
+    },
+    function(reason) {
+      console.log(reason);
+    }
+  );
   /**
   if (allInstancesDeleted) {
     $(event_li).slideUp(function() {
@@ -108,15 +115,15 @@ function delete_all_instances(event_li) {
   **/
 }
 
-function batchSuccess(resp) {
+function InstanceRequestFulfilled(resp) {
+  console.log('Individual request returned status ' + resp.status);
   console.log('Success.');
-  console.log(resp);
   $(this).slideUp(function() {
     $(this).remove();
   });
 }
 
-function batchFailure(reason) {
+function InstanceRequestRejected(reason) {
   console.log('Fatal error.  Probably either a network or API problem.  Try again, please.');
   console.log(reason);
 }
