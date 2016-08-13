@@ -27,15 +27,12 @@ function list_calendars() {
     options: {
       renderItem: null
     },
-
     _renderItem: function(ul, item) {
       if ($.isFunction(this.options.renderItem))
         return this.options.renderItem(ul, item);
       else
         return this._super(ul, item);
     },
-
-
   });
   
   coloredItem = function(ul, item) {
@@ -51,8 +48,6 @@ function list_calendars() {
     var li = $('<li>').append(wrapper_div);
     return $(li).appendTo(ul);
   };
-
-
 }
 
 function Calendar(c) {
