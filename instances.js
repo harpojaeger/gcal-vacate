@@ -117,13 +117,23 @@ function delete_all_instances(event_li) {
 
 function InstanceRequestFulfilled(resp) {
   console.log('Individual request returned status ' + resp.status);
-  console.log('Success.');
   $(this).slideUp(function() {
     $(this).remove();
   });
 }
 
 function InstanceRequestRejected(reason) {
+  switch (reason.status) {
+    case 410:
+      console.log('Event was already deleted.  No worries here!');
+      $(this).slideUp(function() {
+        $(this).remove();
+      });
+      break;
+    case 401:
+      console.log('Authorization problem.  Try refreshing the page.');
+      break;
+  }
   console.log('Fatal error.  Probably either a network or API problem.  Try again, please.');
   console.log(reason);
 }
