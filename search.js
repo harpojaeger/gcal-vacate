@@ -1,4 +1,4 @@
-/** Get data from the form and run the search **/
+// Get data from the form and run the search
 function prepareSearch() {
   var start_date = $("#start").val();
   var end_date = $("#end").val();
@@ -46,7 +46,7 @@ function listUpcomingEvents(start_date, end_date) {
     'singleEvents': false,
     'maxResults': 2500
   });
-
+  //Create a function to process each of the returned events and return it, using closures so it has access to the right event data.
   function instancesRespProcessor(event) {
     var f = function(instances_resp) {
       if (instances_resp.code) {
@@ -56,6 +56,7 @@ function listUpcomingEvents(start_date, end_date) {
         var status_string = ('Found ' + instances_resp.items.length + ' instances of ' + event.summary);
         if (instances_resp.items.length > 0) {
           new BaseEvent(event, instances_resp);
+          //Hide the 'no events found' message only if an event we actually want to see shows up.  Otherwise, it stays there.
           eventsController.msg.hide();
         } else {
           status_string += " - skipping.";
@@ -68,22 +69,25 @@ function listUpcomingEvents(start_date, end_date) {
 
   events_request.execute(function(events_resp) {
     var events = events_resp.items;
+    //Set the 'no events found message' and show it.  Note that the main event div is still hidden, so this has no effect the first time a search is run.
     eventsController.msg.set('No events found.');
     eventsController.msg.show();
     if (events.length > 0) {
       for (i = 0; i < events.length; i++) {
         var event = events[i];
-        if (event.status == "confirmed") {
-          if (typeof(event.recurrence) !== 'undefined') {
-            var instances_request = gapi.client.calendar.events.instances({
-              "calendarId": calendar_ID,
-              "eventId": event.id,
-              "timeMin": $("#start").val() + "T00:00:00" + timezoneSuffix,
-              "timeMax": $("#end").val() + "T00:00:00" + timezoneSuffix,
-            });
-            this_func = instancesRespProcessor(event);
-            instances_request.execute(this_func);
-          }
+        //This is where the action happens.  We can't filter on these attributes in the API call so it has to happen here.
+        if (event.status == "confirmed" && typeof(event.recurrence) !== 'undefined') {
+          //Set up an API call to get the instances of the event we've now determined should actually be output.  Todo: do this with a batch instead.
+          var instances_request = gapi.client.calendar.events.instances({
+            "calendarId": calendar_ID,
+            "eventId": event.id,
+            "timeMin": $("#start").val() + "T00:00:00" + timezoneSuffix,
+            "timeMax": $("#end").val() + "T00:00:00" + timezoneSuffix,
+          });
+          //Make a function that has access to the event information
+          this_func = instancesRespProcessor(event);
+          //Run the instances request using this new function.
+          instances_request.execute(this_func);
         }
       }
       eventsController.div.show();
@@ -95,8 +99,7 @@ function listUpcomingEvents(start_date, end_date) {
 }
 
 
-/** Set up the datepickers **/
-
+// Set up the datepickers
 var datepickerOptions = {
   dateFormat: 'yy-mm-dd',
   changeMonth: true,
@@ -122,7 +125,6 @@ $(function() {
     } catch (error) {
       date = null;
     }
-
     return date;
   }
 });
