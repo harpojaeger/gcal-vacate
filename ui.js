@@ -10,10 +10,10 @@ function containerController() {
 function authController() {
   authDiv = $('#authorize_div');
   this.div = {
-    show: function(){
+    show: function() {
       $(authDiv).show();
     },
-    hide: function(){
+    hide: function() {
       $(authDiv).hide();
     }
   }
@@ -42,6 +42,12 @@ function eventsController() {
     },
     hide: function() {
       $(eventsDiv).hide();
+    },
+    clear: function() {
+      $(eventsDiv).empty();
+    },
+    setContents: function(text) {
+      $(eventsDiv).append(text);
     }
   }
 }
