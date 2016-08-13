@@ -104,6 +104,7 @@ function delete_all_instances(event_li) {
       $(instance).remove();
     });
   }, function(reason) {
+    debug("Fatal error – probably either a network or API problem.  Try again, please.");
     debug(reason);
   });
   if (allInstancesDeleted) {
