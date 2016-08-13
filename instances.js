@@ -91,49 +91,53 @@ function delete_all_instances(event_li) {
       batch.add(deletionRequest, {
         'id': data.id
       });
-      deletionRequest.then(InstanceRequestFulfilled, InstanceRequestRejected, this);
     } else {
       console.log('Skipping ' + data.id);
       allInstancesDeleted = false;
     }
   });
-
   batch.then(
     function(resp) {
       console.log('Batch status is ' + resp.status);
+      for (var id in resp.result) {
+        thisResult = resp.result[id];
+        thisStatus = thisResult.status;
+        var msg = thisStatus + ' ' + id + ' ';
+        var deleteMe = true;
+        switch (thisResult.status) {
+          case 410:
+            msg += 'Event was already deleted.  No worries here!';
+            break;
+          case 401:
+          case 403:
+            msg += 'Authorization problem.  Try refreshing the page.';
+            deleteMe = false;
+            allInstancesDeleted = false;
+            break;
+          case 404:
+          case 409:
+            msg += 'Resource changed or not found.  Run your search again.'
+            deleteMe = false;
+            allInstancesDeleted = false;
+            break;
+        }
+        console.log(msg);
+      }
+      if (deleteMe) {
+        $('#' + id).parent().slideUp(function() {
+          $(this).remove();
+        });
+      }
     },
     function(reason) {
+      console.log('Big error.  Try refreshing the page.');
       console.log(reason);
     }
   );
-  /**
+
   if (allInstancesDeleted) {
     $(event_li).slideUp(function() {
       $(this).remove();
     });
   }
-  **/
-}
-
-function InstanceRequestFulfilled(resp) {
-  console.log('Individual request returned status ' + resp.status);
-  $(this).slideUp(function() {
-    $(this).remove();
-  });
-}
-
-function InstanceRequestRejected(reason) {
-  switch (reason.status) {
-    case 410:
-      console.log('Event was already deleted.  No worries here!');
-      $(this).slideUp(function() {
-        $(this).remove();
-      });
-      break;
-    case 401:
-      console.log('Authorization problem.  Try refreshing the page.');
-      break;
-  }
-  console.log('Fatal error.  Probably either a network or API problem.  Try again, please.');
-  console.log(reason);
 }
