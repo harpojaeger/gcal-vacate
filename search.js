@@ -56,6 +56,7 @@ function listUpcomingEvents(start_date, end_date) {
         var status_string = ('Found ' + instances_resp.items.length + ' instances of ' + event.summary);
         if (instances_resp.items.length > 0) {
           new BaseEvent(event, instances_resp);
+          eventsController.msg.hide();
         } else {
           status_string += " - skipping.";
         }
@@ -67,6 +68,8 @@ function listUpcomingEvents(start_date, end_date) {
 
   events_request.execute(function(events_resp) {
     var events = events_resp.items;
+    eventsController.msg.set('No events found.');
+    eventsController.msg.show();
     if (events.length > 0) {
       for (i = 0; i < events.length; i++) {
         var event = events[i];
@@ -83,13 +86,10 @@ function listUpcomingEvents(start_date, end_date) {
           }
         }
       }
-      eventsController.msg.clear();
       eventsController.div.show();
     } else {
       console.log('No upcoming events found.');
       eventsController.ul.clear();
-      eventsController.msg.clear();
-      eventsController.msg.set('No events found');
     }
   });
 }

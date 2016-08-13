@@ -54,6 +54,12 @@ function eventsController() {
     },
     set: function(text) {
       $(eventsMsg).text(text);
+    },
+    hide: function() {
+      $(eventsMsg).hide();
+    },
+    show: function() {
+      $(eventsMsg).show();
     }
   }
 }
