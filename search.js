@@ -83,11 +83,13 @@ function listUpcomingEvents(start_date, end_date) {
           }
         }
       }
+      eventsController.msg.clear();
       eventsController.div.show();
     } else {
       console.log('No upcoming events found.');
       eventsController.ul.clear();
-      eventsController.div.setContents('No events found');
+      eventsController.msg.clear();
+      eventsController.msg.set('No events found');
     }
   });
 }

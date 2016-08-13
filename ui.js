@@ -23,6 +23,7 @@ function eventsController() {
   eventsTitle = $("#events_title");
   eventsUl = $("#events_ul");
   eventsDiv = $('#events-div');
+  eventsMsg = $('#events_msg');
   this.title = {
     show: function() {
       $(eventsTitle).show();
@@ -45,9 +46,14 @@ function eventsController() {
     },
     clear: function() {
       $(eventsDiv).empty();
+    }
+  }
+  this.msg = {
+    clear: function() {
+      $(eventsMsg).empty();
     },
-    setContents: function(text) {
-      $(eventsDiv).append(text);
+    set: function(text) {
+      $(eventsMsg).text(text);
     }
   }
 }
