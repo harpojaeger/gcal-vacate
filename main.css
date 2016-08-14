@@ -31,12 +31,15 @@ div#authorize_div {
 }
 div#container {
   background-color: white;
-  height: 100%;
-  padding: 10px;
   border-radius: 5px;
-  margin: 10px auto 10px auto;
-  overflow: scroll;
+  box-shadow: 0 0 0 5px #dddddd inset;
+  -webkit-box-shadow:inset 0px 0px 0px 5px #dddddd;
+  -moz-box-shadow:inset 0px 0px 0px 5px #dddddd;
   display: none;
+  height: 100%;
+  margin: 10px auto;
+  overflow: scroll;
+  padding: 20px;
   position: relative;
 }
 div#alert_div {
