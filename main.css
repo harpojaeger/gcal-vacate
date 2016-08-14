@@ -60,9 +60,6 @@ div#params input {
   width: 7em;
   font-size: 1em;
 }
-.section-title {
-  font-size: 1.5em;
-}
 .action-link:hover {
   text-decoration: underline;
   cursor: pointer;
@@ -80,6 +77,7 @@ div#events-div {
 }
 div#events_title {
   margin-bottom: 1em;
+  font-size: 1.5em;
 }
 span.event-action-button {
   margin-left: 5px;
