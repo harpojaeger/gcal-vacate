@@ -85,8 +85,8 @@ function BaseEvent(event, instances_resp) {
       $(event_instances_div).slideToggle();
       //Fade out the other events' deletion controls.
       $('#events-div ul li div.event-deletion-controls').not(event_deletion_controls).fadeOut();
+      //It's necessary to manually set display: inline, because jQuery's fade function sets display: block.
       $(event_deletion_controls).fadeToggle()
-        //Todo: is there any reason this can't be moved to where the controls are originally created?  Or to main.css?
         .css('display', 'inline');
     })
     //Create the tooltip with repeat information.
