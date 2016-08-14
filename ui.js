@@ -1,3 +1,5 @@
+//Functions for manipulating various parts of the UI.  Pretty self-explanatory.
+
 function containerController() {
   containerDiv = $('#container');
   this.div = {
@@ -63,7 +65,7 @@ function eventsController() {
     }
   }
 }
-
+//Todo: can this be deleted entirely?
 function instancesController() {
   instancesDiv = $("#instances-div");
   instancesUl = $('#instances-ul');
