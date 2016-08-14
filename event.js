@@ -120,6 +120,6 @@ function BaseEvent(event, instances_resp) {
       new Instance(instance, event_instances_ul)
     }
     //Todo: check this for deletion.
-    $("#deleteall").unbind("click").click(delete_all_instances);
+    //$("#deleteall").unbind("click").click(delete_all_instances);
   }
 }
