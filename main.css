@@ -31,15 +31,12 @@ div#authorize_div {
 }
 div#container {
   background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 0 0 5px #dddddd inset;
-  -webkit-box-shadow:inset 0px 0px 0px 5px #dddddd;
-  -moz-box-shadow:inset 0px 0px 0px 5px #dddddd;
-  display: none;
   height: 100%;
-  margin: 10px auto;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px auto 10px auto;
   overflow: scroll;
-  padding: 20px;
+  display: none;
   position: relative;
 }
 div#alert_div {
@@ -74,6 +71,8 @@ div#events-div {
   margin-right: 10px;
   display: none;
   line-height: 1.5em;
+  border: 1px solid;
+  border-radius: 5px;
   padding: 5px;
   display: none;
   padding-left: 10px;
