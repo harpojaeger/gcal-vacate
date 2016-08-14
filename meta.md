@@ -14,7 +14,7 @@ You can't undo event deletions with this application.  Measure twice, cut once.
 
 # Credits
 
-This is the first application I've written that really works as intended and is even remotely shippable.  I used a lot of external libraries and relied on a lot of helpful sources.  In no order:
+In no order:
 
 * [jQuery](http://jquery.com/) & [jQuery UI](http://jqueryui.com/)
 * [rrule.js](https://github.com/jkbrzt/rrule)
