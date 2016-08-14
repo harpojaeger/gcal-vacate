@@ -115,17 +115,11 @@ function BaseEvent(event, instances_resp) {
     //Retrieve the basic info for the base event.
     var baseEventData = $(event_li).data('eventObject').baseEventData;
     var instances = instances_resp.items;
-    //Todo: check ui.js and other files to see if this can be deleted entirely (instances no longer have their own section).
-    instancesController.clear();
     for (i = 0; i < instances.length; i++) {
       var instance = instances[i];
       new Instance(instance, event_instances_ul)
     }
     //Todo: check this for deletion.
     $("#deleteall").unbind("click").click(delete_all_instances);
-    //Todo: check these for deletion as well.
-    instancesController.deleteAllLink.show();
-    instancesController.title.show();
-    instancesController.div.show();
   }
 }

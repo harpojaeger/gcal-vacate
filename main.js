@@ -3,7 +3,6 @@ $(document).ready(function() {
   timezoneSuffix = calculateTimezone();
   containerController = new containerController();
   eventsController = new eventsController();
-  instancesController = new instancesController();
   searchController = new searchController();
   authController = new authController();
 });

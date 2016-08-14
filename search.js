@@ -8,10 +8,8 @@ function prepareSearch() {
     end_date += "T00:00:00" + timezoneSuffix;
     console.log("Search for repeating events from " + start_date + " to " + end_date + " in calendar " + calendar_ID);
     listUpcomingEvents(start_date, end_date);
-    instancesController.clear();
     eventsController.div.show();
     eventsController.ul.clear();
-    instancesController.div.hide();
   } else {
     console.log("Requisite data not present for search.");
     $("#alert_div").attr("title", "Error").text("Please choose a calendar and enter both start and end dates.").dialog({

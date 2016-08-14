@@ -65,41 +65,6 @@ function eventsController() {
     }
   }
 }
-//Todo: can this be deleted entirely?
-function instancesController() {
-  instancesDiv = $("#instances-div");
-  instancesUl = $('#instances-ul');
-  instancesTitle = $("#instances_title");
-  deleteLink = $("#deleteall");
-  this.clear = function() {
-    $(instancesUl).empty();
-  }
-  this.title = {
-    hide: function() {
-      $(instancesTitle).hide();
-    },
-    show: function() {
-      $(instancesTitle).show();
-    }
-  }
-  this.div = {
-    show: function() {
-      $(instancesDiv).show();
-    },
-    hide: function() {
-      $(instancesDiv).hide();
-    }
-  }
-  this.deleteAllLink = {
-    hide: function() {
-      $(deleteLink).hide();
-    },
-    show: function() {
-      $(deleteLink).show();
-    }
-  }
-}
-
 function searchController() {
   var searchDiv = $("#search_div");
   this.div = {
