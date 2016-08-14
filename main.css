@@ -9,19 +9,17 @@ body {
   background-color: #BFB4E4;
   height:100%;
 }
-div#bottom {
-  bottom: 10px;
-  left: 0;
-  position: absolute;
-  width: 100%;
+div#main_title {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+  text-align: left;
 }
-div#credits {
-  float: left;
-  padding-left: 10px;
+div#meta {
+  float:right;
 }
-div#help {
-  float: right;
-  padding-right: 10px;
+div.meta-content {
+  margin: 0 5px;
+  float:right;
 }
 div#authorize_div {
   display: none;
@@ -60,7 +58,11 @@ div#params input {
   width: 7em;
   font-size: 1em;
 }
-.action-link:hover {
+a {
+  text-decoration: none;
+  color:inherit;
+}
+.action-link:hover, a:hover {
   text-decoration: underline;
   cursor: pointer;
 }

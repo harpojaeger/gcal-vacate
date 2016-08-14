@@ -43,10 +43,26 @@
 <body>
   <div id="alert_div"></div>
   <div id="container">
+    <div id="meta">
+      <div id='credits' class='action-link meta-content'>
+        credits
+      </div>
+      <div id='help' class='action-link meta-content'>
+        help
+      </div>
+      <div id="author" class="meta-content">
+        made by <a href="http://harpojaeger.com" target=
+        "_blank">@harpojaeger</a>
+      </div>
+    </div>
+    <div id="main_title">
+      GCal Vacate
+    </div>
     <div id="authorize_div">
       <button id="authorize_button" onclick=
-      "handleAuthClick(event)">Authorize</button>
-      Click this appealingly-styled button to log into your Google account and grant GCal Vacate access to your calendar. 
+      "handleAuthClick(event)">Authorize</button> Click this
+      appealingly-styled button to log into your Google account and
+      grant GCal Vacate access to your calendar. 
       <!--Button for the user to click to initiate auth sequence -->
     </div>
     <div id="content">
@@ -59,9 +75,9 @@
           </select>
         </div>
         <div id="params">
-          Find repeating events from <input type="text" id=
-          "start" class="datepicker"> to <input type="text" id=
-          "end" class="datepicker"> <button type="submit" id=
+          Find repeating events from <input type="text" id="start"
+          class="datepicker"> to <input type="text" id="end" class=
+          "datepicker"> <button type="submit" id=
           "submit">search</button>
         </div>
       </div>
@@ -70,12 +86,8 @@
           Events
         </div>
         <ul id="events_ul"></ul>
-        <div id = 'events_msg'></div>
+        <div id='events_msg'></div>
       </div>
-    </div>
-    <div id='bottom'>
-      <div id='credits' class='action-link'>credits</div>
-      <div id='help' class='action-link'>help</div>
     </div>
   </div>
 </body>
