@@ -1,6 +1,6 @@
 # Help
 
-##What is GCal Vacate?
+##What is gcal vacate?
 An application that helps you quickly delete all (or some) repeating events between dates you select.
 
 I have a lot of repeating events in my Google Calendar.  When I went on vacation and changed my timezone, they all showed up at inconvenient times.  I didn't want to look at them while I was on vacation, but since I also wanted them to be there when I got back, I couldn't just delete them all.  So, instead of deleting every individual event by hand, I wrote this application to do it for me (and you).  
