@@ -9,6 +9,20 @@ body {
   background-color: #BFB4E4;
   height:100%;
 }
+div#bottom {
+  bottom: 10px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+div#credits {
+  float: left;
+  padding-left: 10px;
+}
+div#help {
+  float: right;
+  padding-right: 10px;
+}
 div#authorize_div {
   display: none;
   width: 500px;
@@ -25,6 +39,7 @@ div#container {
   margin: 10px auto 10px auto;
   overflow: scroll;
   display: none;
+  position: relative;
 }
 div#alert_div {
   display: none;
