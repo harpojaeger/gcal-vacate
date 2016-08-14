@@ -21,4 +21,5 @@ In no order:
 * [Datejs](http://www.datejs.com/)
 * [@benolson716](https://twitter.com/benolson716) for [a very helpful post on custom jQuery UI widgets](http://www.benknowscode.com/2014/03/customize-jquery-ui-autocomplete-menu.html)
 * [meyerweb reset.css](http://meyerweb.com/eric/tools/css/reset/) (it's public domain, but still, thanks.)
+* A bunch of sites with [useful information](http://madebymike.com.au/writing/precise-control-responsive-typography/) [about](https://css-tricks.com/viewport-sized-typography/) [responsive](https://css-tricks.com/molten-leading-css/) CSS font sizing.
 * The one million answers I got from [Stack Overflow](http://stackoverflow.com/).
