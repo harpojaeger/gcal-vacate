@@ -83,8 +83,6 @@ function BaseEvent(event, instances_resp) {
       $(triangle).toggleClass('ui-icon-triangle-1-e ui-icon-triangle-1-s');
       //Toggle the event instances div.
       $(event_instances_div).slideToggle();
-      //Todo: remove this after checking for compatibility (there used to be a separate style associated with the active event).
-      $('#events-div ul li span').not(this).removeClass('event-active');
       //Fade out the other events' deletion controls.
       $('#events-div ul li div.event-deletion-controls').not(event_deletion_controls).fadeOut();
       $(event_deletion_controls).fadeToggle()
