@@ -104,8 +104,8 @@ function BaseEvent(event, instances_resp) {
   $(event_list_item)
     .data('eventObject', this)
     .append(summary, event_deletion_controls, event_instances_div)
-    //Todo: replace this with the variable from main.js
-    .appendTo('#events_ul');
+    //Use the variable eventsUl, declared in ui.js, to refer to the event listing.
+    .appendTo(eventsUl);
   //Create the instances listing for the event.  The instance request itself has already been run.
   listInstances(event_list_item);
 
