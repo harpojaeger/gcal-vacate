@@ -60,13 +60,6 @@ div#params input {
   width: 7em;
   font-size: 1em;
 }
-div.output {
-  border: 1px solid;
-  border-radius: 5px;
-  padding: 5px;
-  display: none;
-  padding-left: 10px;
-}
 .section-title {
   font-size: 1.5em;
 }
@@ -79,6 +72,11 @@ div#events-div {
   margin-right: 10px;
   display: none;
   line-height: 1.5em;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+  display: none;
+  padding-left: 10px;
 }
 div#events_title {
   margin-bottom: 1em;
