@@ -1,4 +1,4 @@
-# What is GCal Vacate?
+# Help
 
 Here's some helpful text.
 

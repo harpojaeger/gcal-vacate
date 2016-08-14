@@ -17,7 +17,7 @@ div#main_title {
 div#meta {
   float:right;
 }
-div.meta-content {
+a.meta-content {
   margin: 0 5px;
   float:right;
 }
