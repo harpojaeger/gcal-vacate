@@ -6,7 +6,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: calc( 16px + (26 - 16) * ( (100vw - 600px) / ( 1200 - 600) ));
+  font-size: calc( 18px + (26 - 18) * ( (100vw - 600px) / ( 1200 - 600) ));
   height: 100%;
 }
 div#header {
@@ -20,11 +20,12 @@ div#main_title {
   flex: 1 1 auto;
   font-size: 1.5em;
   font-weight: bold;
+  padding-right: 15px;
 }
 div.meta-content {
   flex: 0 1 auto;
   font-size: 0.6em;
-  padding-left: 10px;
+  padding-left: 5px;
 }
 div#authorize_div {
   display: none;
