@@ -2,32 +2,33 @@ html {
   height: 100%;
 }
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: calc( 16px + (26 - 16) * ( (100vw - 600px) / ( 1200 - 600) ));
+  background-color: #bfb4e4;
   display: flex;
   flex-direction: column;
-  background-color: #BFB4E4;
-  height:100%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: calc( 16px + (26 - 16) * ( (100vw - 600px) / ( 1200 - 600) ));
+  height: 100%;
 }
 div#main_title {
-  font-size: 2em;
+  font-size: 1.5em;
   margin-bottom: 0.5em;
   text-align: left;
 }
 div#meta {
-  float:right;
+  float: right;
 }
 div.meta-content {
+  float: right;
+  font-size: 0.75em;
   margin: 0 5px;
-  float:right;
 }
 div#authorize_div {
   display: none;
-  width: 500px;
   line-height: 1.5em;
+  width: 500px;
 }
 #authorize_button {
-  margin: 0px;
+  margin: 0;
 }
 div#container {
   background-color: white;
@@ -49,65 +50,65 @@ div#search_div {
   display: none;
 }
 .cal-select-color-box {
-  margin-right: 5px;
   display: inline;
+  margin-right: 5px;
 }
 div#params {
-  margin-top: 1em;
+  font-family: Arial,Helvetica,sans-serif;
   margin-bottom: 1em;
-  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 1em;
+}
+div#fromto {
+  margin-top: 1em;
 }
 div#params input {
-  width: 7em;
   font-size: 1em;
+  width: 7em;
 }
 a {
+  color: inherit;
   text-decoration: none;
-  color:inherit;
 }
 .action-link:hover, a:hover {
-  text-decoration: underline;
   cursor: pointer;
+  text-decoration: underline;
 }
 div#events-div {
-  float: left;
-  margin-right: 10px;
-  display: none;
-  line-height: 1.5em;
   border: 1px solid;
   border-radius: 5px;
-  padding: 5px;
   display: none;
-  padding-left: 10px;
+  font-size: 0.75em;
+  line-height: 1.5em;
+  margin-right: 10px;
+  padding: 5px 5px 5px 10px;
 }
 div#events_title {
-  margin-bottom: 1em;
   font-size: 1.5em;
+  margin-bottom: 0.5em;
 }
 span.event-action-button {
   margin-left: 5px;
 }
 input.deleteThisInstanceCheckbox {
-  display:none;
+  display: none;
 }
 div.event-instances-div {
   display: none;
-  font-size: .75em;
+  font-size: 0.75em;
 }
 ul.instances-ul {
-  margin: 0px 0px 10px 15px;
-  line-height:1.5em;
+  line-height: 1.5em;
+  margin: 0 0 10px 15px;
 }
 .ui-tooltip-content {
-  font-size: .5em;
+  font-size: 0.5em;
 }
 div.event-deletion-controls {
-  font-size: .75em;
-  display: inline;
-  margin-left: 5px;
   color: gray;
   display: none;
+  font-size: 0.75em;
+  margin-left: 5px;
 }
-li.instance:nth-child(even) label {
+li.instance:nth-child(2n) label {
   background-color: #dddddd;
 }
