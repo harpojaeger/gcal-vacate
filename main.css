@@ -40,10 +40,8 @@ div#authorize_div {
 }
 div#container {
   background-color: white;
+  border: 5px solid #dddddd;
   border-radius: 5px;
-  box-shadow: 0 0 0 5px #dddddd inset;
-  -webkit-box-shadow:inset 0px 0px 0px 5px #dddddd;
-  -moz-box-shadow:inset 0px 0px 0px 5px #dddddd;
   display: none;
   height: 100%;
   margin: 10px auto;
