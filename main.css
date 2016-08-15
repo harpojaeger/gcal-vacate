@@ -84,6 +84,9 @@ div#events-div {
   font-size: 0.75em;
   line-height: 1.5em;
 }
+ul#events_ul {
+  border-left: 1px solid black;
+}
 div#events_title {
   font-size: 1.5em;
   margin-bottom: 0.5em;
