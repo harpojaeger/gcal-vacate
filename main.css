@@ -51,6 +51,7 @@ div#alert_div {
 }
 div#search_div {
   display: none;
+  font-size: .8em;
 }
 .cal-select-color-box {
   display: inline;
