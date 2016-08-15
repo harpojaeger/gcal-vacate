@@ -9,18 +9,22 @@ body {
   font-size: calc( 16px + (26 - 16) * ( (100vw - 600px) / ( 1200 - 600) ));
   height: 100%;
 }
-div#main_title {
-  font-size: 1.5em;
-  margin-bottom: 0.5em;
-  text-align: left;
+div#header {
+  align-items: baseline;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 0.75em;
 }
-div#meta {
-  float: right;
+div#main_title {
+  flex: 1 1 auto;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 div.meta-content {
-  float: right;
-  font-size: 0.75em;
-  margin: 0 5px;
+  flex: 0 1 auto;
+  font-size: 0.6em;
+  padding-left: 10px;
 }
 div#authorize_div {
   display: none;
