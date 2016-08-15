@@ -41,7 +41,6 @@ div#container {
   margin: 10px auto;
   overflow: scroll;
   padding: 20px;
-  position: relative;
 }
 div#alert_div {
   display: none;
@@ -74,13 +73,9 @@ a {
   text-decoration: underline;
 }
 div#events-div {
-  border: 1px solid;
-  border-radius: 5px;
   display: none;
   font-size: 0.75em;
   line-height: 1.5em;
-  margin-right: 10px;
-  padding: 5px 5px 5px 10px;
 }
 div#events_title {
   font-size: 1.5em;
