@@ -9,6 +9,9 @@ body {
   font-size: calc( 18px + (26 - 18) * ( (100vw - 600px) / ( 1200 - 600) ));
   height: 100%;
 }
+div.ui-datepicker {
+    font-size: .75em;
+}
 div#header {
   align-items: baseline;
   border-bottom: 1px solid black;
