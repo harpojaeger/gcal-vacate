@@ -1,0 +1,119 @@
+html {
+  height: 100%;
+}
+body {
+  background-color: #bfb4e4;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: calc( 18px + (26 - 18) * ( (100vw - 600px) / ( 1200 - 600) ));
+  height: 100%;
+}
+div.ui-datepicker {
+    font-size: .75em;
+}
+div#header {
+  align-items: baseline;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 0.75em;
+}
+div#main_title {
+  flex: 1 1 auto;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding-right: 15px;
+}
+div.meta-content {
+  flex: 0 1 auto;
+  font-size: 0.6em;
+  padding-left: 5px;
+}
+div#authorize_div {
+  display: none;
+  line-height: 1.5em;
+  width: 500px;
+}
+#authorize_button {
+  margin: 0;
+}
+div#container {
+  background-color: white;
+  border: 5px solid #dddddd;
+  border-radius: 5px;
+  display: none;
+  height: 100%;
+  margin: 10px auto;
+  overflow: scroll;
+  padding: 20px;
+}
+div#alert_div {
+  display: none;
+}
+div#search_div {
+  display: none;
+  font-size: .8em;
+}
+.cal-select-color-box {
+  display: inline;
+  margin-right: 5px;
+}
+div#params {
+  font-family: Arial,Helvetica,sans-serif;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+div#fromto {
+  margin-top: 1em;
+}
+div#params input {
+  font-size: 1em;
+  width: 7em;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.action-link:hover, a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+div#events-div {
+  display: none;
+  font-size: 0.75em;
+  line-height: 1.5em;
+}
+ul#events_ul {
+  border-left: 1px solid black;
+}
+div#events_title {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+span.event-action-button {
+  margin-left: 5px;
+}
+input.deleteThisInstanceCheckbox {
+  display: none;
+}
+div.event-instances-div {
+  display: none;
+  font-size: 0.75em;
+}
+ul.instances-ul {
+  line-height: 1.5em;
+  margin: 0 0 10px 15px;
+}
+.ui-tooltip-content {
+  font-size: 0.5em;
+}
+div.event-deletion-controls {
+  color: gray;
+  display: none;
+  font-size: 0.75em;
+  margin-left: 5px;
+}
+li.instance:nth-child(2n) label {
+  background-color: #dddddd;
+}

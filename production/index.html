@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="generator" content=
+  "HTML Tidy for HTML5 for Mac OS X version 5.2.0">
+  <link rel="stylesheet" type="text/css" href="reset.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <script type="text/javascript" src="jquery-3.1.0.min.js">
+  </script>
+  <script type="text/javascript" src="jquery-ui/jquery-ui.min.js">
+  </script>
+  <link rel="stylesheet" type="text/css" href=
+  "jquery-ui/jquery-ui.min.css">
+  <script src="rrule/rrule.js">
+  </script>
+  <script src="rrule/nlp.js">
+  </script>
+  <script src="datejs/date.js">
+  </script>
+  <script src="prod.min.js"></script>
+  <script src=
+  "https://apis.google.com/js/client.js?onload=checkAuth">
+  </script>
+  <title>gcal vacate</title>
+</head>
+<body>
+  <div id="alert_div"></div>
+  <div id="container">
+    <div id="header">
+      <div id="main_title">
+        gcal vacate
+      </div>
+      <div id='credits' class='meta-content'>
+        <a href=
+        "https://github.com/harpojaeger/gcal-vacate/blob/master/meta.md#credits">
+        credits</a>
+      </div>
+      <div id='help' class='meta-content'>
+        <a href=
+        "https://github.com/harpojaeger/gcal-vacate/blob/master/meta.md#help">
+        help</a>
+      </div>
+      <div id="author" class="meta-content">
+        made by <a href="http://harpojaeger.com" target=
+        "_blank">@harpojaeger</a>
+      </div>
+    </div>
+    <div id="authorize_div">
+      <button id="authorize_button" onclick=
+      "handleAuthClick(event)">Authorize</button> Click this
+      appealingly-styled button to log into your Google account and
+      grant GCal Vacate access to your calendar. 
+      <!--Button for the user to click to initiate auth sequence -->
+    </div>
+    <div id="search_div">
+      <div id="calendar_div" class="ui-front">
+        <select id="calendar-select">
+          <option value=''>
+            Select a calendar...
+          </option>
+        </select>
+      </div>
+      <div id="params">
+        Find repeating events from:
+        <div id="fromto">
+          <input type="text" id="start" class="datepicker"> to
+          <input type="text" id="end" class="datepicker">
+          <button type="submit" id="submit">search</button>
+        </div>
+      </div>
+    </div>
+    <div id="events-div">
+      <div id="events_title">
+        Events
+      </div>
+      <ul id="events_ul"></ul>
+      <div id='events_msg'></div>
+    </div>
+  </div>
+</body>
+</html>
