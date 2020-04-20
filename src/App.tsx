@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import CalendarList from './CalendarList';
+import CalendarList from './components/CalendarList/CalendarList';
 import { AppState } from './store/reducer'
 import { setSignedIn, setCalendars } from './store/user/actions';
 import { connect } from 'react-redux'
