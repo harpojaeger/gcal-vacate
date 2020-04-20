@@ -1,28 +1,44 @@
-# Help
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## What is gcal vacate?
-An application that quickly deletes all repeating events on your Google Calendar within a specific date range only.
+## Available Scripts
 
-I have a lot of weekly and daily repeating events in my Google Calendar.  When I went on vacation and changed my timezone, they all showed up at inconvenient times.  I couldn't simply bulk delete them going forward, because I wanted them to be there when I got home.  So, instead of deleting every single one by hand, I wrote this application to do it for me (and you).  
+In the project directory, you can run:
 
-## How do you use it?
+### `yarn start`
 
-It lives [here.](http://www.harpojaeger.com/gcal-vacate/)
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Follow the instructions to give gcal vacate access to your Google account (gcal vacate doesn't store your login information in any way).  Then, select the calendar to search and set boundary dates.
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-Click on the name of a repeating event to show all its instances between your boundary dates.  By default, all of these instances are selected for deletion.  Click on them to toggle selection, or use the quick select all/none links.  gcal vacate won't delete any events **outside** the boundary dates.  It also ignores regular, non-repeating events.
+### `yarn test`
 
-You can't undo event deletions with this application.  Measure twice, cut once.
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-# Credits
+### `yarn build`
 
-In no order:
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-* [jQuery](http://jquery.com/) & [jQuery UI](http://jqueryui.com/)
-* [rrule.js](https://github.com/jkbrzt/rrule)
-* [Datejs](http://www.datejs.com/)
-* [@benolson716](https://twitter.com/benolson716) for [a very helpful post on custom jQuery UI widgets](http://www.benknowscode.com/2014/03/customize-jquery-ui-autocomplete-menu.html)
-* [meyerweb reset.css](http://meyerweb.com/eric/tools/css/reset/) (it's public domain, but still, thanks.)
-* A bunch of sites with [useful information](http://madebymike.com.au/writing/precise-control-responsive-typography/) [about](https://css-tricks.com/viewport-sized-typography/) [responsive](https://css-tricks.com/molten-leading-css/) CSS font sizing.
-* The one million answers I got from [Stack Overflow](http://stackoverflow.com/).
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
