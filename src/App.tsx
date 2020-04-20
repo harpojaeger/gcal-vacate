@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import CalendarList from './CalendarList';
 import { AppState } from './store/reducer'
-import { setSigninStatus } from './store/user/actions';
+import { setSignedIn, setCalendars } from './store/user/actions';
 import { connect } from 'react-redux'
 
 const API_KEY = 'AIzaSyDFnRYazEQRQ-IQuUyzWJDyw_gdEp9Zw4w';
@@ -11,26 +11,24 @@ const CLIENT_ID = '223934007308-shigrvi2vqe0rsgbtc3r0636ma19eqrt.apps.googleuser
 const SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events";
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
-type appState = {
-  calendars?: gapi.client.calendar.CalendarListEntry[];
-}
-
 type appProps = {
   isSignedIn: boolean,
-  setSignedIn: Function
+  setSignedIn: Function,
+  calendars: gapi.client.calendar.CalendarListEntry[]
+  setCalendars: Function,
 }
 
-const mapStateToProps = (state: AppState) => ({ isSignedIn: state.user.isSignedIn });
-const mapDispatchToProps = { setSignedIn: setSigninStatus }
+const mapStateToProps = (state: AppState) => ({ isSignedIn: state.user.isSignedIn, calendars: state.user.calendars });
+const mapDispatchToProps = { setSignedIn, setCalendars }
 
 
-class App extends React.Component<appProps, appState> {
+class App extends React.Component<appProps, {}> {
   constructor(props: appProps) {
     super(props);
     this.updateSignInStatus = this.updateSignInStatus.bind(this);
     this.initClient = this.initClient.bind(this);
     this.listCalendars = this.listCalendars.bind(this);
-    this.state = {};
+    this.signOut = this.signOut.bind(this);
   }
 
   loadCalendarApi(): void {
@@ -62,6 +60,7 @@ class App extends React.Component<appProps, appState> {
 
   signOut() {
     gapi.auth2.getAuthInstance().signOut();
+    this.props.setCalendars([]);
   }
 
   componentDidMount() {
@@ -69,13 +68,8 @@ class App extends React.Component<appProps, appState> {
   }
 
   listCalendars() {
-    gapi.client.calendar.calendarList.list({ minAccessRole: 'writer' }).then(result => {
-      this.setState(() => {
-        if (result?.result?.items?.length === 0) return {};
-
-        return { calendars: result.result.items };
-      });
-
+    gapi.client.calendar.calendarList.list({ minAccessRole: 'writer' }).then((result: gapi.client.Response<gapi.client.calendar.CalendarList>) => {
+      if (result?.result?.items) this.props.setCalendars(result.result.items);
     }).catch(console.error);
 
   }
@@ -95,8 +89,8 @@ class App extends React.Component<appProps, appState> {
               <button onClick={this.signIn}>Click me to launch a rad signin workflow</button>
             }
             {this.props.isSignedIn && <button onClick={this.listCalendars}>Click me to list calendars</button>}
-            {this.state.calendars && this.props.isSignedIn &&
-              <CalendarList calendars={this.state.calendars} />
+            {this.props.calendars.length > 0 && this.props.isSignedIn &&
+              <CalendarList calendars={this.props.calendars} />
             }
           </div>
           <a

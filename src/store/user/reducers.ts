@@ -1,4 +1,4 @@
-import { UserState, UserActionType, SET_CALENDARS, SET_SIGNIN_STATUS } from './types'
+import { UserState, UserActionType, SET_CALENDARS, SET_SIGNED_IN } from './types'
 
 const initialState: UserState = {
     isSignedIn: false,
@@ -9,7 +9,7 @@ export function userReducer(state = initialState, action: UserActionType): UserS
     switch (action.type) {
         case SET_CALENDARS:
             return Object.assign({}, state, { calendars: action.payload });
-        case SET_SIGNIN_STATUS:
+        case SET_SIGNED_IN:
             return Object.assign({}, state, { isSignedIn: action.payload });
         default:
             return state;

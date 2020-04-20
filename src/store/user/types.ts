@@ -3,11 +3,11 @@ export interface UserState {
     calendars: gapi.client.calendar.CalendarListEntry[]
 }
 
-export const SET_SIGNIN_STATUS = 'UPDATE_SIGNIN_STATUS'
+export const SET_SIGNED_IN = 'UPDATE_SIGNIN_STATUS'
 export const SET_CALENDARS = 'UPDATE_CALENDARS'
 
-interface SetSigninStatusActionType {
-    type: typeof SET_SIGNIN_STATUS
+interface SetSignedInActionType {
+    type: typeof SET_SIGNED_IN
     payload: boolean
 }
 
@@ -16,4 +16,4 @@ interface SetCalendarsActionType {
     payload: gapi.client.calendar.CalendarListEntry[]
 }
 
-export type UserActionType = SetSigninStatusActionType | SetCalendarsActionType
+export type UserActionType = SetSignedInActionType | SetCalendarsActionType
