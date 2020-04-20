@@ -17,10 +17,11 @@ export default class CalendarList extends Component<calendarListProps, {}> {
     }
 }
 
-function calendar({ id, backgroundColor, foregroundColor: color, summary }: gapi.client.calendar.CalendarListEntry) {
+function calendar({ id, summary }: gapi.client.calendar.CalendarListEntry) {
     return (
-        <option key={id} value={id} style={{ backgroundColor, color }}>
+        <option key={id} value={id}>
             {summary}
         </option>
+
     )
 }
