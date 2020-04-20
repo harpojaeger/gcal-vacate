@@ -1,16 +1,26 @@
 import React, { Component } from 'react';
 
-
 type calendarListProps = { calendars: gapi.client.calendar.CalendarListEntry[] };
 
 export default class CalendarList extends Component<calendarListProps, {}> {
     render() {
         return (
             <div>
-                <ul>
-                    {this.props.calendars.map((cal) => (<li key={cal.id}>{cal.summary}</li>))}
-                </ul>
+                <select>
+                    <option value=''>
+                        Select a calendar...
+                    </option>
+                    {this.props.calendars.map(calendar)}
+                </select>
             </div>
         )
     }
+}
+
+function calendar({ id, backgroundColor, foregroundColor: color, summary }: gapi.client.calendar.CalendarListEntry) {
+    return (
+        <option key={id} value={id} style={{ backgroundColor, color }}>
+            {summary}
+        </option>
+    )
 }
