@@ -9,6 +9,7 @@ const SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.go
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
 type appState = {
+  isSignedIn: boolean,
   calendars?: gapi.client.calendar.CalendarListEntry[];
 }
 
@@ -18,7 +19,7 @@ class App extends React.Component<{}, appState> {
     this.updateSignInStatus = this.updateSignInStatus.bind(this);
     this.initClient = this.initClient.bind(this);
     this.listCalendars = this.listCalendars.bind(this);
-    this.state = {};
+    this.state = { isSignedIn: false };
   }
 
   loadCalendarApi(): void {
@@ -40,8 +41,8 @@ class App extends React.Component<{}, appState> {
   }
 
   // This will ultimately need to set component state
-  updateSignInStatus(isSignedIn: boolean): void {
-    console.log('user signin status:', isSignedIn);
+  updateSignInStatus(isSignedIn: boolean) {
+    this.setState(() => ({ isSignedIn }));
   }
 
   signIn() {
@@ -60,10 +61,8 @@ class App extends React.Component<{}, appState> {
     gapi.client.calendar.calendarList.list({ minAccessRole: 'writer' }).then(result => {
       this.setState(() => {
         if (result?.result?.items?.length === 0) return {};
-        const newState: appState = {
-          calendars: result.result.items
-        };
-        return newState;
+
+        return { calendars: result.result.items };
       });
 
     }).catch(console.error);
@@ -80,10 +79,12 @@ class App extends React.Component<{}, appState> {
 
           </p>
           <div>
-            <button onClick={this.signIn}>Click me to launch a rad signin workflow</button>
-            <button onClick={this.signOut}>Click me to sign out :(</button>
-            <button onClick={this.listCalendars}>Click me to list calendars</button>
-            {this.state.calendars &&
+            {this.state.isSignedIn ?
+              <button onClick={this.signOut}>Click me to sign out :(</button> :
+              <button onClick={this.signIn}>Click me to launch a rad signin workflow</button>
+            }
+            {this.state.isSignedIn && <button onClick={this.listCalendars}>Click me to list calendars</button>}
+            {this.state.calendars && this.state.isSignedIn &&
               <CalendarList calendars={this.state.calendars} />
             }
           </div>
