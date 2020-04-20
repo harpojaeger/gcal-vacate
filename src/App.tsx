@@ -1,18 +1,24 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CalendarList from './CalendarList';
 
 const API_KEY = 'AIzaSyDFnRYazEQRQ-IQuUyzWJDyw_gdEp9Zw4w';
 const CLIENT_ID = '223934007308-shigrvi2vqe0rsgbtc3r0636ma19eqrt.apps.googleusercontent.com';
 const SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events";
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
+type appState = {
+  calendars?: gapi.client.calendar.CalendarListEntry[];
+}
 
-class App extends React.Component<{}, {}> {
+class App extends React.Component<{}, appState> {
   constructor(props: {}) {
     super(props);
     this.updateSignInStatus = this.updateSignInStatus.bind(this);
     this.initClient = this.initClient.bind(this);
+    this.listCalendars = this.listCalendars.bind(this);
+    this.state = {};
   }
 
   loadCalendarApi(): void {
@@ -51,7 +57,16 @@ class App extends React.Component<{}, {}> {
   }
 
   listCalendars() {
-    gapi.client.calendar.calendarList.list({ minAccessRole: 'writer' }).then(console.log).catch(console.error);
+    gapi.client.calendar.calendarList.list({ minAccessRole: 'writer' }).then(result => {
+      this.setState(() => {
+        if (result?.result?.items?.length === 0) return {};
+        const newState: appState = {
+          calendars: result.result.items
+        };
+        return newState;
+      });
+
+    }).catch(console.error);
 
   }
   render() {
@@ -68,6 +83,9 @@ class App extends React.Component<{}, {}> {
             <button onClick={this.signIn}>Click me to launch a rad signin workflow</button>
             <button onClick={this.signOut}>Click me to sign out :(</button>
             <button onClick={this.listCalendars}>Click me to list calendars</button>
+            {this.state.calendars &&
+              <CalendarList calendars={this.state.calendars} />
+            }
           </div>
           <a
             className="App-link"
