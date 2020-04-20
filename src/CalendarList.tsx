@@ -1,12 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { AppState } from './store/reducer'
+import { setSelectedId } from './store/calendar/actions'
 
-type calendarListProps = { calendars: gapi.client.calendar.CalendarListEntry[] };
+type calendarListProps = {
+    selectedId: string,
+    calendars: gapi.client.calendar.CalendarListEntry[]
+    setSelectedId: Function
+};
 
-export default class CalendarList extends Component<calendarListProps, {}> {
+const mapStatetoProps = (state: AppState) => ({
+    selectedId: state.calendar.selectedId
+});
+const mapDispatchToProps = { setSelectedId };
+
+class CalendarList extends Component<calendarListProps, {}> {
+    constructor(props: calendarListProps) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        this.props.setSelectedId(e.target.value);
+    }
     render() {
         return (
             <div>
-                <select>
+                <select value={this.props.selectedId} onChange={this.handleChange}>
                     <option value=''>
                         Select a calendar...
                     </option>
@@ -25,3 +45,5 @@ function calendar({ id, summary }: gapi.client.calendar.CalendarListEntry) {
 
     )
 }
+
+export default connect(mapStatetoProps, mapDispatchToProps)(CalendarList);
