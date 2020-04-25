@@ -49,7 +49,6 @@ class App extends React.Component<appProps, {}> {
     });
   }
 
-  // This will ultimately need to set component state
   updateSignInStatus(isSignedIn: boolean) {
     this.props.setSignedIn(isSignedIn);
   }
@@ -77,12 +76,6 @@ class App extends React.Component<appProps, {}> {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-
-
-          </p>
           <div>
             {this.props.isSignedIn ?
               <button onClick={this.signOut}>Click me to sign out :(</button> :

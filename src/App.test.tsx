@@ -20,24 +20,37 @@ test('renders correct sign-in affordances', () => {
 })
 
 test('renders correct sign-out affordance after signing in', async () => {
-  const mockGapiObject = mockGapi();
-  const mockSignInMethod = jest.fn();
-  mockGapiObject.auth2.getAuthInstance.mockImplementation(() => ({ signIn: mockSignInMethod }))
-  const { getByText } = renderAppWithStore();
+  const mockGapiObject: any = mockGapi();
+  var mockSignInStatusListener: Function = jest.fn();
+  const mockSignInStatusGetter = () => true;
+  mockGapiObject.auth2.getAuthInstance.mockImplementation(() => ({
+    isSignedIn: {
+      listen: (handlerFn: Function) => { mockSignInStatusListener = handlerFn },
+      get: mockSignInStatusGetter
+    },
+    signIn: () => mockSignInStatusListener(true)
+  }));
+
+  const store = createStore(rootReducer, {});
+  const { getByText } = render(<Provider store={store}><App /></Provider>)
   const signInButton = getByText(/click me to launch a rad signin workflow/i);
   signInButton.click();
-  expect(mockSignInMethod).toHaveBeenCalledTimes(1);
-  // expect(store.getState().user.isSignedIn).toBe(true);
-  // const signOutButton = ;
+
   await waitFor(() => {
-    expect(getByText(/sign out/i)).toBeInTheDocument();
+    expect(getByText(/Click me to sign out/i)).toBeInTheDocument();
   });
 })
 
+function Wrapper({ children }: { children: any }) {
+  return <React.StrictMode><Provider store={store}>{children}</Provider></React.StrictMode >
+}
 
 function renderAppWithStore() {
-  return render(<Provider store={store}><App /></Provider>)
+  return customRender(<App />, {});
 }
+
+const customRender = (ui: any, options: any) => render(ui, { wrapper: Wrapper, ...options })
+
 
 function mockGapi() {
   const mockGapi = {
