@@ -1,12 +1,9 @@
-import React from 'react';
-import { render } from '@testing-library/react';
 import { waitFor } from '@testing-library/dom'
-import App from './App';
-import { Provider } from 'react-redux';
 import { storeFactory, AppState } from './store/root';
 import { MockRpcClient } from './client/__mocks__/gapi';
 import '@testing-library/jest-dom';
 import { EnhancedStore } from '@reduxjs/toolkit';
+import { renderApp } from '../test/util';
 
 var store: EnhancedStore<AppState>;
 var mockGapiClient: MockRpcClient;
@@ -17,7 +14,7 @@ beforeEach(() => {
 })
 
 test('renders correct sign-in affordances', () => {
-  const { getByText } = renderApp();
+  const { getByText } = renderApp(store);
 
   const signInButton = getByText(/click me to launch a rad signin workflow/i);
 
@@ -25,7 +22,7 @@ test('renders correct sign-in affordances', () => {
 });
 
 test('renders correct sign-out affordance after signing in', async () => {
-  const { getByText } = renderApp();
+  const { getByText } = renderApp(store);
 
   const signInButton = getByText(/click me to launch a rad signin workflow/i);
   signInButton.click();
@@ -36,7 +33,7 @@ test('renders correct sign-out affordance after signing in', async () => {
 })
 
 test('renders a list of calendars', async () => {
-  const { getByText } = renderApp();
+  const { getByText } = renderApp(store);
 
   const signInButton = getByText(/click me to launch a rad signin workflow/i);
   signInButton.click();
@@ -54,10 +51,3 @@ test('renders a list of calendars', async () => {
   });
 
 });
-
-/**
- * Renders the app using a mocked GAPI RPC class.
- */
-function renderApp() {
-  return render(<React.StrictMode><Provider store={store}><App /></Provider></React.StrictMode>);
-}

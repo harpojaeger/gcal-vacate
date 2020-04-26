@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import CalendarList from './components/signedin/CalendarList/CalendarList';
 import { AppState } from './store/root'
 import { connect } from 'react-redux'
 import { fetchCalendars } from './store/calendarList';
