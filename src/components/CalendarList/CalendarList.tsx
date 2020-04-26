@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../store/reducer'
-import { setSelectedId } from '../../store/calendar/actions'
+import { setSelectedId } from '../../store/calendar'
 
 type calendarListProps = {
     selectedId: string,
