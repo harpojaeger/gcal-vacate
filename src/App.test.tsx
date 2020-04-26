@@ -3,7 +3,9 @@ import { storeFactory, AppState } from './store/root';
 import { MockRpcClient } from './client/__mocks__/gapi';
 import '@testing-library/jest-dom';
 import { EnhancedStore } from '@reduxjs/toolkit';
-import { renderApp } from '../test/util';
+import { renderWithStore } from '../test/util';
+import App from './App';
+import React from 'react';
 
 var store: EnhancedStore<AppState>;
 var mockGapiClient: MockRpcClient;
@@ -13,21 +15,20 @@ beforeEach(() => {
   store = storeFactory(mockGapiClient);
 })
 
-test('renders correct sign-in affordances', () => {
-  const { getByText } = renderApp(store);
+test('renders correct sign-in and sign-out affordances', async () => {
+  const signInButtonLabel = /Click me to launch a rad signin workflow/i;
+  const signOutButtonLabel = /Click me to sign out/i;
+  const { getByText } = renderWithStore(<App />, store);
 
-  const signInButton = getByText(/click me to launch a rad signin workflow/i);
-
-  expect(signInButton).toBeInTheDocument();
-});
-
-test('renders correct sign-out affordance after signing in', async () => {
-  const { getByText } = renderApp(store);
-
-  const signInButton = getByText(/click me to launch a rad signin workflow/i);
+  const signInButton = getByText(signInButtonLabel);
   signInButton.click();
 
   await waitFor(() => {
-    expect(getByText(/Click me to sign out :\(/i)).toBeInTheDocument();
+    const signOutButton = getByText(signOutButtonLabel);
+    signOutButton.click();
+  });
+
+  await waitFor(() => {
+    expect(getByText(signInButtonLabel)).toBeInTheDocument();
   });
 })

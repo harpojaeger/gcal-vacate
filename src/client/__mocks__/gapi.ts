@@ -1,15 +1,17 @@
 import { RpcClient, signInListener } from "../gapi";
 
 export class MockRpcClient implements RpcClient {
-
+    isSignedIn = false;
     signInListener: signInListener = function () { };
     calendars: gapi.client.calendar.CalendarListEntry[] = [];
 
     signIn() {
+        this.isSignedIn = true;
         this.signInListener(true);
     }
 
     signOut() {
+        this.isSignedIn = false;
         this.signInListener(false);
     }
 
@@ -17,12 +19,8 @@ export class MockRpcClient implements RpcClient {
         return Promise.resolve(this.calendars);
     }
 
-    setSigninListener(listener: signInListener) {
-        this.signInListener = listener;
-    }
-
     getIsSignedIn() {
-        return true;
+        return this.isSignedIn;
     }
 
     setSignInListener(listener: signInListener) {

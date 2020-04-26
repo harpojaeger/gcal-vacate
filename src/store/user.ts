@@ -8,7 +8,7 @@ export interface UserState {
     calendars: gapi.client.calendar.CalendarListEntry[]
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
     isSignedIn: false,
     calendars: []
 }

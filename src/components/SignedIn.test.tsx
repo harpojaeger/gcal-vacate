@@ -1,8 +1,11 @@
-import { renderApp } from "../../test/util";
+import { renderWithStore } from "../../test/util";
 import { waitFor } from '@testing-library/dom'
 import { EnhancedStore } from "@reduxjs/toolkit";
 import { AppState, storeFactory } from "../store/root";
 import { MockRpcClient } from "../client/__mocks__/gapi";
+import SignedIn from "./SignedIn";
+import React from 'react';
+import '@testing-library/jest-dom';
 
 var store: EnhancedStore<AppState>;
 var mockGapiClient: MockRpcClient;
@@ -13,10 +16,7 @@ beforeEach(() => {
 })
 
 test('renders a list of calendars', async () => {
-    const { getByText } = renderApp(store);
-
-    const signInButton = getByText(/click me to launch a rad signin workflow/i);
-    signInButton.click();
+    const { getByText } = renderWithStore(<SignedIn />, store);
 
     await waitFor(() => {
         const listCalendarsButton = getByText(/Click me to list calendars/);
