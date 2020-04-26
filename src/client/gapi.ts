@@ -7,18 +7,16 @@ export interface RpcClient {
 
 export class GapiClient implements RpcClient {
 
-    opts: clientOpts;
     signInListener: (isSignedIn: boolean) => void;
 
     constructor(opts: clientOpts, signInListener: ((isSignedIn: boolean) => void)) {
-        this.opts = opts;
         this.signInListener = signInListener;
         // Load the authentication module
-        gapi.load('client:auth2', this.initClient);
+        gapi.load('client:auth2', () => this.initClient(opts));
     }
 
-    initClient() {
-        gapi.client.init(this.opts).then(() => {
+    initClient(opts: clientOpts) {
+        gapi.client.init(opts).then(() => {
             gapi.auth2.getAuthInstance().isSignedIn.listen(this.signInListener);
             this.signInListener(gapi.auth2.getAuthInstance().isSignedIn.get());
         });
