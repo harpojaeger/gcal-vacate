@@ -1,5 +1,4 @@
-import { userReducer } from './user/reducers'
-import { UserState } from './user/types'
+import { userReducer, UserState } from './user'
 import { calendarReducer } from './calendar/reducers';
 import { CalendarState } from './calendar/types';
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'

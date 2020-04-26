@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import CalendarList from './components/CalendarList/CalendarList';
 import { AppState } from './store/reducer'
-import { setSignedIn, setCalendars } from './store/user/actions';
+import { setSignedIn, setCalendars } from './store/user';
 import { connect } from 'react-redux'
 import { GapiClient, RpcClient } from './client/gapi'
 const API_KEY = 'AIzaSyDFnRYazEQRQ-IQuUyzWJDyw_gdEp9Zw4w';
