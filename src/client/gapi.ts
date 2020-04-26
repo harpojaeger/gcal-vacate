@@ -18,6 +18,7 @@ export class GapiClient implements RpcClient {
         // Load the authentication module
         gapi.load('client:auth2', () => this.initClient(opts));
     }
+
     initClient(opts: clientOpts) {
         return gapi.client.init(opts).then(() => {
             // Setting the listener this way allows us to swap in a different

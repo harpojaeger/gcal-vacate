@@ -42,7 +42,7 @@ class App extends React.Component<appProps, {}> {
     this.props.fetchCalendars();
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.setSignInListener(this.props.updateSignInStatus)
   }
 
