@@ -57,7 +57,7 @@ class App extends React.Component<appProps, {}> {
             }
             {this.props.isSignedIn && <button onClick={this.listCalendars}>Click me to list calendars</button>}
             {this.props.calendars.length > 0 && this.props.isSignedIn &&
-              <CalendarList calendars={this.props.calendars} />
+              <CalendarList />
             }
           </div>
         </header>

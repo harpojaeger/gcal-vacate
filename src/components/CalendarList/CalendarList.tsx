@@ -1,49 +1,33 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../store/root'
 import { setSelectedId } from '../../store/calendarList'
 
-type calendarListProps = {
-    selectedId: string,
-    calendars: gapi.client.calendar.CalendarListEntry[]
-    setSelectedId: Function
-};
+export default () => {
+    const calendars = useSelector((state: AppState) => state.calendarList.calendarList);
+    const selectedId = useSelector((state: AppState) => state.calendarList.selectedId);
+    const dispatch = useDispatch();
 
-const mapStatetoProps = (state: AppState) => ({
-    selectedId: state.calendarList.selectedId
-});
-const mapDispatchToProps = { setSelectedId };
-
-class CalendarList extends Component<calendarListProps, {}> {
-    constructor(props: calendarListProps) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
+    function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
+        dispatch(setSelectedId(e.target.value));
     }
 
-    handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
-        this.props.setSelectedId(e.target.value);
-    }
-    render() {
+    function calendar({ id, summary }: gapi.client.calendar.CalendarListEntry) {
         return (
-            <div>
-                <select value={this.props.selectedId} onChange={this.handleChange}>
-                    <option value=''>
-                        Select a calendar...
-                    </option>
-                    {this.props.calendars.map(calendar)}
-                </select>
-            </div>
+            <option key={id} value={id}>
+                {summary}
+            </option>
         )
     }
-}
 
-function calendar({ id, summary }: gapi.client.calendar.CalendarListEntry) {
     return (
-        <option key={id} value={id}>
-            {summary}
-        </option>
-
+        <div>
+            <select value={selectedId} onChange={handleChange}>
+                <option value=''>
+                    Select a calendar...
+                    </option>
+                {calendars.map(calendar)}
+            </select>
+        </div>
     )
 }
-
-export default connect(mapStatetoProps, mapDispatchToProps)(CalendarList);
