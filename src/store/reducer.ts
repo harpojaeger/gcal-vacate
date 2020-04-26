@@ -2,7 +2,8 @@ import { userReducer } from './user/reducers'
 import { UserState } from './user/types'
 import { calendarReducer } from './calendar/reducers';
 import { CalendarState } from './calendar/types';
-import { combineReducers, createStore } from 'redux'
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
+import promiseMiddleware from 'redux-promise';
 
 export interface AppState {
     user: UserState,
@@ -10,7 +11,10 @@ export interface AppState {
 
 }
 
-export const rootReducer = combineReducers({ user: userReducer, calendar: calendarReducer });
+const rootReducer = combineReducers({ user: userReducer, calendar: calendarReducer });
 
-export const store = createStore(rootReducer, {}, (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__());
+export const store = createStore(
+    rootReducer, {},
+    compose(applyMiddleware(promiseMiddleware),
+        (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__())
+);
