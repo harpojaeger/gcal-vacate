@@ -35,6 +35,26 @@ test('renders correct sign-out affordance after signing in', async () => {
   });
 })
 
+test('renders a list of calendars', async () => {
+  const { getByText } = renderApp();
+
+  const signInButton = getByText(/click me to launch a rad signin workflow/i);
+  signInButton.click();
+
+  await waitFor(() => {
+    const listCalendarsButton = getByText(/Click me to list calendars/);
+
+    mockGapiClient.setMockCalendarList([{ id: 'foo' }, { id: 'bar' }]);
+    listCalendarsButton.click();
+  });
+
+  await waitFor(() => {
+    const calendarSelect = getByText(/Select a calendar/);
+    expect(calendarSelect.parentElement?.childElementCount).toBe(3);
+  });
+
+});
+
 /**
  * Renders the app using a mocked GAPI RPC class.
  */

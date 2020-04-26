@@ -3,6 +3,7 @@ import { RpcClient, signInListener } from "../gapi";
 export class MockRpcClient implements RpcClient {
 
     signInListener: signInListener = function () { };
+    calendars: gapi.client.calendar.CalendarListEntry[] = [];
 
     signIn() {
         this.signInListener(true);
@@ -13,8 +14,7 @@ export class MockRpcClient implements RpcClient {
     }
 
     listCalendars({ minAccessRole }: { minAccessRole: string }) {
-        const fakeCalendar: gapi.client.calendar.CalendarListEntry = {}
-        return Promise.resolve([fakeCalendar]);
+        return Promise.resolve(this.calendars);
     }
 
     setSigninListener(listener: signInListener) {
@@ -29,4 +29,7 @@ export class MockRpcClient implements RpcClient {
         this.signInListener = listener;
     }
 
+    setMockCalendarList(calendars: gapi.client.calendar.CalendarListEntry[]) {
+        this.calendars = calendars;
+    }
 }
