@@ -1,18 +1,26 @@
 type clientOpts = { apiKey: string, clientId: string, scope: string, discoveryDocs: string[] };
+
+export type signInListener = ((isSignedIn: boolean) => void);
+
 export interface RpcClient {
     signIn(): void,
     signOut(): void,
-    listCalendars(opts: { minAccessRole: string }): Promise<gapi.client.calendar.CalendarListEntry[]>
+    listCalendars(opts: { minAccessRole: string }): Promise<gapi.client.calendar.CalendarListEntry[]>,
+    setSigninListener(listener: signInListener): void,
+
 }
 
 export class GapiClient implements RpcClient {
 
-    signInListener: (isSignedIn: boolean) => void;
+    signInListener: signInListener = function () { };
 
-    constructor(opts: clientOpts, signInListener: ((isSignedIn: boolean) => void)) {
-        this.signInListener = signInListener;
+    constructor(opts: clientOpts) {
         // Load the authentication module
         gapi.load('client:auth2', () => this.initClient(opts));
+    }
+
+    setSigninListener(listener: signInListener) {
+        this.signInListener = listener;
     }
 
     initClient(opts: clientOpts) {

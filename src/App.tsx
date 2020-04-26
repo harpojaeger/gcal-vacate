@@ -23,18 +23,22 @@ const mapDispatchToProps = { setSignedIn, setCalendars }
 
 
 class App extends React.Component<appProps, {}> {
+
   rpcClient: RpcClient;
+
   constructor(props: appProps) {
     super(props);
     this.updateSignInStatus = this.updateSignInStatus.bind(this);
     this.listCalendars = this.listCalendars.bind(this);
+    this.signIn = this.signIn.bind(this);
     this.signOut = this.signOut.bind(this);
     this.rpcClient = new GapiClient({
       apiKey: API_KEY,
       clientId: CLIENT_ID,
       scope: SCOPES,
       discoveryDocs: DISCOVERY_DOCS
-    }, this.updateSignInStatus)
+    });
+    this.rpcClient.setSigninListener(this.updateSignInStatus);
   }
 
 
