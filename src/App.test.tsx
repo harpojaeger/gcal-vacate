@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { waitFor } from '@testing-library/dom'
 import App from './App';
 import { Provider } from 'react-redux';
-import { store } from './store/reducer';
+import { store } from './store/root';
 
 test('renders learn react link', () => {
   mockGapi();

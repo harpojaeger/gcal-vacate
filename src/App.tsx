@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import CalendarList from './components/CalendarList/CalendarList';
-import { AppState } from './store/reducer'
+import { AppState } from './store/root'
 import { setSignedIn, setCalendars } from './store/user';
 import { connect } from 'react-redux'
 import { GapiClient, RpcClient } from './client/gapi'
