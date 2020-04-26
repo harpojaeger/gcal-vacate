@@ -5,7 +5,7 @@ import CalendarList from './components/CalendarList/CalendarList';
 import { AppState } from './store/reducer'
 import { setSignedIn, setCalendars } from './store/user/actions';
 import { connect } from 'react-redux'
-
+import { GapiClient, RpcClient } from './client/gapi'
 const API_KEY = 'AIzaSyDFnRYazEQRQ-IQuUyzWJDyw_gdEp9Zw4w';
 const CLIENT_ID = '223934007308-shigrvi2vqe0rsgbtc3r0636ma19eqrt.apps.googleusercontent.com';
 const SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events";
@@ -23,55 +23,42 @@ const mapDispatchToProps = { setSignedIn, setCalendars }
 
 
 class App extends React.Component<appProps, {}> {
+  rpcClient: RpcClient;
   constructor(props: appProps) {
     super(props);
     this.updateSignInStatus = this.updateSignInStatus.bind(this);
-    this.initClient = this.initClient.bind(this);
     this.listCalendars = this.listCalendars.bind(this);
     this.signOut = this.signOut.bind(this);
-  }
-
-  loadCalendarApi(): void {
-    gapi.load('client:auth2', this.initClient);
-
-
-  }
-
-  initClient(): void {
-    gapi.client.init({
+    this.rpcClient = new GapiClient({
       apiKey: API_KEY,
       clientId: CLIENT_ID,
       scope: SCOPES,
-      discoveryDocs: DISCOVERY_DOCS,
-    }).then(() => {
-      gapi.auth2.getAuthInstance().isSignedIn.listen(this.updateSignInStatus);
-      this.updateSignInStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-    });
+      discoveryDocs: DISCOVERY_DOCS
+    }, this.updateSignInStatus)
   }
 
-  updateSignInStatus(isSignedIn: boolean) {
+
+  updateSignInStatus(isSignedIn: boolean): void {
     this.props.setSignedIn(isSignedIn);
   }
 
   signIn() {
-    gapi.auth2.getAuthInstance().signIn();
+    this.rpcClient.signIn();
   }
 
   signOut() {
-    gapi.auth2.getAuthInstance().signOut();
+    this.rpcClient.signOut();
     this.props.setCalendars([]);
   }
 
-  componentDidMount() {
-    this.loadCalendarApi();
-  }
-
   listCalendars() {
-    gapi.client.calendar.calendarList.list({ minAccessRole: 'writer' }).then((result: gapi.client.Response<gapi.client.calendar.CalendarList>) => {
-      if (result?.result?.items) this.props.setCalendars(result.result.items);
-    }).catch(console.error);
-
+    this.rpcClient.listCalendars({ minAccessRole: 'writer' })
+      .then(result => {
+        this.props.setCalendars(result);
+      })
+      .catch(console.error);
   }
+
   render() {
     return (
       <div className="App">
