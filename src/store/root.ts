@@ -1,15 +1,15 @@
 import { userReducer, UserState } from './user'
-import { calendarReducer, CalendarState } from './calendar';
+import { calendarListReducer, CalendarListState } from './calendarList';
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import promiseMiddleware from 'redux-promise';
 
 export interface AppState {
     user: UserState,
-    calendar: CalendarState
+    calendarList: CalendarListState
 
 }
 
-const rootReducer = combineReducers({ user: userReducer, calendar: calendarReducer });
+const rootReducer = combineReducers({ user: userReducer, calendarList: calendarListReducer });
 
 export const store = createStore(
     rootReducer, {},

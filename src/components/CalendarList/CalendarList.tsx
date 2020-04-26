@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { AppState } from '../../store/root'
-import { setSelectedId } from '../../store/calendar'
+import { setSelectedId } from '../../store/calendarList'
 
 type calendarListProps = {
     selectedId: string,
@@ -10,7 +10,7 @@ type calendarListProps = {
 };
 
 const mapStatetoProps = (state: AppState) => ({
-    selectedId: state.calendar.selectedId
+    selectedId: state.calendarList.selectedId
 });
 const mapDispatchToProps = { setSelectedId };
 

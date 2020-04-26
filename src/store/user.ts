@@ -20,6 +20,7 @@ export const userReducer = createReducer(initialState, (builder: ActionReducerMa
         return { ...state, isSignedIn: action.payload }
 
     });
+
     builder.addCase(setCalendars, (state, action) => {
         return { ...state, calendars: action.payload }
     })
