@@ -1,11 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import CalendarList from './components/CalendarList/CalendarList';
+import CalendarList from './components/signedin/CalendarList/CalendarList';
 import { AppState } from './store/root'
 import { connect } from 'react-redux'
 import { fetchCalendars } from './store/calendarList';
 import { requestSignIn, requestSignOut, updateSignInStatus, setSignInListener } from './store/user';
+import SignedIn from './components/SignedIn';
+import SignedOut from './components/SignedOut';
 
 type appProps = {
   isSignedIn: boolean,
@@ -51,14 +53,7 @@ class App extends React.Component<appProps, {}> {
       <div className="App">
         <header className="App-header">
           <div>
-            {this.props.isSignedIn ?
-              <button onClick={this.signOut}>Click me to sign out :(</button> :
-              <button onClick={this.signIn}>Click me to launch a rad signin workflow</button>
-            }
-            {this.props.isSignedIn && <button onClick={this.listCalendars}>Click me to list calendars</button>}
-            {this.props.calendars.length > 0 && this.props.isSignedIn &&
-              <CalendarList />
-            }
+            {this.props.isSignedIn ? <SignedIn /> : <SignedOut />}
           </div>
         </header>
       </div>

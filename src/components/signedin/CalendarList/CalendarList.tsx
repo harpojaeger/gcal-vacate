@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../store/root'
-import { setSelectedId } from '../../store/calendarList'
+import { AppState } from '../../../store/root'
+import { setSelectedId } from '../../../store/calendarList'
 
 export default () => {
     const calendars = useSelector((state: AppState) => state.calendarList.calendarList);
