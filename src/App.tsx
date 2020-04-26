@@ -13,7 +13,7 @@ type appProps = {
   setSignInListener: Function,
 }
 
-const mapStateToProps = (state: AppState) => ({ isSignedIn: state.user.isSignedIn });
+const mapStateToProps = ({ user: { isSignedIn } }: AppState) => ({ isSignedIn });
 const mapDispatchToProps = { updateSignInStatus, setSignInListener }
 
 
