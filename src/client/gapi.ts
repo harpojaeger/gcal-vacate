@@ -1,7 +1,9 @@
 type clientOpts = { apiKey: string, clientId: string, scope: string, discoveryDocs: string[] };
 
 export type signInListener = ((isSignedIn: boolean) => void);
-
+export interface eventsMap {
+    [key: string]: Event
+}
 export interface RpcClient {
     signIn(): void,
     signOut(): void,
@@ -51,5 +53,30 @@ export class GapiClient implements RpcClient {
                 return [];
             }
         );
+    }
+
+    async listEvents(minDate: Date, maxDate: Date, calendarId: string): Promise<void> {
+        const result = await gapi.client.calendar.events.list({
+            calendarId,
+            timeMin: minDate.toISOString(),
+            timeMax: maxDate.toISOString(),
+        });
+        // if (!result?.result?.items) return [];
+        const items = result.result.items;
+        // const repeatingEventInstances
+        const instancesRequest = gapi.client.newBatch();
+        instancesRequest.add(
+            gapi.client.calendar.events.instances({
+                calendarId,
+                timeMin: minDate.toISOString(),
+                timeMax: maxDate.toISOString(),
+                eventId: 'foo'
+            })
+        );
+        const batchResult = await instancesRequest;
+        for (let obj in batchResult.result) {
+            console.log(typeof obj);
+        }
+
     }
 }
