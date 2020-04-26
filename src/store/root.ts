@@ -1,18 +1,25 @@
 import { userReducer, UserState } from './user'
 import { calendarListReducer, CalendarListState } from './calendarList';
-import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
-import promiseMiddleware from 'redux-promise';
+import { combineReducers } from 'redux'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { RpcClient } from '../client/gapi';
 
 export interface AppState {
     user: UserState,
     calendarList: CalendarListState
+}
 
+export interface thunkApiExtras {
+    rpcClient: RpcClient
 }
 
 const rootReducer = combineReducers({ user: userReducer, calendarList: calendarListReducer });
 
-export const store = createStore(
-    rootReducer, {},
-    compose(applyMiddleware(promiseMiddleware),
-        (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__())
-);
+
+export function storeFactory(rpcClient: RpcClient) {
+    const middlewareToUse = getDefaultMiddleware({ thunk: { extraArgument: { rpcClient } } });
+    return configureStore({
+        reducer: rootReducer,
+        middleware: middlewareToUse
+    })
+}

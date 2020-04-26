@@ -3,64 +3,47 @@ import logo from './logo.svg';
 import './App.css';
 import CalendarList from './components/CalendarList/CalendarList';
 import { AppState } from './store/root'
-import { setSignedIn, setCalendars } from './store/user';
 import { connect } from 'react-redux'
-import { GapiClient, RpcClient } from './client/gapi'
-const API_KEY = 'AIzaSyDFnRYazEQRQ-IQuUyzWJDyw_gdEp9Zw4w';
-const CLIENT_ID = '223934007308-shigrvi2vqe0rsgbtc3r0636ma19eqrt.apps.googleusercontent.com';
-const SCOPES = "https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events";
-const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+import { fetchCalendars } from './store/calendarList';
+import { requestSignIn, requestSignOut, updateSignInStatus, setSignInListener } from './store/user';
 
 type appProps = {
   isSignedIn: boolean,
-  setSignedIn: Function,
+  updateSignInStatus: Function,
+  setSignInListener: Function,
   calendars: gapi.client.calendar.CalendarListEntry[]
-  setCalendars: Function,
+  fetchCalendars: Function,
+  signIn: Function,
+  signOut: Function,
 }
 
-const mapStateToProps = (state: AppState) => ({ isSignedIn: state.user.isSignedIn, calendars: state.user.calendars });
-const mapDispatchToProps = { setSignedIn, setCalendars }
+const mapStateToProps = (state: AppState) => ({ isSignedIn: state.user.isSignedIn, calendars: state.calendarList.calendarList });
+const mapDispatchToProps = { fetchCalendars, signIn: requestSignIn, signOut: requestSignOut, updateSignInStatus, setSignInListener }
 
 
 class App extends React.Component<appProps, {}> {
 
-  rpcClient: RpcClient;
-
   constructor(props: appProps) {
     super(props);
-    this.updateSignInStatus = this.updateSignInStatus.bind(this);
     this.listCalendars = this.listCalendars.bind(this);
     this.signIn = this.signIn.bind(this);
     this.signOut = this.signOut.bind(this);
-    this.rpcClient = new GapiClient({
-      apiKey: API_KEY,
-      clientId: CLIENT_ID,
-      scope: SCOPES,
-      discoveryDocs: DISCOVERY_DOCS
-    });
-    this.rpcClient.setSigninListener(this.updateSignInStatus);
-  }
-
-
-  updateSignInStatus(isSignedIn: boolean): void {
-    this.props.setSignedIn(isSignedIn);
   }
 
   signIn() {
-    this.rpcClient.signIn();
+    this.props.signIn();
   }
 
   signOut() {
-    this.rpcClient.signOut();
-    this.props.setCalendars([]);
+    this.props.signOut();
   }
 
   listCalendars() {
-    this.rpcClient.listCalendars({ minAccessRole: 'writer' })
-      .then(result => {
-        this.props.setCalendars(result);
-      })
-      .catch(console.error);
+    this.props.fetchCalendars();
+  }
+
+  componentWillMount() {
+    this.props.setSignInListener(this.props.updateSignInStatus)
   }
 
   render() {
