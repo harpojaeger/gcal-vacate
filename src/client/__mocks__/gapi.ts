@@ -1,4 +1,4 @@
-import { RpcClient, signInListener } from "../gapi";
+import { RpcClient, signInListener, EventWithInstances } from "../gapi";
 
 export class MockRpcClient implements RpcClient {
     isSignedIn = false;
@@ -29,5 +29,9 @@ export class MockRpcClient implements RpcClient {
 
     setMockCalendarList(calendars: gapi.client.calendar.CalendarListEntry[]) {
         this.calendars = calendars;
+    }
+
+    listRepeatingEventInstances(timeMin: Date, timeMax: Date, calendarId: string): Promise<EventWithInstances[]> {
+        throw new Error("Method not implemented.");
     }
 }
