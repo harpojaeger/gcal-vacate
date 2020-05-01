@@ -64,9 +64,9 @@ export class GapiClient implements RpcClient {
 
         const batch = gapi.client.newBatch();
 
-        events.forEach(({ id, recurrence, status, description }) => {
+        events.forEach(({ id, recurrence, status, summary }) => {
             if (id && recurrence && status === 'confirmed') {
-                eventDetailsMap[id] = description;
+                eventDetailsMap[id] = summary;
                 batch.add(
                     this.createInstancesRequest(id, calendarId, timeMin, timeMax), { id, callback: () => undefined }
                 );
@@ -77,9 +77,9 @@ export class GapiClient implements RpcClient {
 
         const { result: batchResult } = await batch;
 
-        for (let [eventId, description = ''] of Object.entries(eventDetailsMap)) {
+        for (let [eventId, summary = ''] of Object.entries(eventDetailsMap)) {
             const instances = (batchResult[eventId] as gapi.client.Response<gapi.client.calendar.Events>).result.items || [];
-            eventsWithInstances.push({ description, calendarId, eventId, instances })
+            eventsWithInstances.push({ summary, calendarId, eventId, instances })
         }
         return eventsWithInstances;
     }
@@ -110,7 +110,7 @@ interface EventDetails {
 }
 
 export interface EventWithInstances {
-    description: string,
+    summary: string,
     calendarId: string,
     eventId: string,
     instances: gapi.client.calendar.Event[]

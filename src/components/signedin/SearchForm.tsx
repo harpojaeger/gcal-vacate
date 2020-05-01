@@ -23,8 +23,7 @@ export default () => {
     function placeholderEventOutputter(event: EventWithInstances) {
         return (
             <div>
-                id: {event.eventId}
-                name: {event.description}
+                name: {event.summary}
                 <br />
                 instances:
                 <ul>
@@ -37,6 +36,7 @@ export default () => {
     function eventInstance(event: gapi.client.calendar.Event) {
         return (
             <li key={event.id}>
+                {/* TODO make this work with all-day events. May need to use originalStartTime field instead  */}
                 from {event.start?.dateTime} to {event.end?.dateTime}
             </li>
         )
