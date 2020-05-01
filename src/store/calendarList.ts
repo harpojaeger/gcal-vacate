@@ -36,17 +36,17 @@ export const fetchCalendars =
     });
 
 export const calendarListReducer = createReducer(initialState, (builder: ActionReducerMapBuilder<CalendarListState>) => {
-    builder.addCase(setSelectedId, (state, action) => {
-        return { ...state, selectedId: action.payload }
-    });
+    builder.addCase(setSelectedId, (state, action) => (
+        { ...state, selectedId: action.payload }
+    ));
 
     builder.addCase(fetchCalendars.pending, (state) => ({ ...state, fetchStatus: FetchStatus.Pending }));
-    builder.addCase(fetchCalendars.fulfilled, (state, action) => {
-        return {
+    builder.addCase(fetchCalendars.fulfilled, (state, action) => (
+        {
             ...state,
             status: FetchStatus.Fulfilled,
             calendarList: action.payload,
         }
-    });
+    ));
     builder.addCase(fetchCalendars.rejected, state => ({ ...state, fetchStatus: FetchStatus.Rejected }));
 })

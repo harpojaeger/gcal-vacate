@@ -115,3 +115,15 @@ export interface EventWithInstances {
     eventId: string,
     instances: gapi.client.calendar.Event[]
 }
+
+
+export interface FetchEventOpts {
+    timeMin: Date,
+    timeMax: Date,
+    calendarId: string,
+}
+/** Convenience method for making a call to fetch repeating event instances from
+ * using an RpcClient. */
+export const fetchRepeatingEventInstances =
+    (rpcClient: RpcClient, params: FetchEventOpts): Promise<EventWithInstances[]> =>
+        rpcClient.listRepeatingEventInstances(params.timeMin, params.timeMax, params.calendarId);
