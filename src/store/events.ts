@@ -1,7 +1,7 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
-import { eventsMap } from '../client/gapi';
+import { EventWithInstances } from '../client/gapi';
 
 
 export interface EventsState {
-    events: eventsMap,
+    events: EventWithInstances[],
 }
