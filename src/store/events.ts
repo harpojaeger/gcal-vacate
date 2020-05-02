@@ -36,6 +36,13 @@ interface SetInstanceSelectedParams {
 }
 export const setInstanceSelected = createAction<SetInstanceSelectedParams>("setInstanceSelected");
 
+interface SetAllEventInstancesSelectedParams {
+    eventIndex: number,
+    eventId: string,
+    selected: boolean,
+}
+export const setAllEventInstancesSelected = createAction<SetAllEventInstancesSelectedParams>("setAllEventInstancesSelected");
+
 export const eventsReducer = createReducer(initialState, (builder: ActionReducerMapBuilder<EventsState>) => {
     builder.addCase(resetEventSearchStatus, state => {
         return {
@@ -64,6 +71,13 @@ export const eventsReducer = createReducer(initialState, (builder: ActionReducer
 
         state.events[action.payload.eventIndex].instances[action.payload.instanceIndex].selected = action.payload.selected;
         return state;
+    });
+
+    builder.addCase(setAllEventInstancesSelected, (state, { payload: { eventIndex, eventId, selected } }) => {
+        const targetEvent = state.events[eventIndex];
+        if (targetEvent.eventId !== eventId) throw new Error("Event state has unexpected shape. Couldn't find the correct event.");
+
+        state.events[eventIndex] = setAllInstancesSelected(targetEvent, selected);
     })
 });
 
@@ -74,4 +88,12 @@ function buildSelectableInstance(instance: gapi.client.calendar.Event): Selectab
 
 function buildEventWithSelectableInstances(event: EventWithInstances): EventWithSelectableInstances {
     return { ...event, instances: event.instances.map(buildSelectableInstance) };
+}
+
+function setAllInstancesSelected(event: EventWithSelectableInstances, selected: boolean): EventWithSelectableInstances {
+    const newInstances = event.instances.map(instance => ({ ...instance, selected }));
+    return {
+        ...event,
+        instances: newInstances
+    }
 }
