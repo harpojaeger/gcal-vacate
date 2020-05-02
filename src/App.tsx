@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { AppState } from './store/root'
 import { connect } from 'react-redux'
