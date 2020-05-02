@@ -15,9 +15,12 @@ export default ({ event, eventIndex }: { event: EventWithSelectableInstances, ev
     const instances = event.instances;
     let allInstancesSelected = true;
     let noInstancesSelected = true;
+    let indeterminate: boolean;
     for (let instance of instances) {
         allInstancesSelected = allInstancesSelected && instance.selected;
         noInstancesSelected = noInstancesSelected && !instance.selected;
+        indeterminate = !(allInstancesSelected || noInstancesSelected)
+        if (indeterminate) break;
     }
     return (
         <div key={event.eventId}>
@@ -27,7 +30,7 @@ export default ({ event, eventIndex }: { event: EventWithSelectableInstances, ev
                 onChange={() => handleEventSelection(eventIndex, event.eventId, !allInstancesSelected)}
                 // Set the checkbox in the visually indeterminate state if only
                 // some of this event's instances are selected.
-                ref={el => el && (el.indeterminate = !(allInstancesSelected || noInstancesSelected))}
+                ref={el => el && (el.indeterminate = indeterminate)}
             ></input>
             <label htmlFor={event.eventId}>
                 name: {event.summary}, all selected: {allInstancesSelected ? 'yup' : 'nope'}
