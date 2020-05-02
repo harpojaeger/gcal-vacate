@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEventInstances } from '../../store/events';
+import { fetchEventInstances, SelectableEventInstance, EventWithSelectableInstances, setInstanceSelected } from '../../store/events';
 import { AppState } from '../../store/root';
-import { EventWithInstances } from '../../client/gapi';
 
 export default () => {
     const dispatch = useDispatch();
@@ -19,8 +18,12 @@ export default () => {
     function sendSearchRequest() {
         dispatch(fetchEventInstances({ timeMin: startDate, timeMax: endDate, calendarId }));
     }
+    function handleInstanceSelection(eventIndex: number, instanceIndex: number, eventId: string, instanceId: string, selected: boolean) {
+        dispatch(setInstanceSelected({ eventIndex, instanceIndex, eventId, instanceId, selected }))
+    }
 
-    function placeholderEventOutputter(event: EventWithInstances) {
+    function placeholderEventOutputter(event: EventWithSelectableInstances, eventIndex: number) {
+
         return (
             <div>
                 name: {event.summary}
@@ -31,37 +34,41 @@ export default () => {
                 </ul>
             </div>
         )
-    }
+        function eventInstance(instance: SelectableEventInstance, instanceIndex: number) {
+            const isAllDayEvent: boolean = instance.start?.dateTime === undefined;
+            let formattedStartTime: string = '';
+            let formattedEndTime: string = '';
+            // This still needs some adjustment, as it shows one-day all-day events
+            // as lasting from the day they are on until the next day. Workable for now.
+            if (isAllDayEvent) {
+                if (instance.start?.date) {
+                    formattedStartTime = new Date(Date.parse(instance.start.date)).toLocaleDateString();
+                }
+                if (instance.end?.date) {
+                    formattedEndTime = new Date(Date.parse(instance.end.date)).toLocaleDateString();
+                }
+            } else {
+                if (instance.start?.dateTime) {
+                    formattedStartTime = new Date(Date.parse(instance.start.dateTime)).toLocaleString();
+                }
+                if (instance.end?.dateTime) {
+                    formattedEndTime = new Date(Date.parse(instance.end.dateTime)).toLocaleString();
+                }
+            }
 
-    function eventInstance(event: gapi.client.calendar.Event) {
-        const isAllDayEvent: boolean = event.start?.dateTime === undefined;
-        let formattedStartTime: string = '';
-        let formattedEndTime: string = '';
-        // This still needs some adjustment, as it shows one-day all-day events
-        // as lasting from the day they are on until the next day. Workable for now.
-        if (isAllDayEvent) {
-            if (event.start?.date) {
-                formattedStartTime = new Date(Date.parse(event.start.date)).toLocaleDateString();
-            }
-            if (event.end?.date) {
-                formattedEndTime = new Date(Date.parse(event.end.date)).toLocaleDateString();
-            }
-        } else {
-            if (event.start?.dateTime) {
-                formattedStartTime = new Date(Date.parse(event.start.dateTime)).toLocaleString();
-            }
-            if (event.end?.dateTime) {
-                formattedEndTime = new Date(Date.parse(event.end.dateTime)).toLocaleString();
-            }
+
+            return (
+                <li key={instance.id}>
+                    <input type="checkbox" checked={instance.selected} onChange={
+                        () => handleInstanceSelection(eventIndex, instanceIndex, event.eventId, instance.id || '', !instance.selected)
+                    }></input>
+                from {formattedStartTime} to {formattedEndTime}. selected: {instance.selected ? 'yup' : 'nope'}
+                </li>
+            )
         }
-
-
-        return (
-            <li key={event.id}>
-                from {formattedStartTime} to {formattedEndTime}
-            </li>
-        )
     }
+
+
 
     return (
         <div>
