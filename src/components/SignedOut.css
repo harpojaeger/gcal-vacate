@@ -6,8 +6,7 @@
 
 .SignedOutContainer div {
     border-left: 1px dashed grey;
-    padding-left:8px
-
+    padding-left:8px;
 }
 .Instructions {
     font-size: .8rem;
