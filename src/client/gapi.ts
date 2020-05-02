@@ -55,7 +55,7 @@ export class GapiClient implements RpcClient {
 
     async listRepeatingEventInstances(timeMin: Date, timeMax: Date, calendarId: string): Promise<EventWithInstances[]> {
         const events = await this.listAllEvents(calendarId, timeMin, timeMax);
-
+        if (events.length === 0) return [];
         /** In the batch request, individual requests for the instances of a
          * repeating event will be identified by their event ID. This map
          * associates that ID with the event's description, so that both can
