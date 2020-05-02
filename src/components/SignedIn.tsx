@@ -5,7 +5,6 @@ import { fetchCalendars } from '../store/calendarList';
 import { AppState } from '../store/root';
 import CalendarList from './signedin/CalendarList/CalendarList';
 import SearchForm from './signedin/SearchForm';
-import './SignedIn.css'
 
 export default () => {
     const dispatch = useDispatch();

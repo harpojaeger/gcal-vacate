@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { requestSignIn } from '../store/user';
+import './SignedOut.css';
 
 export default () => {
     const dispatch = useDispatch();
