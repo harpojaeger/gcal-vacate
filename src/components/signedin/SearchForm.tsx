@@ -34,10 +34,31 @@ export default () => {
     }
 
     function eventInstance(event: gapi.client.calendar.Event) {
+        const isAllDayEvent: boolean = event.start?.dateTime === undefined;
+        let formattedStartTime: string = '';
+        let formattedEndTime: string = '';
+        // This still needs some adjustment, as it shows one-day all-day events
+        // as lasting from the day they are on until the next day. Workable for now.
+        if (isAllDayEvent) {
+            if (event.start?.date) {
+                formattedStartTime = new Date(Date.parse(event.start.date)).toLocaleDateString();
+            }
+            if (event.end?.date) {
+                formattedEndTime = new Date(Date.parse(event.end.date)).toLocaleDateString();
+            }
+        } else {
+            if (event.start?.dateTime) {
+                formattedStartTime = new Date(Date.parse(event.start.dateTime)).toLocaleString();
+            }
+            if (event.end?.dateTime) {
+                formattedEndTime = new Date(Date.parse(event.end.dateTime)).toLocaleString();
+            }
+        }
+
+
         return (
             <li key={event.id}>
-                {/* TODO make this work with all-day events. May need to use originalStartTime field instead  */}
-                from {event.start?.dateTime} to {event.end?.dateTime}
+                from {formattedStartTime} to {formattedEndTime}
             </li>
         )
     }
