@@ -28,10 +28,15 @@ export default ({ instance, handleChange }: { instance: SelectableEventInstance,
 
     return (
         <li key={instance.id}>
-            <input type="checkbox" checked={instance.selected} onChange={
-                () => handleChange(!instance.selected)
-            }></input>
+            <input type="checkbox"
+                checked={instance.selected}
+                onChange={() => handleChange(!instance.selected)}
+                id={instance.id}
+            >
+            </input>
+            <label htmlFor={instance.id}>
                 from {formattedStartTime} to {formattedEndTime}. selected: {instance.selected ? 'yup' : 'nope'}
+            </label>
         </li>
     )
 }
