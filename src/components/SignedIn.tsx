@@ -5,6 +5,7 @@ import { fetchCalendars } from '../store/calendarList';
 import { AppState } from '../store/root';
 import CalendarList from './signedin/CalendarList/CalendarList';
 import SearchForm from './signedin/SearchForm';
+import './SignedIn.css'
 
 export default () => {
     const dispatch = useDispatch();
@@ -12,7 +13,7 @@ export default () => {
     const selectedCalendarId = useSelector((state: AppState) => state.calendarList.selectedId);
 
     return (
-        <div>
+        <div className="SignedIn">
             <button onClick={() => dispatch(requestSignOut())}>Click me to sign out :(</button>
             <button onClick={() => dispatch(fetchCalendars())}>Click me to list calendars</button>
             {calendars.length > 0 && <CalendarList />}

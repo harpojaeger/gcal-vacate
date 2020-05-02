@@ -16,7 +16,7 @@ beforeEach(() => {
 })
 
 test('renders correct sign-in and sign-out affordances', async () => {
-  const signInButtonLabel = /Click me to launch a rad signin workflow/i;
+  const signInButtonLabel = /Log in/;
   const signOutButtonLabel = /Click me to sign out/i;
   const { getByText } = renderWithStore(<App />, store);
 

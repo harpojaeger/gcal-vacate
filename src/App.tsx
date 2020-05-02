@@ -24,12 +24,11 @@ class App extends React.Component<appProps, {}> {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <div>
-            {this.props.isSignedIn ? <SignedIn /> : <SignedOut />}
-          </div>
-        </header>
+      <div className="AppContainer">
+        <div className="AppContent">
+          <div className="AppTitle">Gcal Vacate</div>
+          {this.props.isSignedIn ? <SignedIn /> : <SignedOut />}
+        </div>
       </div>
     );
   }
