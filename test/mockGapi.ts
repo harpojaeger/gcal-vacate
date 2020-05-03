@@ -1,4 +1,4 @@
-import { RpcClient, signInListener, EventWithInstances } from "../gapi";
+import { RpcClient, signInListener, EventWithInstances } from "../src/client/gapi";
 
 export class MockRpcClient implements RpcClient {
     isSignedIn = false;
@@ -25,6 +25,7 @@ export class MockRpcClient implements RpcClient {
 
     setSignInListener(listener: signInListener) {
         this.signInListener = listener;
+        listener(false);
     }
 
     setMockCalendarList(calendars: gapi.client.calendar.CalendarListEntry[]) {

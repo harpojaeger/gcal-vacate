@@ -3,13 +3,20 @@ import { createAction, createReducer } from '@reduxjs/toolkit'
 import { thunkApiExtras } from './root';
 import { signInListener } from '../client/gapi';
 
+// An enum is used rather than a boolean, to account for the period before the
+// gapi auth client loads, when we don't know if the user is signed in or not.
+export enum UserSignInStatus {
+    UNKNOWN = 0,
+    SIGNED_IN = 1,
+    SIGNED_OUT = 2,
+}
 export interface UserState {
-    isSignedIn: boolean,
+    signInStatus: UserSignInStatus,
     calendars: gapi.client.calendar.CalendarListEntry[]
 }
 
 export const initialState: UserState = {
-    isSignedIn: false,
+    signInStatus: UserSignInStatus.UNKNOWN,
     calendars: []
 }
 
@@ -34,6 +41,13 @@ export const setSignInListener = createAsyncThunk<void, signInListener, { extra:
 export const userReducer = createReducer(initialState, (builder: ActionReducerMapBuilder<UserState>) => {
     builder.addCase(setCalendars, (state, { payload: calendars }) => ({ ...state, calendars }));
 
-    builder.addCase(updateSignInStatus.fulfilled, (state, { payload: isSignedIn }) => ({ ...state, isSignedIn }));
+    builder.addCase(updateSignInStatus.fulfilled, (state, { payload: isSignedIn }) => {
+        if (isSignedIn) {
+            state.signInStatus = UserSignInStatus.SIGNED_IN;
+        } else {
+            state.signInStatus = UserSignInStatus.SIGNED_OUT;
+        }
+        // ...state, isSignedIn
+    });
 
 });

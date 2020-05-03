@@ -2,7 +2,7 @@ import { renderWithStore } from "../../test/util";
 import { waitFor } from '@testing-library/dom'
 import { EnhancedStore } from "@reduxjs/toolkit";
 import { AppState, storeFactory } from "../store/root";
-import { MockRpcClient } from "../client/__mocks__/gapi";
+import { MockRpcClient } from "../../test/mockGapi";
 import SignedIn from "./SignedIn";
 import React from 'react';
 import '@testing-library/jest-dom';

@@ -2,17 +2,17 @@ import React from 'react';
 import './App.scss';
 import { AppState } from './store/root'
 import { connect } from 'react-redux'
-import { updateSignInStatus, setSignInListener } from './store/user';
+import { updateSignInStatus, setSignInListener, UserSignInStatus } from './store/user';
 import SignedIn from './components/SignedIn';
 import SignedOut from './components/SignedOut';
 
 type appProps = {
-  isSignedIn: boolean,
+  signInStatus: UserSignInStatus,
   updateSignInStatus: Function,
   setSignInListener: Function,
 }
 
-const mapStateToProps = ({ user: { isSignedIn } }: AppState) => ({ isSignedIn });
+const mapStateToProps = ({ user: { signInStatus } }: AppState) => ({ signInStatus });
 const mapDispatchToProps = { updateSignInStatus, setSignInListener }
 
 
@@ -23,11 +23,24 @@ class App extends React.Component<appProps, {}> {
   }
 
   render() {
+    let content;
+    switch (this.props.signInStatus) {
+      case UserSignInStatus.UNKNOWN:
+        content = 'loading...';
+        break;
+      case UserSignInStatus.SIGNED_IN:
+        content = <SignedIn />;
+        break;
+      case UserSignInStatus.SIGNED_OUT:
+        content = <SignedOut />;
+        break;
+    }
+
     return (
       <div className="AppContainer">
         <div className="AppContent">
           <div className="AppTitle">Gcal Vacate</div>
-          {this.props.isSignedIn ? <SignedIn /> : <SignedOut />}
+          {content}
         </div>
       </div>
     );
