@@ -8,21 +8,3 @@
     border-left: 1px dashed grey;
     padding-left:8px;
 }
-.Instructions {
-    font-size: .8rem;
-}
-
-button.LogIn {
-    background-color: white;
-    font-size: 1rem;
-    height: 2rem;
-    width: 4rem;
-    border-radius: 4px;
-    border: none;
-    border: 1px solid black;
-    margin-left: 8px;
-}
-
-button.LogIn:hover {
-    border: 2px solid black;
-}

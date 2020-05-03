@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { requestSignIn } from '../store/user';
 import './SignedOut.css';
+import { Button } from './elements/Button';
 
 export default () => {
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export default () => {
                 To use Gcal Vacate, log in with your Google account. If you haven't used Gcal Vacate before, you will be prompted to grant it access to view and modify your Google Calendar data.
                 Gcal Vacate doesn't store your login, password or any of your personal information. You can revoke Gcal Vacate's access to your account at any time <a href="https://support.google.com/accounts/answer/3466521?hl=en">(more info</a>).
             </div>
-            <button className="LogIn" onClick={() => dispatch(requestSignIn())}>Log in</button>
+            <div><Button onClick={() => dispatch(requestSignIn())} label="Log in" /></div>
         </div>
     );
 }

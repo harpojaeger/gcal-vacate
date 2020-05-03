@@ -1,0 +1,15 @@
+
+button.GcalVacateButton {
+    background-color: white;
+    font-size: 1rem;
+    width: fit-content;
+    padding: .3rem .5rem;
+    border-radius: 4px;
+    border: none;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+button.GcalVacateButton:hover {
+    border: 2px solid black;
+}
