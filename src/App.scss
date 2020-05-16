@@ -2,53 +2,74 @@
 the range specified by the viewport sizes. Annoyingly, a lot of string
 interpolation is necessary to output a properly formatted `calc()` value, so the
 arguments must be specified as integers without a 'px' suffix. */
-@mixin fluid-font-size($minFontSize, $maxFontSize, $minViewportWidth, $maxViewportWidth) {
-  html {
-    font-size: #{$minFontSize}px;
-  }
-
-  @media screen and (min-width: #{$minViewportWidth}px) {
+@mixin fluid-font-size(
+    $minFontSize,
+    $maxFontSize,
+    $minViewportWidth,
+    $maxViewportWidth
+) {
     html {
-      /* NB: when two SASS variables appear in a single string interpolation
+        font-size: #{$minFontSize}px;
+    }
+
+    @media screen and (min-width: #{$minViewportWidth}px) {
+        html {
+            /* NB: when two SASS variables appear in a single string interpolation
       statement, the arithmetic is being done by the SASS preprocessor. When
       variables appear individually, they are printed literally. */
-      font-size: calc(#{$minFontSize}px + #{$maxFontSize - $minFontSize} * ((100vw - #{$minViewportWidth}px) / #{$maxViewportWidth - $minViewportWidth}))
+            font-size: calc(
+                #{$minFontSize}px + #{$maxFontSize - $minFontSize} * ((
+                                100vw - #{$minViewportWidth}px
+                            ) / #{$maxViewportWidth - $minViewportWidth})
+            );
+        }
     }
-  }
 
-  @media screen and (min-width: #{$maxViewportWidth}px) {
-    html {
-      font-size: #{$maxFontSize}px;
+    @media screen and (min-width: #{$maxViewportWidth}px) {
+        html {
+            font-size: #{$maxFontSize}px;
+        }
     }
-  }
 }
-
 
 @include fluid-font-size(16, 22, 380, 768);
 
 body {
-  height: 100%;
+    height: 100%;
 }
 
 .AppContainer {
-  width: 100vw;
-  min-height: 100vh;
-  background-color: #a031a0cb;
-  display: grid;
-  grid-template-columns: minmax(40px, 1fr) minmax(300px, 768px) minmax(40px, 1fr);
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #a031a0cb;
+    display: grid;
+    grid-template-columns: minmax(40px, 1fr) minmax(300px, 768px) minmax(
+            40px,
+            1fr
+        );
+}
+
+.Header {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .AppTitle {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid black;
+    font-size: 2rem;
+}
+
+.SignOutButton {
+    line-height: 1rem;
 }
 
 .AppContent {
-  grid-column: 2 / 2;
-  background-color: #bbb;
-  height: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  border-radius: 4px;
+    grid-column: 2 / 2;
+    background-color: #bbb;
+    height: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 4px;
 }
