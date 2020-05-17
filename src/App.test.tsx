@@ -7,6 +7,7 @@ import { renderWithStore } from '../test/util';
 import App from './App';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
+import { RenderResult } from '@testing-library/react';
 
 var store: EnhancedStore<AppState>;
 var mockGapiClient: MockRpcClient;
@@ -41,7 +42,7 @@ describe('the log in/out workflow', () => {
         });
     });
 
-    it('allows the user to sign in and loads their calendars', async () => {
+    it('renders a functioning sign-in affordance', async () => {
         const { getByText } = renderWithStore(<App />, store);
 
         // Simulate the gapi starting up and determining, after a short wait, that the
@@ -55,10 +56,28 @@ describe('the log in/out workflow', () => {
 
         await waitFor(() => {
             expect(getByText(signOutButtonLabel)).toBeInTheDocument();
+        });
+    });
+});
 
-            const calendarSelect = getByText(/Select a calendar/);
+describe('the signed-in state', () => {
+    var dom: RenderResult;
+
+    beforeEach(async () => {
+        dom = renderWithStore(<App />, store);
+        mockGapiClient.signOut();
+
+        await waitFor(() => {
+            const signInButton = dom.getByText(signInButtonLabel);
+            signInButton.click();
+        });
+    });
+
+    it("loads the user's calendars", async () => {
+        await waitFor(() => {
+            const calendarSelect = dom.getByText(/Select a calendar/);
             userEvent.selectOptions(calendarSelect, 'awesome calendar');
-            expect(getByText(/Do a search/)).toBeInTheDocument();
+            expect(dom.getByText(/Do a search/)).toBeInTheDocument();
         });
     });
 });
