@@ -3,29 +3,18 @@ import {
     signInListener,
     EventWithInstances,
 } from '../src/client/gapi';
-
-// To allow other modules to access these objects without worrying about nulls,
-// we extend the type and make the properties we're interested in non-nullable.
-interface FakeCalendar extends gapi.client.calendar.CalendarListEntry {
-    id: string;
-    summary: string;
-}
-
-export const FIRST_CALENDAR: FakeCalendar = {
-    id: 'first-id',
-    summary: 'awesome calendar',
-};
-export const SECOND_CALENDAR: FakeCalendar = {
-    id: 'second-id',
-    summary: 'cool calendar',
-};
+import {
+    WORK_CALENDAR,
+    PERSONAL_CALENDAR,
+    FAKE_REPEATING_EVENTS,
+} from './fakeApiData';
 
 export class MockRpcClient implements RpcClient {
     isSignedIn = false;
     signInListener: signInListener = function () {};
     calendars: gapi.client.calendar.CalendarListEntry[] = [
-        FIRST_CALENDAR,
-        SECOND_CALENDAR,
+        WORK_CALENDAR,
+        PERSONAL_CALENDAR,
     ];
 
     signIn() {
@@ -59,6 +48,6 @@ export class MockRpcClient implements RpcClient {
         timeMax: Date,
         calendarId: string
     ): Promise<EventWithInstances[]> {
-        throw new Error('Method not implemented.');
+        return Promise.resolve(FAKE_REPEATING_EVENTS);
     }
 }

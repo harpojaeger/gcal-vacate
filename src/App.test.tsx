@@ -77,4 +77,18 @@ describe('the signed-in state', () => {
             expect(dom.getByText(/Do a search/)).toBeInTheDocument();
         });
     });
+
+    describe('the search form', () => {
+        it('returns a list of events with their instances', async () => {
+            await waitFor(() => {
+                expect(dom.getByText(/Do a search/)).toBeInTheDocument();
+            });
+            const searchButton = dom.getByText(/Do a search/);
+            searchButton.click();
+
+            await waitFor(() => {
+                expect(dom.getByText(/Reticulate splines/)).toBeInTheDocument();
+            });
+        });
+    });
 });
