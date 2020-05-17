@@ -6,7 +6,6 @@ import { EnhancedStore } from '@reduxjs/toolkit';
 import { renderWithStore } from '../test/util';
 import App from './App';
 import React from 'react';
-import userEvent from '@testing-library/user-event';
 import { RenderResult } from '@testing-library/react';
 
 var store: EnhancedStore<AppState>;
@@ -75,8 +74,6 @@ describe('the signed-in state', () => {
 
     it("loads the user's calendars", async () => {
         await waitFor(() => {
-            const calendarSelect = dom.getByText(/Select a calendar/);
-            userEvent.selectOptions(calendarSelect, 'awesome calendar');
             expect(dom.getByText(/Do a search/)).toBeInTheDocument();
         });
     });
