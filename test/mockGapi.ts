@@ -1,9 +1,22 @@
-import { RpcClient, signInListener, EventWithInstances } from "../src/client/gapi";
+import {
+    RpcClient,
+    signInListener,
+    EventWithInstances,
+} from '../src/client/gapi';
 
 export class MockRpcClient implements RpcClient {
     isSignedIn = false;
-    signInListener: signInListener = function () { };
-    calendars: gapi.client.calendar.CalendarListEntry[] = [];
+    signInListener: signInListener = function () {};
+    calendars: gapi.client.calendar.CalendarListEntry[] = [
+        {
+            id: 'asdf',
+            summary: 'awesome calendar',
+        },
+        {
+            id: 'jkl;',
+            summary: 'cool calendar',
+        },
+    ];
 
     signIn() {
         this.isSignedIn = true;
@@ -31,7 +44,11 @@ export class MockRpcClient implements RpcClient {
         this.calendars = calendars;
     }
 
-    listRepeatingEventInstances(timeMin: Date, timeMax: Date, calendarId: string): Promise<EventWithInstances[]> {
-        throw new Error("Method not implemented.");
+    listRepeatingEventInstances(
+        timeMin: Date,
+        timeMax: Date,
+        calendarId: string
+    ): Promise<EventWithInstances[]> {
+        throw new Error('Method not implemented.');
     }
 }

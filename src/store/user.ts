@@ -2,6 +2,7 @@ import { ActionReducerMapBuilder, createAsyncThunk } from '@reduxjs/toolkit';
 import { createReducer } from '@reduxjs/toolkit';
 import { thunkApiExtras } from './root';
 import { signInListener } from '../client/gapi';
+import { fetchCalendars } from './calendarList';
 
 // An enum is used rather than a boolean, to account for the period before the
 // gapi auth client loads, when we don't know if the user is signed in or not.
@@ -38,9 +39,14 @@ export const updateSignInStatus = createAsyncThunk<
     boolean,
     void,
     { extra: thunkApiExtras }
->('user/updateSignInStatus', async (unused, { extra: { rpcClient } }) => {
-    return rpcClient.getIsSignedIn();
-});
+>(
+    'user/updateSignInStatus',
+    async (unused, { dispatch, extra: { rpcClient } }) => {
+        const isSignedIn = rpcClient.getIsSignedIn();
+        if (isSignedIn) dispatch(fetchCalendars());
+        return isSignedIn;
+    }
+);
 
 export const setSignInListener = createAsyncThunk<
     void,

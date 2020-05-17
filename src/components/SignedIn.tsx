@@ -1,28 +1,20 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCalendars } from '../store/calendarList';
+import { useSelector } from 'react-redux';
 import { AppState } from '../store/root';
 import CalendarList from './signedin/CalendarList/CalendarList';
 import SearchForm from './signedin/SearchForm';
-import { Button } from './elements/Button';
+import { AsyncOperationStatus } from '../store/enums';
 
 export default () => {
-    const dispatch = useDispatch();
-    const calendars = useSelector(
-        (state: AppState) => state.calendarList.calendarList
+    const calendarListFetchStatus = useSelector(
+        (state: AppState) => state.calendarList.fetchStatus
     );
-    const selectedCalendarId = useSelector(
-        (state: AppState) => state.calendarList.selectedId
-    );
-
     return (
         <div className="SignedIn">
-            <Button
-                onClick={() => dispatch(fetchCalendars())}
-                label="Click me to list calendars"
-            />
-            {calendars.length > 0 && <CalendarList />}
-            {selectedCalendarId && <SearchForm />}
+            <CalendarList />
+            {calendarListFetchStatus === AsyncOperationStatus.FULFILLED && (
+                <SearchForm />
+            )}
         </div>
     );
 };
