@@ -6,12 +6,17 @@ import { EnhancedStore } from '@reduxjs/toolkit';
 import { renderWithStore } from '../test/util';
 import App from './App';
 import React from 'react';
-import { RenderResult } from '@testing-library/react';
+import { RenderResult, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { WORK_CALENDAR_ID } from '../test/fakeApiData';
 
 var store: EnhancedStore<AppState>;
 var mockGapiClient: MockRpcClient;
 const signInButtonLabel = /Log in/;
 const signOutButtonLabel = /Log out/i;
+const searchButtonLabel = /Do a search/;
+const calendarSelectLabel = /Select a calendar/;
+
 beforeEach(() => {
     mockGapiClient = new MockRpcClient();
     store = storeFactory(mockGapiClient);
@@ -74,20 +79,65 @@ describe('the signed-in state', () => {
 
     it("loads the user's calendars", async () => {
         await waitFor(() => {
-            expect(dom.getByText(/Do a search/)).toBeInTheDocument();
+            const calendarSelect = dom.getByText(calendarSelectLabel);
+            expect(calendarSelect.parentElement?.childElementCount).toEqual(3);
         });
     });
 
     describe('the search form', () => {
+        describe('the search button', () => {
+            var searchButton: HTMLElement;
+
+            beforeEach(async () => {
+                await waitFor(() => {
+                    searchButton = dom.getByText(searchButtonLabel);
+                });
+            });
+
+            it('is disabled when no calendar is selected', async () => {
+                expect(searchButton).toBeDisabled();
+            });
+
+            it('is enabled when a calendar is selected', async () => {
+                const calendarSelect = dom.getByText(calendarSelectLabel)
+                    .parentElement;
+                expect(calendarSelect).toBeTruthy();
+                if (calendarSelect) {
+                    fireEvent.change(calendarSelect, {
+                        target: { value: WORK_CALENDAR_ID },
+                    });
+                }
+
+                await waitFor(() => {
+                    expect(searchButton).toBeEnabled();
+                });
+
+                searchButton.click();
+            });
+        });
+
         it('returns a list of events with their instances', async () => {
             await waitFor(() => {
-                expect(dom.getByText(/Do a search/)).toBeInTheDocument();
+                expect(dom.getByText(searchButtonLabel)).toBeInTheDocument();
+                const calendarSelect = dom.getByText(calendarSelectLabel)
+                    .parentElement;
+                expect(calendarSelect).toBeTruthy();
+                if (calendarSelect) {
+                    fireEvent.change(calendarSelect, {
+                        target: { value: WORK_CALENDAR_ID },
+                    });
+                }
             });
-            const searchButton = dom.getByText(/Do a search/);
+            const searchButton = dom.getByText(searchButtonLabel);
+
+            await waitFor(() => {
+                expect(searchButton).toBeEnabled();
+            });
+
             searchButton.click();
 
             await waitFor(() => {
-                expect(dom.getByText(/Reticulate splines/)).toBeInTheDocument();
+                // expect(dom.getByText(/Reticulate splines/)).toBeInTheDocument();
             });
         });
     });

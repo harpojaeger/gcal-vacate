@@ -7,7 +7,7 @@ interface FakeCalendar extends gapi.client.calendar.CalendarListEntry {
     summary: string;
 }
 
-const WORK_CALENDAR_ID = 'work-calendar';
+export const WORK_CALENDAR_ID = 'work-calendar';
 
 export const WORK_CALENDAR: FakeCalendar = {
     id: WORK_CALENDAR_ID,
